@@ -1,0 +1,54 @@
+
+dy {
+    margin: 20px;
+}
+p {
+    margin: 5px 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #000;
+}
+dt{
+    margin-top: 5px;
+    width: 100px;
+    float: left;
+    text-align: right;
+}
+dd{
+    margin: 5px 0 5px 100px;
+}
+input {
+    font-size: 100%;
+    padding: 5px;
+}
+#message {
+    width: 400px;
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+jQuery(function(){
+  var socket = io.connect('http://localhost');
+ 
+  // サーバからメッセージ受信
+  socket.on('send user', function (msg) {
+      jQuery('#chat').prepend('<p>'+msg+'</p>');
+  });
+  jQuery('input[type=submit]').click(function(){
+      var name = jQuery('#name').val();
+      var message = jQuery('#message').val();
+ 
+      // サーバへメッセージ送信
+      socket.emit('server send', name+'：'+message);
+  });
+});
+</script>
+<div>
+  <dl>
+    <dt>名前：</dt><dd><input type="text" id="name"></dd>
+    <dt>メッセージ：</dt><dd><input type="text" id="message" size="140" /></dd>
+    <dd><input type="submit" value="送信" /></dd>
+  </dl>
+  <hr />
+  <div id="chat"></div>
+</div>
