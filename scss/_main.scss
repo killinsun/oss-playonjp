@@ -1,0 +1,94 @@
+@charset "utf-8";
+// ===================================================================
+// メイン - このファイルにメインコンテンツ部分のスタイルをガツガツ書いていく。
+// ===================================================================
+ 
+/* TEST 
+.test {
+	@include border_radius;
+	@include border_radius(5px 10px 2px 12%);
+	@include bg_size(100px);
+	@include min_height(777px);
+	@extend .clearfix;
+	@extend .box_size;
+	background: url(#{$img_path}share/bg_test.gif);
+	font-size: fz(18);
+}
+.opTest img:hover {
+	@extend .opacity;
+}
+*/  
+ 
+/*----------------------------------------------------
+	element style
+----------------------------------------------------*/
+body {
+	background: $main_color;
+	border-top: 4px solid $accent_color;
+	color: $font_color;
+	font-family: $base_font;
+}
+ 
+input, textarea {
+	font-family: $base_font;
+}
+ 
+// for IE6
+* html {
+	body, input, textarea {
+		font-family: $base_font_ie;
+	}
+}
+ 
+// 外部リンクアイコン
+.externalIcon {
+	margin: 0 3px;
+	vertical-align: middle;
+}
+ 
+// リンク
+a {
+	&:link {
+		color: $link_color;
+	}
+	&:visited {
+		color: $link_color_visited;
+	}
+	&:hover {
+		text-decoration: none;
+		color: $link_color_hover;
+	}
+	&:active {
+		color: $link_color_active;
+	}
+}
+ 
+ 
+// レイアウト関係のスタイル読み込み
+@import "layout";
+ 
+ 
+/*----------------------------------------------------
+	#main
+----------------------------------------------------*/
+#main {
+	float: left;
+	width: 600px;
+	background: $main_color;
+	//@include border_radius;
+	
+	table, ol, ul, dl, blockquote, pre, p {
+		margin-bottom: $base_margin_bottom;
+	}
+	
+}
+ 
+ 
+/*----------------------------------------------------
+	#sub
+----------------------------------------------------*/
+#sub {
+	float: right;
+	width: 310px;
+	background: $main_color;
+}

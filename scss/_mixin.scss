@@ -1,0 +1,151 @@
+@charset "utf-8";
+// ===================================================================
+// mixinやらCSS3やら、extendも。
+// ===================================================================
+ 
+ 
+// border-radius
+@mixin border_radius($br_value) {
+	@each $prefix in $set_prefix {
+		#{$prefix}border-radius: $br_value;
+	}
+}
+ 
+ 
+// background-size
+@mixin bg_size($w, $h: auto) {
+	@each $prefix in $set_prefix {
+		#{$prefix}background-size: $w $h;
+	}
+}
+ 
+ 
+// min-height
+@mixin min_height($value) {
+	min-height: $value;
+	_height: $value;
+}
+ 
+ 
+// ===================================================================
+// extend
+// ===================================================================
+@if $use_extend_object {
+/* 汎用クラス */
+ 
+	// リストマーカー
+	[class^="mark"] {
+		padding-left: 15px;
+		background: no-repeat left .5em;
+	}
+	@for $i from 1 through 5 {
+		.mark#{$i} {
+			background-image: url(#{$img_path}share/mark_#{$i}.gif);
+		}
+	}
+ 
+	// 簡易ロールオーバー
+	@if $opacity_value {
+		.opacity {
+			opacity: $opacity_value;
+			-moz-opacity: $opacity_value;
+			filter: alpha(opacity=#{$opacity_value * 100});
+			-ms-filter: "alpha(opacity=#{$opacity_value * 100})";
+		}
+	}
+ 
+	// inline-block
+	.inline_block {
+		display: inline-block;
+		*display: inline;
+		*zoom: 1;
+	}
+ 
+	// table-cell
+	.table_cell {
+		display: table-cell;
+		*display: inline;
+		*zoom: 1;
+		vertical-align: middle;
+	}
+ 
+	// float: right
+	.fr,
+	.imgR {
+		float: right;
+		margin-left: 10px;
+	}
+ 
+	// float: left
+	.fl,
+	.imgL {
+		float: left;
+		margin-right: 10px;
+	}
+ 
+	// text-align: center
+	.imgC,
+	.tC,
+	.btn {
+		text-align: center;
+	}
+ 
+	// img Centering
+	.imgC {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+ 
+	// text-align: right
+	.tR,
+	.sign {
+		text-align: right;
+	}
+ 
+	// box-sizing
+	.box_size {
+		@each $prefix in $set_prefix {
+			#{$prefix}box-sizing: border-box;
+		}
+	}
+ 
+	// text-shadow none
+	.ts_none {
+		@each $prefix in $set_prefix {
+			#{$prefix}text-shadow: none !important;;
+		}
+	}
+ 
+	// box-shadow none
+	.bs_none {
+		@each $prefix in $set_prefix {
+			#{$prefix}box-shadow: none !important;;
+		}
+	}
+ 
+ 
+	// 余白調整用のクラス
+	@if $use_spacing_classes {
+		@for $i from 0 through 20 {
+			.mt#{$i * 5} { margin-top: 5px * $i !important; }
+			.mb#{$i * 5} { margin-bottom: 5px * $i !important; }
+			.pt#{$i * 5} { padding-top: 5px * $i !important; }
+			.pb#{$i * 5} { padding-bottom: 5px * $i !important; }
+		}
+	}
+ 
+}
+ 
+ 
+/* clearfix */
+.clearfix {
+	*zoom: 1;
+	&:after {
+		content: ".";
+		display: block;
+		clear: both;
+		height: 0;
+		visibility: hidden;
+	}
+}
