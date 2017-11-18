@@ -37,9 +37,36 @@
 				</div>
 				</div>
 				<div id="main_container" class="col-md-7">
-					<h1>**号館</h1>
+					<h1>a号館 - チャット</h1>
 				</div>
+				  <div id="page1">
+					<p>
+						FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。無料で利用できます。チャットの使い方については、説明ページを見て下さい。 1～6号館はユーザ登録をした人のみが入れる号館です。ログインしてから、チャットに来て下さい。ゲスト用は登録に関係なく誰でも使えます。 マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
+					</p>
+					<div class="init">
+					  <label>
+						<span class="title">部屋:</span>
+						<select id="room">
+						  <option value="roomA">#red</option>
+						  <option value="roomB">#blue</option>
+						  <option value="roomC">#orange</option>
+						</select>
+					  </label>
+					  <label>
+						<span class="title">名前:</span>
+						<input type="text" value="ロスト-Lost-" id="name" maxlength="10"/>
+					  </label>
+					</div>
+					<button id="join">入室</button>
+				  </div>
+				  <div id="page2">
+					<ul id="view" class="list"></ul>
+					<div class="msgBox">
+					  <input type="text" placeholder="" id="message" />
+					</div>
+				  </div>
 			</div>
+			<script src="client_js/chat.js"></script>
 
 
 	</section>
