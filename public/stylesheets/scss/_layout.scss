@@ -8,9 +8,6 @@
 	ヘッダー
 ----------------------------------------------------*/
 header {
-	margin-bottom: $base_margin_bottom;
-	background: #fff;
-	
 	#nav {
 		@extend .clearfix;
 		li {
@@ -23,11 +20,8 @@ header {
 /*----------------------------------------------------
 	フッター
 ----------------------------------------------------*/
-footer {
+footer.copyright {
 	@extend .clearfix;
-	background: #CCFF99;
-	
-	.copyright {
 		font-size: 12px;
 		text-align: center;
 		background-color: #CCFF99;
@@ -36,7 +30,6 @@ footer {
 		vertical-align: middle;
 		padding-top: 3px;
 		padding-bottom: 1px;
-	}
 }
 
 

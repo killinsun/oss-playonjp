@@ -32,37 +32,54 @@
     <main>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-2" id="user_column_pc">hidden-sm</div>
-          <div class="col-md-7" id="main_container">
-            <h1>チャット</h1>
-            <p>
-               FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
-              無料で利用できます。チャットの使い方については、説明ページを見て下さい。
-              1～6号館はユーザ登録をした人のみが入れる号館です。
-              ログインしてから、チャットに来て下さい。
-              ゲスト用は登録に関係なく誰でも使えます。 
-              マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
-            </p>
+          <div class="col-md-2 hidden-sm" id="user_column_pc">
+            <p>user_navigation</p>
+          </div>
+          <div class="col-md-10" id="main_container">
             <div class="container-fluid">
               <div class="row">
-                <div class="col-lg-4">room1</div>
-                <div class="col-lg-4">room1</div>
-                <div class="col-lg-4">room1</div>
+                <div class="col-lg-12">
+                  <h1>チャット</h1>
+                  <p class="chathelp">
+                    FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
+                    無料で利用できます。チャットの使い方については、説明ページを見て下さい。
+                    1～6号館はユーザ登録をした人のみが入れる号館です。
+                    ログインしてから、チャットに来て下さい。
+                    ゲスト用は登録に関係なく誰でも使えます。 
+                    マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
+                  </p>
+                </div>
               </div>
               <div class="row">
-                <div class="col-lg-4">room1</div>
-                <div class="col-lg-4">room1</div>
-                <div class="col-lg-4">room1</div>
-              </div>
-              <div class="row">
-                <div class="col-lg-4">room1</div>
-                <div class="col-lg-4">room1</div>
-                <div class="col-lg-4">room1</div>
-              </div>
-              <div class="row">
-                <div class="col-lg-4">room1</div>
-                <div class="col-lg-4">room1</div>
-                <div class="col-lg-4">room1</div>
+                <div class="col-lg-10">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-4 roomarea" id="guest1">ゲスト</div>
+                      <div class="col-lg-4 roomarea" id="guest2">ゲスト2</div>
+                      <div class="col-lg-4 roomarea" id="tennis">テーブルテニス</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4 roomarea" id="build1">1号館</div>
+                      <div class="col-lg-4 roomarea" id="build2">2号館</div>
+                      <div class="col-lg-4 roomarea" id="build3">3号館</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4 roomarea" id="build4">4号館</div>
+                      <div class="col-lg-4 roomarea" id="build5">5号館</div>
+                      <div class="col-lg-4 roomarea" id="build6">6号館</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4 roomarea" id="two">二人限定</div>
+                      <div class="col-lg-4 roomarea" id="two2">二人限定(2)</div>
+                      <div class="col-lg-4 roomarea" id="denybuild">アクセス禁止</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div id="advert_right">
+                    <p>advert</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

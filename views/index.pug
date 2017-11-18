@@ -3,30 +3,43 @@ block contents
 	main
 		div.container-fluid
 			div.row
-				div#user_column_pc.col-md-2 hidden-sm
-				div#main_container.col-md-7
-					h1 チャット
-					p 
-						| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
-						| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。
-						| 1～6号館はユーザ登録をした人のみが入れる号館です。
-						| ログインしてから、チャットに来て下さい。
-						| ゲスト用は登録に関係なく誰でも使えます。 
-						| マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
+				div#user_column_pc.col-md-2.hidden-sm
+					p user_navigation
+				div#main_container.col-md-10
 					div.container-fluid
 						div.row
-							div.col-lg-4 room1
-							div.col-lg-4 room1
-							div.col-lg-4 room1
+							div.col-lg-12
+								//- Info
+								h1 チャット
+								p.chathelp
+									| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
+									| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。
+									| 1～6号館はユーザ登録をした人のみが入れる号館です。
+									| ログインしてから、チャットに来て下さい。
+									| ゲスト用は登録に関係なく誰でも使えます。 
+									| マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
 						div.row
-							div.col-lg-4 room1
-							div.col-lg-4 room1
-							div.col-lg-4 room1
-						div.row
-							div.col-lg-4 room1
-							div.col-lg-4 room1
-							div.col-lg-4 room1
-						div.row
-							div.col-lg-4 room1
-							div.col-lg-4 room1
-							div.col-lg-4 room1
+							div.col-lg-10
+								//- Chat 
+								div.container-fluid
+									div.row
+										div#guest1.col-lg-4.roomarea ゲスト
+										div#guest2.col-lg-4.roomarea ゲスト2
+										div#tennis.col-lg-4.roomarea テーブルテニス
+									div.row
+										div#build1.col-lg-4.roomarea 1号館
+										div#build2.col-lg-4.roomarea 2号館
+										div#build3.col-lg-4.roomarea 3号館
+									div.row
+										div#build4.col-lg-4.roomarea 4号館
+										div#build5.col-lg-4.roomarea 5号館
+										div#build6.col-lg-4.roomarea 6号館
+									div.row
+										div#two.col-lg-4.roomarea 二人限定
+										div#two2.col-lg-4.roomarea 二人限定(2)
+										div#denybuild.col-lg-4.roomarea アクセス禁止
+							div.col-lg-2
+								//- Right advert
+								div#advert_right
+									p advert
+

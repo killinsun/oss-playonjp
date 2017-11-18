@@ -24,7 +24,6 @@
 ----------------------------------------------------*/
 body {
 	background: $main_color;
-	border-top: 4px solid $accent_color;
 	color: $font_color;
 	font-family: $base_font;
 }
@@ -71,15 +70,32 @@ a {
 /*----------------------------------------------------
 	#main
 ----------------------------------------------------*/
-#main {
-	float: left;
-	width: 600px;
+main {
 	background: $main_color;
-	//@include border_radius;
-	
-	table, ol, ul, dl, blockquote, pre, p {
-		margin-bottom: $base_margin_bottom;
+	padding-bottom: 5px;
+	h1{
+		display: block;
+		font-size: 2em;
+		-webkit-margin-before: 0.67em;
+		-webkit-margin-after: 0.67em;
+		-webkit-margin-start: 0px;
+		-webkit-margin-end: 0px;
+		font-weight: bold;	
+		text-align: center;
 	}
+	
+	p.chathelp{
+		font-size: 12px;
+	}
+
+	div.roomarea {
+		font-size: 12px;
+		width: 100%;
+		height: 150px;
+		background: #fff;
+		text-align: center;
+	}
+
 	
 }
  
