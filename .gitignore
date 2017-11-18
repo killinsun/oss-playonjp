@@ -34,3 +34,8 @@ npm-debug.log
 # Test script files
 ex_test
 
+
+.DS_STORE
+
+.sass-cache
+*.swp
