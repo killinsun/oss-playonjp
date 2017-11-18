@@ -1,0 +1,75 @@
+extends _layout.pug
+block contents
+	main
+		div.container-fluid
+			div.row
+				div.col-lg-12
+					//- Info
+					h1 ***号館 - チャット
+					p.chathelp
+						| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
+						| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。
+						| 1～6号館はユーザ登録をした人のみが入れる号館です。
+						| ログインしてから、チャットに来て下さい。
+						| ゲスト用は登録に関係なく誰でも使えます。 
+						| マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
+			div.row
+				div.col-lg-10
+					div.row
+						// Room view
+						div#room_view.container-fluid
+							form#command.row
+								div#to_area.col-sm-2
+									p user_name
+									select.form-control("name=dm_to")
+										option("value=共有ボード") 共有ボード
+										option("value=B") B
+										option("value=C") C
+								div#text_area.col-sm-8
+									div.container
+										div.row.form-inline
+											label.checkbox-inline
+												input.col-sm1.form-control.form-inline("type=checkbox")
+											span.col-sm11 
+												| 入退室時に発言する(部屋の様子を見たい場合はチェックを外す)
+										div.row
+											input.col-sm12.form-control("type=text value='type command' width=100%")
+								div#submit_area.col-sm-2
+									br
+									input.form-control("type=submit value=送信")
+							div#room_list.row
+								div.container
+									div.row
+										div#red.col-lg-2.room 
+											div.room_name 赤
+											div.number 1/16
+											div.join: input.form-control("type=button value=入室")
+										div#waterblue.col-lg-2.room 
+											div.room_name 薄青
+											div.number 1/16
+											div.join: input.form-control("type=button value=入室")
+										div#green.col-lg-2.room 
+											div.room_name 緑
+											div.number 1/16
+											div.join: input.form-control("type=button value=入室")
+									div.row
+										div#purple.col-lg-2.room 
+											div.room_name 紫
+											div.number 1/16
+											div.join: input.form-control("type=button value=入室")
+										div#yellow.col-lg-2.room 
+											div.room_name 黄
+											div.number 1/16
+											div.join: input.form-control("type=button value=入室")
+										div#blue.col-lg-2.room 
+											div.room_name 青
+											div.number 1/16
+											div.join: input.form-control("type=button value=入室")
+					div.row
+						// Chat view
+						p chat view
+				div.col-lg-2
+					//- Right advert
+					div#advert_right
+						p advert
+

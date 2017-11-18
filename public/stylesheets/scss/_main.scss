@@ -88,14 +88,101 @@ main {
 		font-size: 12px;
 	}
 
-	div.roomarea {
-		font-size: 12px;
-		width: 100%;
-		height: 150px;
-		background: #fff;
-		text-align: center;
-	}
+	div {
+		
+		.roomarea{
+			font-size: 12px;
+			width: 100%;
+			height: 200px;
+			background: #fff;
+			text-align: center;
+			margin: 20px;
+			.member_stat{
+				.red{ background: $red ; float:left; width: 16.6%; }
+				.waterblue{ background: $waterblue ; float:left; width: 16.6%; }
+				.green{ background: $green ; float:left; width: 16.6%;}
+				.purple{ background: $purple ; float:left; width: 16.6%;}
+				.yellow{ background: $yellow ; float:left; width: 16.6%;}
+				.blue{ background: $blue ; float:left; width: 16.6%;}
+			}
+			.member_list{
+				height:50%;
+				word-break: break-word;
+				overflow:auto;
+			}
 
+			.build_info{
+				font-size: 8px;
+				.join{
+					input{
+						font-size:8px;
+					}
+				}
+			}
+
+		}
+
+		#room_view{
+			background: #EDE9D8;
+			//command_area
+			form#command{
+				padding: 10px;
+
+				div#to_area{
+					font-size: 12px;
+				}
+				div#text_area{
+					background: #6C3524;
+					color: #FFFFFF;
+					font-size: 10px;
+					.row {
+						margin-top: 5px;
+						margin-bottom: 5px;
+					}
+				}
+
+			}
+
+			div.row{
+				.room{
+					height: 150px;
+					margin: 10px;
+					padding: 10px;
+					.room_name{
+						text-align: center;
+					}
+					.number{
+						text-align: center;
+					}
+					input.form-control{
+						background: #F8B500;
+						color: #000000;
+						font-weight: bold;	
+					}
+				}
+				#red{ background: #EE836F; }
+				#waterblue{ background: #89C3EB; }
+				#green{ background: #3EB370; }
+				#purple{ background: #7058A3; }
+				#yellow{ background: #F3F133; }
+				#blue{ background: #1E50A2; }
+			}
+
+			#room_list{
+				padding-top: 10px;
+				padding-bottom: 10px;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+
+
+		}
+
+		#chat_view{
+
+
+		}
+	}
 	
 }
  
