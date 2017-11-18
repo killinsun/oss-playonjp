@@ -1,5 +1,32 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+extends _layout.pug
+block contents
+	main
+		div.container-fluid
+			div.row
+				div#user_column_pc.col-md-2 hidden-sm
+				div#main_container.col-md-7
+					h1 チャット
+					p 
+						| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
+						| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。
+						| 1～6号館はユーザ登録をした人のみが入れる号館です。
+						| ログインしてから、チャットに来て下さい。
+						| ゲスト用は登録に関係なく誰でも使えます。 
+						| マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
+					div.container-fluid
+						div.row
+							div.col-lg-4 room1
+							div.col-lg-4 room1
+							div.col-lg-4 room1
+						div.row
+							div.col-lg-4 room1
+							div.col-lg-4 room1
+							div.col-lg-4 room1
+						div.row
+							div.col-lg-4 room1
+							div.col-lg-4 room1
+							div.col-lg-4 room1
+						div.row
+							div.col-lg-4 room1
+							div.col-lg-4 room1
+							div.col-lg-4 room1
