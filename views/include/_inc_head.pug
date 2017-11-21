@@ -1,7 +1,7 @@
 head
 	meta(charset="utf-8")
 	link(rel="stylesheet" type="text/css" 
-		href="../public/stylesheets/style.css")
+		href=`http://${hostname}/stylesheets/style.css`)
 	link(rel="stylesheet" type="text/css" 
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
 		grity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
@@ -12,5 +12,5 @@ head
 	script(src="/socket.io/socket.io.js")
 	script
 		var socket = io();
-	title OSS PLAYON.JP
+	title #{title}
 
