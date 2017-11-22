@@ -126,11 +126,14 @@ input, textarea {
 
 a:link {
   color: #06f; }
+
 a:visited {
   color: #39f; }
+
 a:hover {
   text-decoration: none;
   color: #00f; }
+
 a:active {
   color: #00f; }
 
@@ -265,5 +268,3 @@ main {
   float: right;
   width: 310px;
   background: #F4F4F4; }
-
-/*# sourceMappingURL=style.css.map */
