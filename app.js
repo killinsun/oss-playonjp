@@ -7,6 +7,7 @@ var bodyParser	= require('body-parser');
 
 var routes		= require('./routes/index');
 var users		= require('./routes/users');
+var chat		= require('./routes/chat');
 
 var app			= express();
 var http		= require('http').Server(app);
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'stylesheets')));
 
 app.use('/', routes);
+app.use('/chat', chat);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
