@@ -6,10 +6,7 @@
       <link rel="stylesheet" type="text/css" href="../public/stylesheets/style.css">
       <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" grity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-      <script src="/socket.io/socket.io.js"></script>
-      <script>
-        <var>socket = io();</var>
-      </script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       <title>OSS PLAYON.JP</title>
     </head>
   </head>
@@ -49,6 +46,25 @@
             <div class="row">
               <!-- Room view-->
               <div class="container-fluid" id="room_view">
+                <div id="member_list">
+                  <div id="title_bar"></div>
+                  <div class="form-inline" id="switch_opt">
+                    <label class="radio-inline">
+                      <input class="form-inline" type=radio checked><span>時間</span>
+                    </label>
+                    <label class="checkbox-inline">
+                      <input class="form-inline" type=radio><span>IP</span>
+                    </label>
+                  </div>
+                  <div id="list">
+                    <div class="one_line">
+                      <div class="room_color"></div>
+                      <div class="user_name">user 1</div>
+                      <div class="time_date">2017/11/15 17:33</div>
+                      <div class="icon"> </div>
+                    </div>
+                  </div>
+                </div>
                 <form class="row" id="command">
                   <div class="col-sm-2" id="to_area">
                     <p>user_name</p>
@@ -66,13 +82,11 @@
                         </label><span class="col-sm11">
                            入退室時に発言する(部屋の様子を見たい場合はチェックを外す)</span>
                       </div>
-                      <div class="row">
-                        <input class="col-sm12 form-control" type=text value='type command' width=100%>
+                      <div class="row form-inline">
+                        <input class="form-control col-sm11" type=text placeholder=type_command>
+                        <button class="btn btn-default col-sm1" type=submit>送信</button>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-sm-2" id="submit_area"><br>
-                    <input class="form-control" type=submit value=送信>
                   </div>
                 </form>
                 <div class="row" id="room_list">
@@ -137,6 +151,28 @@
               <p>advert</p>
             </div>
           </div>
+          <script>
+            $(function() {
+            	// タイトルバーをドラッグしたとき
+            	wx = 550;
+            	wy = 120;
+            	$('#title_bar').mousedown(function(e) {
+            	  var mx = e.pageX;
+            	  var my = e.pageY;
+            	  $(document).on('mousemove.member_list', function(e) {
+            		wx += e.pageX - mx;
+            		wy += e.pageY - my;
+            		$('#member_list').css({top: wy, left: wx});
+            		mx = e.pageX;
+            		my = e.pageY;
+            		return false;
+            	  }).one('mouseup', function(e) {
+            		$(document).off('mousemove.member_list');
+            	  });
+            	  return false;
+            	});
+            });
+          </script>
         </div>
       </div>
     </main>

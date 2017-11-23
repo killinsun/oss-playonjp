@@ -217,6 +217,21 @@ main {
         font-size: 8px; }
   main div #room_view {
     background: #EDE9D8; }
+    main div #room_view #member_list {
+      width: 350px;
+      height: 300px;
+      background: gray;
+      position: absolute;
+      z-index: 9999;
+      top: 120px;
+      left: 550px; }
+      main div #room_view #member_list #title_bar {
+        background: blue;
+        height: 15px; }
+      main div #room_view #member_list #list {
+        height: 70%;
+        overflow: auto;
+        font-size: 12px; }
     main div #room_view form#command {
       padding: 10px; }
       main div #room_view form#command div#to_area {
@@ -231,7 +246,9 @@ main {
     main div #room_view div.row .room {
       height: 150px;
       margin: 10px;
-      padding: 10px; }
+      margin-bottom: 100px;
+      padding: 10px;
+      border: 1px solid #000000; }
       main div #room_view div.row .room .room_name {
         text-align: center; }
       main div #room_view div.row .room .number {

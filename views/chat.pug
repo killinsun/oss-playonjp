@@ -18,6 +18,21 @@ block contents
 					div.row
 						// Room view
 						div#room_view.container-fluid
+							div#member_list
+								div#title_bar
+								div#switch_opt.form-inline
+									label.radio-inline
+										input.form-inline("type=radio checked")
+										span 時間
+									label.checkbox-inline
+										input.form-inline("type=radio")
+										span IP
+								div#list
+									div.one_line
+										div.room_color
+										div.user_name user 1
+										div.time_date 2017/11/15 17:33
+										div.icon 
 							form#command.row
 								div#to_area.col-sm-2
 									p user_name
@@ -32,11 +47,9 @@ block contents
 												input.col-sm1.form-control.form-inline("type=checkbox")
 											span.col-sm11 
 												| 入退室時に発言する(部屋の様子を見たい場合はチェックを外す)
-										div.row
-											input.col-sm12.form-control("type=text value='type command' width=100%")
-								div#submit_area.col-sm-2
-									br
-									input.form-control("type=submit value=送信")
+										div.row.form-inline
+											input.form-control.col-sm11("type=text placeholder=type_command")
+											button.btn.btn-default.col-sm1("type=submit") 送信
 							div#room_list.row
 								div.container
 									div.row
@@ -72,4 +85,26 @@ block contents
 					//- Right advert
 					div#advert_right
 						p advert
+				script.
+					$(function() {
+						// タイトルバーをドラッグしたとき
+						wx = 550;
+						wy = 120;
+						$('#title_bar').mousedown(function(e) {
+						  var mx = e.pageX;
+						  var my = e.pageY;
+						  $(document).on('mousemove.member_list', function(e) {
+							wx += e.pageX - mx;
+							wy += e.pageY - my;
+							$('#member_list').css({top: wy, left: wx});
+							mx = e.pageX;
+							my = e.pageY;
+							return false;
+						  }).one('mouseup', function(e) {
+							$(document).off('mousemove.member_list');
+						  });
+						  return false;
+						});
+					});
+					
 

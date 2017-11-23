@@ -124,6 +124,30 @@ main {
 
 		#room_view{
 			background: #EDE9D8;
+
+			#member_list{
+				width:350px;
+				height: 300px;
+				background:gray;
+				position: absolute;
+				z-index: 9999;
+				top: 120px;
+				left: 550px;
+				#title_bar{
+					background: blue;
+					height:15px;
+				}
+				#switch_opt{
+
+				}
+				#list{
+					height:70%;
+					overflow:auto;	
+					font-size: 12px;
+
+				}
+
+			}
 			//command_area
 			form#command{
 				padding: 10px;
@@ -147,7 +171,9 @@ main {
 				.room{
 					height: 150px;
 					margin: 10px;
+					margin-bottom: 100px;
 					padding: 10px;
+					border: 1px solid #000000;
 					.room_name{
 						text-align: center;
 					}
