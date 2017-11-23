@@ -82,9 +82,9 @@
   box-shadow: none !important; }
 
 /* clearfix */
-.clearfix, header #nav, footer.copyright {
+.clearfix, header #nav, footer.copyright, nav, main {
   *zoom: 1; }
-  .clearfix:after, header #nav:after, footer.copyright:after {
+  .clearfix:after, header #nav:after, footer.copyright:after, nav:after, main:after {
     content: ".";
     display: block;
     clear: both;
@@ -126,14 +126,11 @@ input, textarea {
 
 a:link {
   color: #06f; }
-
 a:visited {
   color: #39f; }
-
 a:hover {
   text-decoration: none;
   color: #00f; }
-
 a:active {
   color: #00f; }
 
@@ -285,3 +282,5 @@ main {
   float: right;
   width: 310px;
   background: #F4F4F4; }
+
+/*# sourceMappingURL=style.css.map */

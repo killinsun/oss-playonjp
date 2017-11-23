@@ -37,6 +37,7 @@ footer.copyright {
 	メニュー
 ----------------------------------------------------*/
 nav {
+	@extend .clearfix;
 	ul {
 		li {
 			display: inline;

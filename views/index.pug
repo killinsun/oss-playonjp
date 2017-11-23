@@ -1,224 +1,224 @@
 extends _layout.pug
 block contents
 	main
-	p #{basedir}
-		div.container
-			div.row
-				div#user_column_pc.col-md-2.hidden-sm
-					p user_navigation
-				div#main_container.col-md-10
-					div.container-fluid
-						div.row
-							div.col-lg-12
-								//- Info
-								h1 チャット
-								p.chathelp
-									| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
-									| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。
-									| 1～6号館はユーザ登録をした人のみが入れる号館です。
-									| ログインしてから、チャットに来て下さい。
-									| ゲスト用は登録に関係なく誰でも使えます。 
-									| マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
-						div.row
-							div.col-lg-10
-								//- Chat 
-								div#all_view.container
-									div.row
-										div#guest1.col-lg-3.roomarea
-											div.room_name ゲスト
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,ggg,hhh,iii,jjj,kkk,lllllllllllll,mmmmmmm,ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd_______________________________________________________________________
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-										div#guest2.col-lg-3.roomarea
-											div.room_name ゲスト2
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-										div#tennis.col-lg-3.roomarea
-											div.room_name テーブルテニス
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-									div.row
-										div#build1.col-lg-3.roomarea
-											div.room_name 1号館
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-										div#build2.col-lg-3.roomarea
-											div.room_name 2号館
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-										div#build3.col-lg-3.roomarea
-											div.room_name 3号館
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-									div.row
-										div#build4.col-lg-3.roomarea
-											div.room_name 4号館
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-										div#build5.col-lg-3.roomarea
-											div.room_name 5号館
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-										div#build6.col-lg-3.roomarea
-											div.room_name 6号館
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-									div.row
-										div#two.col-lg-3.roomarea
-											div.room_name 二人限定
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-										div#two2.col-lg-3.roomarea
-											div.room_name 二人限定(2)
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-										div#denybuild.col-lg-3.roomarea
-											div.room_name アクセス禁止
-											div.member_stat.clearfix
-												div.red 0
-												div.waterblue 0
-												div.green 0
-												div.purple 0
-												div.yellow 0
-												div.blue 0
-											div.member_list
-												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
-												div.number 現在 0 人入館中
-												div.join
-													input.form-control("type=button value=入室")
-												
-							div.col-lg-2
-								//- Right advert
-								div#advert_right
-									p advert
+		p #{basedir}
+			div.container
+				div.row
+					div#user_column_pc.col-md-2.hidden-sm
+						p user_navigation
+					div#main_container.col-md-10
+						div.container-fluid
+							div.row
+								div.col-lg-12
+									//- Info
+									h1 チャット
+									p.chathelp
+										| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
+										| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。
+										| 1～6号館はユーザ登録をした人のみが入れる号館です。
+										| ログインしてから、チャットに来て下さい。
+										| ゲスト用は登録に関係なく誰でも使えます。 
+										| マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
+							div.row
+								div.col-lg-10
+									//- Chat 
+									div#all_view.container
+										div.row
+											div#guest1.col-lg-3.roomarea
+												div.room_name ゲスト
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,ggg,hhh,iii,jjj,kkk,lllllllllllll,mmmmmmm,ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd_______________________________________________________________________
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+											div#guest2.col-lg-3.roomarea
+												div.room_name ゲスト2
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+											div#tennis.col-lg-3.roomarea
+												div.room_name テーブルテニス
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+										div.row
+											div#build1.col-lg-3.roomarea
+												div.room_name 1号館
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+											div#build2.col-lg-3.roomarea
+												div.room_name 2号館
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+											div#build3.col-lg-3.roomarea
+												div.room_name 3号館
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+										div.row
+											div#build4.col-lg-3.roomarea
+												div.room_name 4号館
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+											div#build5.col-lg-3.roomarea
+												div.room_name 5号館
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+											div#build6.col-lg-3.roomarea
+												div.room_name 6号館
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+										div.row
+											div#two.col-lg-3.roomarea
+												div.room_name 二人限定
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+											div#two2.col-lg-3.roomarea
+												div.room_name 二人限定(2)
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+											div#denybuild.col-lg-3.roomarea
+												div.room_name アクセス禁止
+												div.member_stat.clearfix
+													div.red 0
+													div.waterblue 0
+													div.green 0
+													div.purple 0
+													div.yellow 0
+													div.blue 0
+												div.member_list
+													p aaa,bbb,ccc,ddd,eee,fff,gg
+												div.build_info
+													div.number 現在 0 人入館中
+													div.join
+														input.form-control("type=button value=入室")
+													
+								div.col-lg-2
+									//- Right advert
+									div#advert_right
+										p advert
 
