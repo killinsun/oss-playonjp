@@ -72,26 +72,42 @@ var now_user_list = {};
 io.on('connection', function(socket){
 	console.log('%s joined.', socket.id);
 
-
-	socket.on('room_join', function(user_data,room){
+	socket.on('room_join', function(user_data){
+		console.log(user_data);
+		console.log(now_user_list);
 		if(!now_user_list[user_data.socket_id]){
-			now_user_list[user_data.socket_id] = user_data.user_name;
+			now_user_list[user_data.socket_id] = user_data;
+			console.log("add now_user_list " + now_user_list[user_data.socket_id]);
 		}
-		console.log(now_user_list[user_data.socket_id] + ' Joined to ' + room);
-		socket.join(room);
-		io.sockets.emit('update_list_st', now_user_list, room);
+		console.log(now_user_list);
+		now_user_list[user_data.socket_id].joined_room['room2'] = user_data.joined_room['room2'];
+		
+		join_room = now_user_list[user_data.socket_id].joined_room['room2'];
+
+		console.log(
+			now_user_list[user_data.socket_id].socket_id +
+			' Joined to ' + 
+			join_room
+		);
+
+		socket.join(join_room);
+		io.sockets.emit('update_list_st', now_user_list);
 	});
 
-	socket.on('room_leave', function(user_data,room){
-		if(!now_user_list[user_data.socket_id]){
-			now_user_list[user_data.socket_id] = user_data.user_name;
+	socket.on('room_leave', function(recived_id){
+		if(!now_user_list[recived_id]){
+			console.log('socket error');
 		}
-		console.log(now_user_list[user_data.socket_id] + ' leave from ' + room);
-		socket.leave(room);
-		io.sockets.emit('update_list_st', now_user_list, room);
+		leave_room = now_user_list[recived_id].joined_room['room2'];
+		console.log(now_user_list[recived_id].user_name + 
+			' leave from ' + 
+			leave_room);
+		socket.leave(leave_room);
+		now_user_list[recived_id].joined_room['room2'] = '';
+		io.sockets.emit('update_list_st', now_user_list);
 	});
 
-	socket.on('message', function(user_data,room) {
+	socket.on('message', function(user_data) {
 		io.sockets.in(room).emit('message', msg, now_user_list[socket.id]);
 	});
 

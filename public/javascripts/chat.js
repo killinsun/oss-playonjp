@@ -1,5 +1,4 @@
 var socket = io();
-
 $(function(){
 
 	//Room join
@@ -10,7 +9,7 @@ $(function(){
 		$('#join_view').hide();
 		$('#room_view').show();
 		
-		socket.emit('room_join', {'socket_id': socket.id, 'user_name': user_name, 'joined_room': {'room': 'share'}:,"share");
+		socket.emit('room_join', {'socket_id': socket.id, 'user_name': user_name, 'joined_room': {'room1': 'share', 'room2': ''}});
 
 		return false;
 	});
@@ -22,19 +21,23 @@ $(function(){
 		
 		$('#room_view').hide();
 		$('#chat_view').show();
-		socket.emit('room_join', {'socket_id': socket.id, 'user_name': user_name}, room);
+		socket.emit('room_join', {'socket_id': socket.id, 'user_name': user_name, 'joined_room': {'room1': 'share', 'room2': room}});
 		console.log(socket.id + ':' + room);
 
 	
 	});
 	
 	//Update user list
-	socket.on('update_list_st',function(now_user_list,room){
+	socket.on('update_list_st',function(now_user_list){
 		$('.one_line').remove();
 		for(user in now_user_list){
+			var socket_id = now_user_list[user].socket_id;
+			var user_name = now_user_list[user].user_name;
+			var room_name = now_user_list[user].joined_room['room2'];
+			console.log('room:' + room_name);
 			one_line = '<div class="one_line">';
-			one_line+= '<div class="room_color">' + room + '</div>';
-			one_line+= '<div class="user_name">' + now_user_list[user] + '</div>';
+			one_line+= '<div class="room_color">' + room_name + '</div>';
+			one_line+= '<div class="user_name">' + user_name + '</div>';
 			one_line+= '<div class="date_time">2017/12/31 0:00:00 </div>';
 			one_line+= '<div class="icon">a </div>';
 			one_line+= '</div>';
@@ -67,10 +70,8 @@ $(function(){
 		//Get pressed button's room name.
 		$('#chat_view').hide();
 		$('#room_view').show();
-		socket.emit('room_join', {'socket_id': socket.id, 'user_name': user_name}, room);
-		console.log(socket.id + ':' + room);
+		socket.emit('room_leave', socket.id);
 
-	
 	});
 
 });
