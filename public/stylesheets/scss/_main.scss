@@ -3,22 +3,6 @@
 // メイン - このファイルにメインコンテンツ部分のスタイルをガツガツ書いていく。
 // ===================================================================
  
-/* TEST 
-.test {
-	@include border_radius;
-	@include border_radius(5px 10px 2px 12%);
-	@include bg_size(100px);
-	@include min_height(777px);
-	@extend .clearfix;
-	@extend .box_size;
-	background: url(#{$img_path}share/bg_test.gif);
-	font-size: fz(18);
-}
-.opTest img:hover {
-	@extend .opacity;
-}
-*/  
- 
 /*----------------------------------------------------
 	element style
 ----------------------------------------------------*/
@@ -89,79 +73,93 @@ main {
 		font-size: 12px;
 	}
 
-	div {
-		
-		.roomarea{
-			font-size: 12px;
-			width: 100%;
-			height: 200px;
-			background: #fff;
-			text-align: center;
-			margin: 20px;
-			.member_stat{
-				.red{ background: $red ; float:left; width: 16.6%; }
-				.waterblue{ background: $waterblue ; float:left; width: 16.6%; }
-				.green{ background: $green ; float:left; width: 16.6%;}
-				.purple{ background: $purple ; float:left; width: 16.6%;}
-				.yellow{ background: $yellow ; float:left; width: 16.6%;}
-				.blue{ background: $blue ; float:left; width: 16.6%;}
+	div.roomarea{
+		font-size: 12px;
+		width: 100%;
+		height: 200px;
+		background: #fff;
+		text-align: center;
+		margin: 20px;
+
+		.member_stat{
+			.red{ background: $red ; float:left; width: 16.6%; }
+			.waterblue{ background: $waterblue ; float:left; width: 16.6%; }
+			.green{ background: $green ; float:left; width: 16.6%;}
+			.purple{ background: $purple ; float:left; width: 16.6%;}
+			.yellow{ background: $yellow ; float:left; width: 16.6%;}
+			.blue{ background: $blue ; float:left; width: 16.6%;}
+		}
+
+		.member_list{
+			height:50%;
+			word-break: break-word;
+			overflow:auto;
+		}
+
+		.build_info{
+			font-size: 8px;
+			.join{
+				input{
+					font-size:8px;
+				}
 			}
-			.member_list{
-				height:50%;
-				word-break: break-word;
-				overflow:auto;
+		}
+	}
+
+
+	div#room_view{
+		//background: #EDE9D8;
+		background: #000000;
+
+		#member_list{
+			width:350px;
+			height: 300px;
+			background:gray;
+			position: absolute;
+			z-index: 9999;
+			top: 120px;
+			left: 550px;
+			#title_bar{
+				background: blue;
+				height:15px;
 			}
-			.build_info{
-				font-size: 8px;
-				.join{
-					input{
-						font-size:8px;
-					}
+			#switch_opt{
+			}
+			#list{
+				height:70%;
+				overflow:auto;	
+				font-size: 12px;
+			}
+		}
+
+		//command_area
+		#command{
+			padding: 10px;
+
+			div#to_area{
+				font-size: 12px;
+			}
+			div#text_area{
+				background: #6C3524;
+				color: #FFFFFF;
+				font-size: 10px;
+				.row {
+					margin-top: 5px;
+					margin-bottom: 5px;
 				}
 			}
 		}
 
-		#room_view{
-			background: #EDE9D8;
 
-			#member_list{
-				width:350px;
-				height: 300px;
-				background:gray;
-				position: absolute;
-				z-index: 9999;
-				top: 120px;
-				left: 550px;
-				#title_bar{
-					background: blue;
-					height:15px;
-				}
-				#switch_opt{
-				}
-				#list{
-					height:70%;
-					overflow:auto;	
-					font-size: 12px;
-				}
-			}
-			//command_area
-			form#command{
-				padding: 10px;
 
-				div#to_area{
-					font-size: 12px;
-				}
-				div#text_area{
-					background: #6C3524;
-					color: #FFFFFF;
-					font-size: 10px;
-					.row {
-						margin-top: 5px;
-						margin-bottom: 5px;
-					}
-				}
-			}
-			div.row{
+		//Room List
+		#room_list{
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-left: 20px;
+			padding-right: 20px;
+
+			.row{
 				.room{
 					height: 150px;
 					margin: 10px;
@@ -186,17 +184,29 @@ main {
 				#purple{ background: #7058A3; }
 				#yellow{ background: #F3F133; }
 				#blue{ background: #1E50A2; }
+
 			}
-			#room_list{
-				padding-top: 10px;
-				padding-bottom: 10px;
-				padding-left: 20px;
-				padding-right: 20px;
-			}
-		}
-		#chat_view{
 		}
 	}
+
+	div#join_view{
+		background: #FFFFFF;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 20px;
+		padding-right: 20px;
+
+	}
+
+	div#chat_view{
+		background: #FFFFFF;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+		
+
 }
 
  

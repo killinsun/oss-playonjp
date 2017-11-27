@@ -8,7 +8,7 @@ block contents
 			div.row
 				div.col-lg-12
 					//- Info
-					h1 ***号館 - チャット
+					h1 ***
 					p.chathelp
 						| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
 						| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。
@@ -16,15 +16,18 @@ block contents
 						| ログインしてから、チャットに来て下さい。
 						| ゲスト用は登録に関係なく誰でも使えます。 
 						| マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
-			div.row
+			div#room_view.row
 				div.col-lg-10
-					div.row
-						div#chat_view
-							form(action="")
-								select#opt_room(name="opt_room")
-									option(value="room1") RoomA
-									option(value="room1") RoomB
-								input(type="text" id="msg")
-								input(type="submit" id="btn" value="送信")
-							ul#message
-								
+					div#join_view
+						form#form_join(action="" name="form_join")
+							input(type="text" id="user_name")
+							input#btn_join(type="submit" name="btn_join" value="入室")
+					div#chat_view
+						form#form_chat(action="" name="form_chat")
+							select#opt_room(name="opt_room")
+								option(value="room1") RoomA
+								option(value="room1") RoomB
+							input(type="text" id="msg")
+							input#btn_send(type="submit" name="btn_send" value="送信")
+						ul#message
+							

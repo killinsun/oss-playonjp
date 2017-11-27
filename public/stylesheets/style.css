@@ -126,11 +126,14 @@ input, textarea {
 
 a:link {
   color: #06f; }
+
 a:visited {
   color: #39f; }
+
 a:hover {
   text-decoration: none;
   color: #00f; }
+
 a:active {
   color: #00f; }
 
@@ -176,48 +179,48 @@ main {
     text-align: center; }
   main p.chathelp {
     font-size: 12px; }
-  main div .roomarea {
+  main div.roomarea {
     font-size: 12px;
     width: 100%;
     height: 200px;
     background: #fff;
     text-align: center;
     margin: 20px; }
-    main div .roomarea .member_stat .red {
+    main div.roomarea .member_stat .red {
       background: #EE836F;
       float: left;
       width: 16.6%; }
-    main div .roomarea .member_stat .waterblue {
+    main div.roomarea .member_stat .waterblue {
       background: #89C3EB;
       float: left;
       width: 16.6%; }
-    main div .roomarea .member_stat .green {
+    main div.roomarea .member_stat .green {
       background: #3EB370;
       float: left;
       width: 16.6%; }
-    main div .roomarea .member_stat .purple {
+    main div.roomarea .member_stat .purple {
       background: #7058A3;
       float: left;
       width: 16.6%; }
-    main div .roomarea .member_stat .yellow {
+    main div.roomarea .member_stat .yellow {
       background: #F3F133;
       float: left;
       width: 16.6%; }
-    main div .roomarea .member_stat .blue {
+    main div.roomarea .member_stat .blue {
       background: #1E50A2;
       float: left;
       width: 16.6%; }
-    main div .roomarea .member_list {
+    main div.roomarea .member_list {
       height: 50%;
       word-break: break-word;
       overflow: auto; }
-    main div .roomarea .build_info {
+    main div.roomarea .build_info {
       font-size: 8px; }
-      main div .roomarea .build_info .join input {
+      main div.roomarea .build_info .join input {
         font-size: 8px; }
-  main div #room_view {
-    background: #EDE9D8; }
-    main div #room_view #member_list {
+  main div#room_view {
+    background: #000000; }
+    main div#room_view #member_list {
       width: 350px;
       height: 300px;
       background: gray;
@@ -225,55 +228,67 @@ main {
       z-index: 9999;
       top: 120px;
       left: 550px; }
-      main div #room_view #member_list #title_bar {
+      main div#room_view #member_list #title_bar {
         background: blue;
         height: 15px; }
-      main div #room_view #member_list #list {
+      main div#room_view #member_list #list {
         height: 70%;
         overflow: auto;
         font-size: 12px; }
-    main div #room_view form#command {
+    main div#room_view #command {
       padding: 10px; }
-      main div #room_view form#command div#to_area {
+      main div#room_view #command div#to_area {
         font-size: 12px; }
-      main div #room_view form#command div#text_area {
+      main div#room_view #command div#text_area {
         background: #6C3524;
         color: #FFFFFF;
         font-size: 10px; }
-        main div #room_view form#command div#text_area .row {
+        main div#room_view #command div#text_area .row {
           margin-top: 5px;
           margin-bottom: 5px; }
-    main div #room_view div.row .room {
-      height: 150px;
-      margin: 10px;
-      margin-bottom: 100px;
-      padding: 10px;
-      border: 1px solid #000000; }
-      main div #room_view div.row .room .room_name {
-        text-align: center; }
-      main div #room_view div.row .room .number {
-        text-align: center; }
-      main div #room_view div.row .room input.form-control {
-        background: #F8B500;
-        color: #000000;
-        font-weight: bold; }
-    main div #room_view div.row #red {
-      background: #EE836F; }
-    main div #room_view div.row #waterblue {
-      background: #89C3EB; }
-    main div #room_view div.row #green {
-      background: #3EB370; }
-    main div #room_view div.row #purple {
-      background: #7058A3; }
-    main div #room_view div.row #yellow {
-      background: #F3F133; }
-    main div #room_view div.row #blue {
-      background: #1E50A2; }
-    main div #room_view #room_list {
+    main div#room_view #room_list {
       padding-top: 10px;
       padding-bottom: 10px;
       padding-left: 20px;
       padding-right: 20px; }
+      main div#room_view #room_list .row .room {
+        height: 150px;
+        margin: 10px;
+        margin-bottom: 100px;
+        padding: 10px;
+        border: 1px solid #000000; }
+        main div#room_view #room_list .row .room .room_name {
+          text-align: center; }
+        main div#room_view #room_list .row .room .number {
+          text-align: center; }
+        main div#room_view #room_list .row .room input.form-control {
+          background: #F8B500;
+          color: #000000;
+          font-weight: bold; }
+      main div#room_view #room_list .row #red {
+        background: #EE836F; }
+      main div#room_view #room_list .row #waterblue {
+        background: #89C3EB; }
+      main div#room_view #room_list .row #green {
+        background: #3EB370; }
+      main div#room_view #room_list .row #purple {
+        background: #7058A3; }
+      main div#room_view #room_list .row #yellow {
+        background: #F3F133; }
+      main div#room_view #room_list .row #blue {
+        background: #1E50A2; }
+  main div#join_view {
+    background: #FFFFFF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px; }
+  main div#chat_view {
+    background: #FFFFFF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px; }
 
 /*----------------------------------------------------
 	#sub
@@ -282,5 +297,3 @@ main {
   float: right;
   width: 310px;
   background: #F4F4F4; }
-
-/*# sourceMappingURL=style.css.map */

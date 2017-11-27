@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "compile-style": "node-sass --include-path scss public/stylesheets/scss/style.scss -o public/stylesheets/ compres",
+    "compile-style": "node-sass --include-path scss public/stylesheets/scss/*.scss -o public/stylesheets/ compres",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "dependencies": {
