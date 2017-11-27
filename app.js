@@ -11,6 +11,7 @@ var chat		= require('./routes/chat');
 
 var app			= express();
 var http		= require('http').Server(app);
+var io = require('socket.io')(http);
 const PORT		= 3000;
 
 // view engine setup
@@ -24,7 +25,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'stylesheets')));
 
 app.use('/', routes);
 app.use('/chat', chat);
@@ -62,8 +62,38 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+
+
+
+// ----------- Chat Program -------
+// We will devide these code later.
+//
+
+io.on('connection', function(socket){
+	console.log('%s joined.', socket.id);
+
+	var room = 'room-a';
+
+	io.sockets.in(room).emit('message',socket.id + 'さんが入室しました', "");
+
+	socket.join(room);
+
+	socket.on('message', function(msg) {
+		io.sockets.in(room).emit('message', msg, socket.id);
+		console.log(msg);
+	});
+
+	socket.on('disconnect', function(e) {
+		console.log('%s leave.', socket.id);
+	});
+
+});
+// --------------------------------
+
 
 http.listen(PORT, function(){
 	console.log('server started on %d', PORT);
 });
+
+
+module.exports = app;

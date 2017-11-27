@@ -1,0 +1,30 @@
+extends _layout.pug
+block contents
+	script(src="https://code.jquery.com/jquery-1.11.1.js")
+	script(src="/socket.io/socket.io.js")
+	script(type="text/javascript" src="javascripts/chat.js")
+	main
+		div.container-fluid
+			div.row
+				div.col-lg-12
+					//- Info
+					h1 ***号館 - チャット
+					p.chathelp
+						| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
+						| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。
+						| 1～6号館はユーザ登録をした人のみが入れる号館です。
+						| ログインしてから、チャットに来て下さい。
+						| ゲスト用は登録に関係なく誰でも使えます。 
+						| マイクやWebカメラを使うビデオチャットは、ユーザ登録した方のみ利用できます。
+			div.row
+				div.col-lg-10
+					div.row
+						div#chat_view
+							form(action="")
+								select#opt_room(name="opt_room")
+									option(value="room1") RoomA
+									option(value="room1") RoomB
+								input(type="text" id="msg")
+								input(type="submit" id="btn" value="送信")
+							ul#message
+								
