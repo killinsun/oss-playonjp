@@ -1,5 +1,8 @@
 extends _layout.pug
 block contents
+	script(src="https://code.jquery.com/jquery-1.11.1.js")
+	script(src="/socket.io/socket.io.js")
+	script(type="text/javascript" src="javascripts/chat.js")
 	main
 		div.container-fluid
 			div.row
@@ -16,23 +19,27 @@ block contents
 			div.row
 				div.col-lg-10
 					div.row
+						div#member_list
+							div#title_bar
+							div#switch_opt.form-inline
+								label.radio-inline
+									input.form-inline("type=radio checked")
+									span 時間
+								label.checkbox-inline
+									input.form-inline("type=radio")
+									span IP
+							div#list
+								div.one_line
+						// Join view
+						div#join_view.container-fluid
+							form#form_join(action="" name="form_join")
+								input(type="text" id="user_name")
+								input#btn_room_join(type="submit" name="btn_room_join" value="入室")
+							div#rules
+								p ルールを色々記載する
+							
 						// Room view
 						div#room_view.container-fluid
-							div#member_list
-								div#title_bar
-								div#switch_opt.form-inline
-									label.radio-inline
-										input.form-inline("type=radio checked")
-										span 時間
-									label.checkbox-inline
-										input.form-inline("type=radio")
-										span IP
-								div#list
-									div.one_line
-										div.room_color
-										div.user_name user 1
-										div.time_date 2017/11/15 17:33
-										div.icon 
 							form#command.row
 								div#to_area.col-sm-2
 									p user_name
@@ -56,32 +63,36 @@ block contents
 										div#red.col-lg-2.room 
 											div.room_name 赤
 											div.number 1/16
-											div.join: input.form-control("type=button value=入室")
+											div.join: input.form-control.room_join_btn("type=button value=入室")
 										div#waterblue.col-lg-2.room 
 											div.room_name 薄青
 											div.number 1/16
-											div.join: input.form-control("type=button value=入室")
+											div.join: input.form-control.room_join_btn("type=button value=入室")
 										div#green.col-lg-2.room 
 											div.room_name 緑
 											div.number 1/16
-											div.join: input.form-control("type=button value=入室")
+											div.join: input.form-control.room_join_btn("type=button value=入室")
 									div.row
 										div#purple.col-lg-2.room 
 											div.room_name 紫
 											div.number 1/16
-											div.join: input.form-control("type=button value=入室")
+											div.join: input.form-control.room_join_btn("type=button value=入室")
 										div#yellow.col-lg-2.room 
 											div.room_name 黄
 											div.number 1/16
-											div.join: input.form-control("type=button value=入室")
+											div.join: input.form-control.room_join_btn("type=button value=入室")
 										div#blue.col-lg-2.room 
 											div.room_name 青
 											div.number 1/16
-											div.join: input.form-control("type=button value=入室")
+											div.join: input.form-control.room_join_btn("type=button value=入室")
 					div.row
 						div#chat_view.container-fluid
 							// Chat view
-							p chat view
+							form#form_chat(action="" name="form_chat")
+								input(type="text" id="msg")
+								input#btn_send(" type=button value=送信")
+								input#btn_leave("type=button value=退室")
+							ul#message
 				div.col-lg-2
 					//- Right advert
 					div#advert_right

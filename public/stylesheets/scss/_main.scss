@@ -106,31 +106,33 @@ main {
 		}
 	}
 
+	div#member_list{
+		width:350px;
+		height: 300px;
+		background:gray;
+		position: absolute;
+		z-index: 9999;
+		top: 120px;
+		left: 550px;
+		#title_bar{
+			background: blue;
+			height:15px;
+		}
+		#switch_opt{
+		}
+		#list{
+			background: #FFFFFF;
+			height:70%;
+			overflow:auto;	
+			font-size: 12px;
+		}
+	}
+
 
 	div#room_view{
-		//background: #EDE9D8;
-		background: #000000;
+		display: none; //default
+		background: #EDE9D8;
 
-		#member_list{
-			width:350px;
-			height: 300px;
-			background:gray;
-			position: absolute;
-			z-index: 9999;
-			top: 120px;
-			left: 550px;
-			#title_bar{
-				background: blue;
-				height:15px;
-			}
-			#switch_opt{
-			}
-			#list{
-				height:70%;
-				overflow:auto;	
-				font-size: 12px;
-			}
-		}
 
 		//command_area
 		#command{
@@ -190,6 +192,7 @@ main {
 	}
 
 	div#join_view{
+		display: visible; //default
 		background: #FFFFFF;
 		padding-top: 10px;
 		padding-bottom: 10px;
@@ -199,6 +202,7 @@ main {
 	}
 
 	div#chat_view{
+		display: none;
 		background: #FFFFFF;
 		padding-top: 10px;
 		padding-bottom: 10px;

@@ -68,23 +68,37 @@ app.use(function(err, req, res, next) {
 // ----------- Chat Program -------
 // We will devide these code later.
 //
-
+var now_user_list = {};
 io.on('connection', function(socket){
 	console.log('%s joined.', socket.id);
 
-	var room = 'room-a';
 
-	io.sockets.in(room).emit('message',socket.id + 'さんが入室しました', "");
+	socket.on('room_join', function(user_data,room){
+		if(!now_user_list[user_data.socket_id]){
+			now_user_list[user_data.socket_id] = user_data.user_name;
+		}
+		console.log(now_user_list[user_data.socket_id] + ' Joined to ' + room);
+		socket.join(room);
+		io.sockets.emit('update_list_st', now_user_list, room);
+	});
 
-	socket.join(room);
+	socket.on('room_leave', function(user_data,room){
+		if(!now_user_list[user_data.socket_id]){
+			now_user_list[user_data.socket_id] = user_data.user_name;
+		}
+		console.log(now_user_list[user_data.socket_id] + ' leave from ' + room);
+		socket.leave(room);
+		io.sockets.emit('update_list_st', now_user_list, room);
+	});
 
-	socket.on('message', function(msg) {
-		io.sockets.in(room).emit('message', msg, socket.id);
-		console.log(msg);
+	socket.on('message', function(user_data,room) {
+		io.sockets.in(room).emit('message', msg, now_user_list[socket.id]);
 	});
 
 	socket.on('disconnect', function(e) {
-		console.log('%s leave.', socket.id);
+		console.log('%s leave.', now_user_list[socket.id]);
+		delete now_user_list[socket.id];
+		io.sockets.emit('update_list_st', now_user_list);
 	});
 
 });

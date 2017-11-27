@@ -91,21 +91,6 @@
     height: 0;
     visibility: hidden; }
 
-/* TEST 
-.test {
-	@include border_radius;
-	@include border_radius(5px 10px 2px 12%);
-	@include bg_size(100px);
-	@include min_height(777px);
-	@extend .clearfix;
-	@extend .box_size;
-	background: url(../img/share/bg_test.gif);
-	font-size: fz(18);
-}
-.opTest img:hover {
-	@extend .opacity;
-}
-*/
 /*----------------------------------------------------
 	element style
 ----------------------------------------------------*/
@@ -218,23 +203,25 @@ main {
       font-size: 8px; }
       main div.roomarea .build_info .join input {
         font-size: 8px; }
+  main div#member_list {
+    width: 350px;
+    height: 300px;
+    background: gray;
+    position: absolute;
+    z-index: 9999;
+    top: 120px;
+    left: 550px; }
+    main div#member_list #title_bar {
+      background: blue;
+      height: 15px; }
+    main div#member_list #list {
+      background: #FFFFFF;
+      height: 70%;
+      overflow: auto;
+      font-size: 12px; }
   main div#room_view {
-    background: #000000; }
-    main div#room_view #member_list {
-      width: 350px;
-      height: 300px;
-      background: gray;
-      position: absolute;
-      z-index: 9999;
-      top: 120px;
-      left: 550px; }
-      main div#room_view #member_list #title_bar {
-        background: blue;
-        height: 15px; }
-      main div#room_view #member_list #list {
-        height: 70%;
-        overflow: auto;
-        font-size: 12px; }
+    display: none;
+    background: #EDE9D8; }
     main div#room_view #command {
       padding: 10px; }
       main div#room_view #command div#to_area {
@@ -278,12 +265,14 @@ main {
       main div#room_view #room_list .row #blue {
         background: #1E50A2; }
   main div#join_view {
+    display: visible;
     background: #FFFFFF;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px; }
   main div#chat_view {
+    display: none;
     background: #FFFFFF;
     padding-top: 10px;
     padding-bottom: 10px;
