@@ -125,6 +125,16 @@ main {
 			height:70%;
 			overflow:auto;	
 			font-size: 12px;
+			.one_line{
+				height: 10%;
+
+				.red{ background: $red; }
+				.waterblue{ background: $waterblue; }
+				.green{ background: $green; }
+				.purple{ background: $purple; }
+				.yellow{ background: $yellow; }
+				.blue{ background: $blue; }
+			}
 		}
 	}
 

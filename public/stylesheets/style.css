@@ -219,6 +219,20 @@ main {
       height: 70%;
       overflow: auto;
       font-size: 12px; }
+      main div#member_list #list .one_line {
+        height: 10%; }
+        main div#member_list #list .one_line .red {
+          background: #EE836F; }
+        main div#member_list #list .one_line .waterblue {
+          background: #89C3EB; }
+        main div#member_list #list .one_line .green {
+          background: #3EB370; }
+        main div#member_list #list .one_line .purple {
+          background: #7058A3; }
+        main div#member_list #list .one_line .yellow {
+          background: #F3F133; }
+        main div#member_list #list .one_line .blue {
+          background: #1E50A2; }
   main div#room_view {
     display: none;
     background: #EDE9D8; }

@@ -28,8 +28,8 @@ block contents
 								label.checkbox-inline
 									input.form-inline("type=radio")
 									span IP
-							div#list
-								div.one_line
+							div#list.container-fluid
+								//div.one_line.row
 						// Join view
 						div#join_view.container-fluid
 							form#form_join(action="" name="form_join")
@@ -42,7 +42,7 @@ block contents
 						div#room_view.container-fluid
 							form#command.row
 								div#to_area.col-sm-2
-									p user_name
+									p#current_user_name 
 									select.form-control("name=dm_to")
 										option("value=共有ボード") 共有ボード
 										option("value=B") B
@@ -90,7 +90,7 @@ block contents
 							// Chat view
 							form#form_chat(action="" name="form_chat")
 								input(type="text" id="msg")
-								input#btn_send(" type=button value=送信")
+								input#btn_send("type=submit value=送信")
 								input#btn_leave("type=button value=退室")
 							ul#message
 				div.col-lg-2
