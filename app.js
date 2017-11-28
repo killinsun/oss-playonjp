@@ -87,14 +87,22 @@ io.on('connection', function(socket){
 			console.log("add now_user_list " + now_user_list[user_data.socket_id].user_name);
 		}
 	
-		join_room = user_data.joined_room['room2'];	
+		user_name	= user_data.user_name;
+		in_msg		= user_data.in_msg;
+		join_room	= user_data.joined_room['room2'];
 
 		if(member_count[join_room].max >= member_count[join_room].now + 1){
 			now_user_list[user_data.socket_id].joined_room['room2'] = join_room;
 			member_count[join_room].now += 1;
 			socket.join(join_room);
 			io.sockets.emit('update_list_st', now_user_list, member_count);
-			io.to(user_data.socket_id).emit('result', true);
+			
+			//Chat room in message.
+			if(join_room!=''){
+				io.sockets.in(join_room).emit('message', '', user_name + ' ' + in_msg);
+				io.to(user_data.socket_id).emit('result', true);
+			}
+			console.log(join_room);
 		}else{
 			console.log("Capacity is max. send to " + user_data.socket_id + ":" + user_data.user_name);
 			io.to(user_data.socket_id).emit('result', false);
@@ -106,13 +114,20 @@ io.on('connection', function(socket){
 		if(!now_user_list[recived_id]){
 			console.log('socket error');
 		}
-
+		
+		user_name	= now_user_list[recived_id].user_name;
+		out_msg		= now_user_list[recived_id].out_msg;
 		leave_room = now_user_list[recived_id].joined_room['room2'];
+
+		//Chat room out message.
+		io.sockets.in(leave_room).emit('message', '', user_name + ' ' + out_msg);
 
 		socket.leave(leave_room);
 		now_user_list[recived_id].joined_room['room2'] = '';
 		member_count[leave_room].now -= 1;
-		io.sockets.emit('update_list_st', now_user_list, member_count);
+		if(leave_room!=''){
+			io.sockets.emit('update_list_st', now_user_list, member_count);
+		}
 	});
 
 
@@ -161,6 +176,12 @@ io.on('connection', function(socket){
 					io.sockets.in(this_room).emit('message', '', '部屋人数は2～20までの間で設定してください。');
 
 				}
+				break;
+
+			case '/rom':
+				now_user_list[recived_id].usr_status = 'rom';
+				io.sockets.emit('update_list_st', now_user_list, member_count);
+
 				break;
 		}
 	});

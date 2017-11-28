@@ -221,6 +221,8 @@ main {
       font-size: 12px; }
       main div#member_list #list .one_line {
         height: 10%; }
+        main div#member_list #list .one_line .rom_user {
+          color: #FF0000; }
         main div#member_list #list .one_line .red {
           background: #EE836F; }
         main div#member_list #list .one_line .waterblue {

@@ -1,5 +1,6 @@
 //e.g,,, /member: 12 -> set room member max capacity.
 const special_command =/^\/[a-z]*:(.*)$/;
+var user_data= {};
 var socket = io();
 $(function(){
 
@@ -12,12 +13,18 @@ $(function(){
 		$('#room_view').show();
 		$('#current_user_name').text(user_name);
 
-		
-		socket.emit('room_join', {
+		user_data = {
 			'socket_id': socket.id, 
 			'user_name': user_name, 
-			'joined_room': {'room1': 'share', 'room2': ''}
-			});
+			'joined_room': {'room1': 'share', 'room2': ''},
+			'resent_chat': null,
+			'usr_status'	 : 'stable',
+			'in_msg'	 : 'さんが入室しました',
+			'out_msg'	 : 'さんが退室しました',
+			'msg_count'	 : 0
+		}
+		
+		socket.emit('room_join', user_data);
 
 		return false;
 	});
@@ -26,13 +33,10 @@ $(function(){
 	$('.room_join_btn').click(function(){
 		//Get pressed button's room name.
 		var room = $(this).closest('.room').attr('id');
-		
 
-		socket.emit('room_join', {
-			'socket_id': socket.id, 
-			'user_name': user_name, 
-			'joined_room': {'room1': 'share', 'room2': room}
-			});
+		user_data.joined_room['room2'] = room;
+
+		socket.emit('room_join', user_data );
 
 		socket.on('result', function(result){
 			if(result){
@@ -54,10 +58,15 @@ $(function(){
 			var socket_id = now_user_list[user].socket_id;
 			var user_name = now_user_list[user].user_name;
 			var room_name = now_user_list[user].joined_room['room2'];
+			var usr_status	  = now_user_list[user].usr_status;
 			console.log('room:' + room_name);
 			one_line = '<div class="one_line row">';
 			one_line+= '<div class="room_color ' + room_name + ' col-sm-1"></div>';
-			one_line+= '<div class="user_name col-sm-4">' + user_name + '</div>';
+			if(usr_status ==='rom'){
+				one_line+= '<div class="user_name col-sm-4 rom_user">' + user_name + '</div>';
+			}else{
+				one_line+= '<div class="user_name col-sm-4">' + user_name + '</div>';
+			}
 			one_line+= '<div class="date_time col-sm-6">2017/12/31 0:00:00 </div>';
 			one_line+= '<div class="icon col-sm-1">a </div>';
 			one_line+= '</div>';
@@ -88,7 +97,13 @@ $(function(){
 			spl_str= msg.split(":");	
 			command = spl_str[0];
 			command_val = spl_str[1];
+
 			socket.emit('special_command', socket.id, command, command_val);
+			$('#msg').val('').focus();
+			return false;
+		}else if(msg.match(/^\/rom\s*$/)){
+			console.log(msg);
+			socket.emit('special_command', socket.id, msg, null);
 			$('#msg').val('').focus();
 			return false;
 		}
