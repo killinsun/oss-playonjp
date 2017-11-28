@@ -69,24 +69,14 @@ app.use(function(err, req, res, next) {
 // We will devide these code later.
 //
 var now_user_list = {};
-var now_user_num  = {
-	'': 0,
-	'red': 0,
-	'waterblue': 0,
-	'green': 0,
-	'purple': 0,
-	'yellow': 0,
-	'blue': 0
-	};
-
-var max_user_num  = {
-	'': 20,
-	'red': 20,
-	'waterblue': 20,
-	'green': 20,
-	'purple': 20,
-	'yellow': 20,
-	'blue': 20
+var member_count = {
+	''			: { 'name' : '共有ボード', 'now': 0, 'max': 50},
+	'red'		: { 'name' : '赤',		'now': 0, 'max': 20},
+	'waterblue'	: { 'name' : '薄青',	'now': 0, 'max': 20},
+	'green'		: { 'name' : '緑',		'now': 0, 'max': 20},
+	'purple'	: { 'name' : '紫',		'now': 0, 'max': 20},
+	'yellow'	: { 'name' : '黄',		'now': 0, 'max': 20},
+	'blue'		: { 'name' : '青',		'now': 0, 'max': 20},
 	};
 io.on('connection', function(socket){
 	console.log('%s joined.', socket.id);
@@ -99,11 +89,11 @@ io.on('connection', function(socket){
 	
 		join_room = user_data.joined_room['room2'];	
 
-		if(max_user_num[join_room] >= now_user_num[join_room] + 1){
+		if(member_count[join_room].max >= member_count[join_room].now + 1){
 			now_user_list[user_data.socket_id].joined_room['room2'] = join_room;
-			now_user_num[join_room] += 1;
+			member_count[join_room].now += 1;
 			socket.join(join_room);
-			io.sockets.emit('update_list_st', now_user_list, now_user_num);
+			io.sockets.emit('update_list_st', now_user_list, member_count);
 			io.to(user_data.socket_id).emit('result', true);
 		}else{
 			console.log("Capacity is max. send to " + user_data.socket_id + ":" + user_data.user_name);
@@ -121,8 +111,8 @@ io.on('connection', function(socket){
 
 		socket.leave(leave_room);
 		now_user_list[recived_id].joined_room['room2'] = '';
-		now_user_num[leave_room] -= 1;
-		io.sockets.emit('update_list_st', now_user_list, now_user_num);
+		member_count[leave_room].now -= 1;
+		io.sockets.emit('update_list_st', now_user_list, member_count);
 	});
 
 
@@ -141,10 +131,10 @@ io.on('connection', function(socket){
 		console.log('%s leave.', now_user_list[socket.id]);
 		if(now_user_list[socket.id]){
 			leave_room = now_user_list[socket.id].joined_room['room2'];
-			now_user_num[join_room] -= 1;
-			now_user_num[''] -= 1;
+			member_count[join_room].now -= 1;
+			member_count[''].now -= 1;
 			delete now_user_list[socket.id];
-			io.sockets.emit('update_list_st', now_user_list, now_user_num);
+			io.sockets.emit('update_list_st', now_user_list, member_count);
 		}
 	});
 
@@ -155,17 +145,20 @@ io.on('connection', function(socket){
 			case '/name':
 				console.log('change user name');
 				now_user_list[recived_id].user_name = command_val;
-				io.sockets.emit('update_list_st', now_user_list, now_user_num);
+				io.sockets.emit('update_list_st', now_user_list, member_count);
 				break;
 			case '/room':
 				console.log('change room name');
+				member_count[this_room].name = command_val;
+				io.sockets.emit('update_list_st', now_user_list, member_count);
 				break;
 			case '/member':
 				const reg = /^\s*[0-9]*$/
 				if(command_val.match(reg) && command_val <= 20 && command_val >=2){
-					max_user_num[this_room] = command_val;
+					member_count[this_room].max = command_val;
+					io.sockets.emit('update_list_st', now_user_list, member_count);
 				}else{
-					io.sockets.in(this_room).emit('message', '', '部屋人数は2～20までの間で設定してください。'+ command_val);
+					io.sockets.in(this_room).emit('message', '', '部屋人数は2～20までの間で設定してください。');
 
 				}
 				break;

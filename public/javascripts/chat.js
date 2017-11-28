@@ -19,7 +19,6 @@ $(function(){
 			'joined_room': {'room1': 'share', 'room2': ''}
 			});
 
-
 		return false;
 	});
 
@@ -40,7 +39,7 @@ $(function(){
 				$('#room_view').hide();
 				$('#chat_view').show();
 			}else{
-				alert("入れませんでした");
+				console.log("入れませんでした");
 			}
 		});
 
@@ -48,7 +47,7 @@ $(function(){
 	});
 	
 	//Update user list
-	socket.on('update_list_st',function(now_user_list, now_user_num){
+	socket.on('update_list_st',function(now_user_list, member_count){
 		//Update Member list
 		$('.one_line').remove();
 		for(user in now_user_list){
@@ -64,14 +63,21 @@ $(function(){
 			one_line+= '</div>';
 			$('#list').append(one_line);
 		}
-		//Update room member number;
-		for(r in now_user_num){
+		//Update room member number and title name;
+		for(r in member_count){
 			if(r===''){
 				
 			}else{
-				$('#room_list').find('#'+r).find('.number').text(now_user_num[r]);
+				$('#room_list').find('#'+r).find('.number').text(
+					member_count[r].now + "/" + member_count[r].max
+				);
+
+				$('#room_list').find('#'+r).find('.room_name').text(
+					member_count[r].name
+				);
 			}
 		}
+
 	});
 	
 	//Send message and update message box
