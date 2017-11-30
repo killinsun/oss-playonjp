@@ -130,8 +130,11 @@ $(function(){
 
 	$('#btn_leave').click(function(){
 		$('#chat_view').hide();
+
+		$('#msg').val('');
 		$('#room_view').show();
 		socket.emit('room_leave', socket.id);
+		$('#message li').remove();
 
 	});
 	
