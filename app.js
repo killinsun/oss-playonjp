@@ -87,9 +87,9 @@ io.on('connection', function(socket){
 			console.log("add now_user_list " + now_user_list[user_data.socket_id].user_name);
 		}
 	
-		user_name	= user_data.user_name;
-		in_msg		= user_data.in_msg;
-		join_room	= user_data.joined_room['room2'];
+		let user_name	= user_data.user_name;
+		let in_msg		= user_data.in_msg;
+		let join_room	= user_data.joined_room['room2'];
 
 		if(member_count[join_room].max >= member_count[join_room].now + 1){
 			now_user_list[user_data.socket_id].joined_room['room2'] = join_room;
@@ -115,9 +115,9 @@ io.on('connection', function(socket){
 			console.log('socket error');
 		}
 		
-		user_name	= now_user_list[recived_id].user_name;
-		out_msg		= now_user_list[recived_id].out_msg;
-		leave_room = now_user_list[recived_id].joined_room['room2'];
+		let user_name	= now_user_list[recived_id].user_name;
+		let out_msg		= now_user_list[recived_id].out_msg;
+		let leave_room = now_user_list[recived_id].joined_room['room2'];
 
 		//Chat room out message.
 		io.sockets.in(leave_room).emit('message', '', user_name + ' ' + out_msg);
@@ -131,15 +131,22 @@ io.on('connection', function(socket){
 	});
 
 
-	socket.on('message', function(recived_id, msg) {
+	socket.on('message', function(recived_id, msg, recent_chat) {
 		if(!now_user_list[recived_id]){
 			console.log('socket error');
 		}
-		socket_id	= recived_id;
-		user_name	= now_user_list[recived_id].user_name;
-		room		= now_user_list[recived_id].joined_room['room2'];
 
+		let user_name	= now_user_list[recived_id].user_name;
+		let room		= now_user_list[recived_id].joined_room['room2'];
+
+		//Recent chat time update.
+		now_user_list[recived_id].recent_chat = recent_chat;
 		io.sockets.in(room).emit('message', user_name, msg);
+
+		if(now_user_list[recived_id].usr_status = 'rom'){
+			now_user_list[recived_id].usr_status = null;
+			io.sockets.emit('update_list_st', now_user_list, member_count);
+		}
 	});
 
 	socket.on('disconnect', function(e) {
@@ -154,7 +161,7 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('special_command', function(recived_id, command, command_val){
-		this_room = now_user_list[recived_id].joined_room['room2'];
+		let this_room = now_user_list[recived_id].joined_room['room2'];
 		
 		switch(command){
 			case '/name':
