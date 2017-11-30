@@ -13,7 +13,7 @@
     "css-loader": "^0.28.7",
     "debug": "~2.6.9",
     "express": "~4.15.5",
-    "mongo": "^0.1.0",
+    "mongoose": "^4.13.5",
     "morgan": "~1.9.0",
     "node-sass": "^4.7.2",
     "node-sass-middleware": "0.9.8",

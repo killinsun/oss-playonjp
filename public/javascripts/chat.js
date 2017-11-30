@@ -80,6 +80,7 @@ $(function(){
 				$('#room_list').find('#'+r).find('.number').text(
 					member_count[r].now + "/" + member_count[r].max
 				);
+				
 
 				$('#room_list').find('#'+r).find('.room_name').text(
 					member_count[r].name
@@ -91,7 +92,9 @@ $(function(){
 	
 	//Send message and update message box
 	$('#form_chat').submit(function(){
-		var msg = $('#msg').val()
+		let msg			= $('#msg').val()
+		let recent_chat = new Date();
+
 		if(msg.match(special_command)){
 			console.log(msg);
 			spl_str= msg.split(":");	
@@ -107,10 +110,12 @@ $(function(){
 			$('#msg').val('').focus();
 			return false;
 		}
-		if(msg ==='') return false;
-		socket.emit('message', socket.id, msg);
 
+		if(msg ==='') return false;
+
+		socket.emit('message', socket.id, msg, recent_chat);
 		$('#msg').val('').focus();
+
 		return false;
 	});
 
@@ -126,6 +131,14 @@ $(function(){
 		socket.emit('room_leave', socket.id);
 
 	});
+	
+	function judgeRomStatus(recent_chat){
+		let now = new Date();
+
+		let diff = (now.getTime() - recent_chat.getTime()) / ( 1000 * 60 * 60 * 24);
+		console.log(diff);
+	}
 
 });
+
 

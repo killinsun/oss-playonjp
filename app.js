@@ -14,6 +14,9 @@ var http		= require('http').Server(app);
 var io = require('socket.io')(http);
 const PORT		= 3000;
 
+const model		= require('./model');
+let	  Chat		= model.Chat;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -138,6 +141,21 @@ io.on('connection', function(socket){
 
 		let user_name	= now_user_list[recived_id].user_name;
 		let room		= now_user_list[recived_id].joined_room['room2'];
+
+		var newChat = new Chat({
+			room_name:	room,
+			date_time:	recent_chat,
+			socket_id:  recived_id,
+			user_name:	user_name,
+			msg		 :	msg
+		});
+
+		newChat.save(function(err){
+			if(err){
+				console.log(err);
+			}
+			console.log(newChat);
+		});
 
 		//Recent chat time update.
 		now_user_list[recived_id].recent_chat = recent_chat;
