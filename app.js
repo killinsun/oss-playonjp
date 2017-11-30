@@ -146,7 +146,7 @@ io.on('connection', function(socket){
 			room	 :	room,
 			sc_id	 :	recent_chat,
 			usr_id	 :	user_name,
-			ur_name	 :	user_name,
+			usr_name :	user_name,
 			msg		 :	msg,
 			say_date :	recent_chat
 		});
