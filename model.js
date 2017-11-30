@@ -6,8 +6,8 @@ let Chat = new mongoose.Schema({
 	sc_id:		String,
 	usr_id:		String,
 	usr_name:	String,
-	msg		 :	String
-	say_date:	String,
+	msg		 :	String,
+	say_date:	String
 });
 
 let User = new mongoose.Schema({

@@ -143,11 +143,12 @@ io.on('connection', function(socket){
 		let room		= now_user_list[recived_id].joined_room['room2'];
 
 		var newChat = new Chat({
-			room_name:	room,
-			date_time:	recent_chat,
-			socket_id:  recived_id,
-			user_name:	user_name,
-			msg		 :	msg
+			room	 :	room,
+			sc_id	 :	recent_chat,
+			usr_id	 :	user_name,
+			ur_name	 :	user_name,
+			msg		 :	msg,
+			say_date :	recent_chat
 		});
 
 		newChat.save(function(err){
