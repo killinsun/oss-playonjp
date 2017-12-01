@@ -94,7 +94,7 @@ $(function(){
 	});
 	
 	//Send message and update message box
-	$('#form_chat').submit(function(){
+	$('#btn_send').click(function(){
 		let msg			= $('#msg').val()
 		let recent_chat = formatDate(new Date(),'YYYY/MM/MM hh:mm:ss');
 
@@ -119,12 +119,15 @@ $(function(){
 		socket.emit('message', socket.id, msg, recent_chat);
 		$('#msg').val('').focus();
 
-		return false;
 	});
 
 
 	socket.on('message', function(user_name,msg){
-		$('#message').append($('<li>').text(user_name + " : " + msg));
+		let msg_icon = null;
+		let one_line = '<div class="msg_icon">' + msg_icon + '</div>';
+		one_line += '<div class="chat_user">' + user_name + '</div>';
+		one_line += '<div class="msg">' + msg + '</div>';
+		$('#chatted_msg_area').append(one_line);
 
 	});
 

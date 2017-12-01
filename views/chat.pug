@@ -105,23 +105,23 @@ block contents
 										input#btn_leave.form-control("type=button value=部屋から出る")
 									div#mem_count_color
 									div#input_area
-										form#form_chat(action="" name="form_chat")
+										form#form_chat("action='' name=form_chat")
 											div#top.form-inline
 												input#border_sw.form-control("type=button value=B")
 												input#italic_sw.form-control("type=button value=I")
 												input#underl_sw.form-control("type=button value=U")
 												p color
 												select#font_size_select.form-control("name=font_size_select")
-													option#x-large("value=20")
-													option#large("value=16")
-													option#default("value=12(標準)")
-													option#midium("value=10")
-													option#small("value=8")
+													option#x-large("value=20") 20
+													option#large("value=16") 16
+													option#default("value=12(標準)") 12(標準)
+													option#midium("value=10") 10
+													option#small("value=8") 8
 												select#icon_select.form-control("name=icon_select")
-													option#icon1("value=😅")
-													option#icon2("value=20")
-													option#icon3("value=20")
-													option#icon4("value=20")
+													option#icon1("value=😃") 😃
+													option#icon2("value=😁") 😁
+													option#icon3("value=20") 😢
+													option#icon4("value=20") 🙏
 													option#icon5("value=20")
 													option#icon6("value=20")
 													option#icon7("value=20")
@@ -132,7 +132,7 @@ block contents
 												div#input_container.col-lg-10
 													input#input_box.form-control("type=text widh=100%")
 												div#submit_container.col-lg-2
-													input#btn_send.form-control("type=submit value=送信")
+													input#btn_send.form-control("type=button value=送信")
 							div.row
 								div#room_button 部屋
 								div#share_board 共有ボード
