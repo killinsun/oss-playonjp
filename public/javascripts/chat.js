@@ -4,11 +4,27 @@ var user_data= {};
 var socket = io();
 $(function(){
 
-	//Room join
+	let formatDate = function (date, format) {
+	  if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
+	  format = format.replace(/YYYY/g, date.getFullYear());
+	  format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
+	  format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
+	  format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
+	  format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+	  format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+	  if (format.match(/S/g)) {
+		var milliSeconds = ('00' + date.getMilliseconds()).slice(-3);
+		var length = format.match(/S/g).length;
+		for (var i = 0; i < length; i++) format = format.replace(/S/, milliSeconds.substring(i, i + 1));
+	  }
+	  return format;
+	};
+
+	//room join
 	$('#form_join').submit(function(){
 
 		let user_name = $('#user_name').val()
-		let joined_time = formatDate(new Date(),'YYYY/MM/DD hh:mm:ss');
+		let joined_time = formatDate(new Date(),'yyyy/mm/dd hh:mm:ss');
 
 		$('#join_view').hide();
 		$('#room_view').show();
@@ -31,9 +47,9 @@ $(function(){
 		return false;
 	});
 
-	//Chat join
+	//chat join
 	$('.room_join_btn').click(function(){
-		//Get pressed button's room name.
+		//get pressed button's room name.
 		let room = $(this).closest('.room').attr('id');
 
 		user_data.joined_room['room2'] = room;
@@ -52,9 +68,9 @@ $(function(){
 	
 	});
 	
-	//Update user list
+	//update user list
 	socket.on('update_list_st',function(now_user_list, member_count){
-		//Update Member list
+		//update member list
 		$('.one_line').remove();
 		for(user in now_user_list){
 			let socket_id = now_user_list[user].socket_id;
@@ -75,7 +91,7 @@ $(function(){
 			one_line+= '</div>';
 			$('#list').append(one_line);
 		}
-		//Update room member number and title name;
+		//update room member number and title name;
 		for(r in member_count){
 			if(r===''){
 				
@@ -93,9 +109,9 @@ $(function(){
 
 	});
 	
-	//Send message and update message box
-	$('#btn_send').click(function(){
-		let msg			= $('#msg').val()
+	//send message and update message box
+	$('#form_chat').submit(function(){
+		let msg			= $('#input_box').val()
 		let recent_chat = formatDate(new Date(),'YYYY/MM/MM hh:mm:ss');
 
 		if(msg.match(special_command)){
@@ -105,39 +121,42 @@ $(function(){
 			command_val = spl_str[1];
 
 			socket.emit('special_command', socket.id, command, command_val);
-			$('#msg').val('').focus();
+			$('#input_box').val('').focus();
 			return false;
 		}else if(msg.match(/^\/rom\s*$/)){
 			console.log(msg);
 			socket.emit('special_command', socket.id, msg, null);
-			$('#msg').val('').focus();
+			$('#input_box').val('').focus();
 			return false;
 		}
 
 		if(msg ==='') return false;
 
 		socket.emit('message', socket.id, msg, recent_chat);
-		$('#msg').val('').focus();
+		$('#input_box').val('').focus();
+
+		return false;
 
 	});
 
 
 	socket.on('message', function(user_name,msg){
 		let msg_icon = null;
-		let one_line = '<div class="msg_icon">' + msg_icon + '</div>';
-		one_line += '<div class="chat_user">' + user_name + '</div>';
-		one_line += '<div class="msg">' + msg + '</div>';
-		$('#chatted_msg_area').append(one_line);
+		let one_line = '<div class="msg_line row">';
+		one_line += '<div class="msg_icon col-md-1">' + msg_icon + '</div>';
+		one_line += '<div class="chat_user col-md-2">' + user_name + '</div>';
+		one_line += '<div class="msg col-md-9">' + msg + '</div></div>';
+		$('#chatted_msg_area').prepend(one_line);
 
 	});
 
 	$('#btn_leave').click(function(){
 		$('#chat_view').hide();
 
-		$('#msg').val('');
+		$('#input_box').val('');
 		$('#room_view').show();
 		socket.emit('room_leave', socket.id);
-		$('#message li').remove();
+		$('#chatted_msg_area div').remove();
 
 	});
 	
@@ -148,21 +167,6 @@ $(function(){
 		console.log(diff);
 	}
 
-	function formatDate (date, format) {
-	  if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
-	  format = format.replace(/YYYY/g, date.getFullYear());
-	  format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
-	  format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
-	  format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
-	  format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
-	  format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
-	  if (format.match(/S/g)) {
-		var milliSeconds = ('00' + date.getMilliseconds()).slice(-3);
-		var length = format.match(/S/g).length;
-		for (var i = 0; i < length; i++) format = format.replace(/S/, milliSeconds.substring(i, i + 1));
-	  }
-	  return format;
-	};
 
 });
 

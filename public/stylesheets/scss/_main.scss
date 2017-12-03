@@ -219,6 +219,26 @@ main {
 		padding-bottom: 10px;
 		padding-left: 20px;
 		padding-right: 20px;
+
+		div#chatted_msg_area{
+			.msg_line{
+				@extend .clearfix;
+				width: 100%;
+
+				border-top: solid 1px #AAAAAA;
+				.msg_icon{
+					float: left	;
+				}
+
+				.chat_user{
+					float: left;
+
+				}
+				.msg{
+					float:left;
+				}
+			}
+		}
 	}
 		
 

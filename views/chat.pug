@@ -105,7 +105,7 @@ block contents
 										input#btn_leave.form-control("type=button value=部屋から出る")
 									div#mem_count_color
 									div#input_area
-										form#form_chat("action='' name=form_chat")
+										form#form_chat("name=form_chat")
 											div#top.form-inline
 												input#border_sw.form-control("type=button value=B")
 												input#italic_sw.form-control("type=button value=I")
@@ -132,12 +132,12 @@ block contents
 												div#input_container.col-lg-10
 													input#input_box.form-control("type=text widh=100%")
 												div#submit_container.col-lg-2
-													input#btn_send.form-control("type=button value=送信")
+													input#btn_send.form-control("type=submit value=送信")
 							div.row
 								div#room_button 部屋
 								div#share_board 共有ボード
 							div.row
-								div#chatted_msg_area
+								div#chatted_msg_area.container-fluid
 									
 								
 				div.col-lg-2
