@@ -107,7 +107,7 @@ main {
 	}
 
 	div#member_list{
-		width:350px;
+		width:370px;
 		height: 300px;
 		background:gray;
 		position: absolute;
@@ -122,9 +122,12 @@ main {
 		}
 		#list{
 			background: #FFFFFF;
-			height:70%;
+			width: 90%;
+			height: 70%;
 			overflow:auto;	
 			font-size: 12px;
+			padding:10px;
+			margin:10px auto;
 			.one_line{
 				height: 10%;
 
@@ -220,18 +223,64 @@ main {
 		padding-left: 20px;
 		padding-right: 20px;
 
+		div#leave_box{
+			margin:10px;
+		}
+
+		div#input_area{
+			background: #6C3524;
+			margin: 10px;
+	
+			div#top{
+				padding-top: 10px;
+				padding-bottom: 10px;
+				margin-left: 15px;
+				input{ 
+					margin-left: 5px; 
+					width: 35px;
+					height: 35px;
+				}
+				select{
+					margin-left: 5px;
+					width: 100px;
+				}
+			}
+
+			div#bottom{
+				padding-top: 10px;
+				padding-bottom: 10px;
+
+				#input_box{
+					width: 100%;
+				}
+
+				#btn_send{
+					width: 100%;
+				}
+			}
+			
+			input .form-control-custom:hover{
+				background-color: #000000;
+					
+			}
+
+		}	
+
 		div#chatted_msg_area{
+			margin : 15px;
+			border: solid 1px #000000;
 			.msg_line{
 				@extend .clearfix;
-				width: 100%;
+				
 
-				border-top: solid 1px #AAAAAA;
+				border-top: solid 1px #DDDDDD;
 				.msg_icon{
 					float: left	;
 				}
 
 				.chat_user{
 					float: left;
+					border-right: solid 1px #000000;
 
 				}
 				.msg{

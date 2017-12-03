@@ -204,7 +204,7 @@ main {
       main div.roomarea .build_info .join input {
         font-size: 8px; }
   main div#member_list {
-    width: 350px;
+    width: 370px;
     height: 300px;
     background: gray;
     position: absolute;
@@ -216,9 +216,12 @@ main {
       height: 15px; }
     main div#member_list #list {
       background: #FFFFFF;
+      width: 90%;
       height: 70%;
       overflow: auto;
-      font-size: 12px; }
+      font-size: 12px;
+      padding: 10px;
+      margin: 10px auto; }
       main div#member_list #list .one_line {
         height: 10%; }
         main div#member_list #list .one_line .rom_user {
@@ -294,15 +297,43 @@ main {
     padding-bottom: 10px;
     padding-left: 20px;
     padding-right: 20px; }
-    main div#chat_view div#chatted_msg_area .msg_line {
-      width: 100%;
-      border-top: solid 1px #AAAAAA; }
-      main div#chat_view div#chatted_msg_area .msg_line .msg_icon {
-        float: left; }
-      main div#chat_view div#chatted_msg_area .msg_line .chat_user {
-        float: left; }
-      main div#chat_view div#chatted_msg_area .msg_line .msg {
-        float: left; }
+    main div#chat_view div#leave_box {
+      margin: 10px; }
+    main div#chat_view div#input_area {
+      background: #6C3524;
+      margin: 10px; }
+      main div#chat_view div#input_area div#top {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: 15px; }
+        main div#chat_view div#input_area div#top input {
+          margin-left: 5px;
+          width: 35px;
+          height: 35px; }
+        main div#chat_view div#input_area div#top select {
+          margin-left: 5px;
+          width: 100px; }
+      main div#chat_view div#input_area div#bottom {
+        padding-top: 10px;
+        padding-bottom: 10px; }
+        main div#chat_view div#input_area div#bottom #input_box {
+          width: 100%; }
+        main div#chat_view div#input_area div#bottom #btn_send {
+          width: 100%; }
+      main div#chat_view div#input_area input .form-control-custom:hover {
+        background-color: #000000; }
+    main div#chat_view div#chatted_msg_area {
+      margin: 15px;
+      border: solid 1px #000000; }
+      main div#chat_view div#chatted_msg_area .msg_line {
+        border-top: solid 1px #DDDDDD; }
+        main div#chat_view div#chatted_msg_area .msg_line .msg_icon {
+          float: left; }
+        main div#chat_view div#chatted_msg_area .msg_line .chat_user {
+          float: left;
+          border-right: solid 1px #000000; }
+        main div#chat_view div#chatted_msg_area .msg_line .msg {
+          float: left; }
 
 /*----------------------------------------------------
 	#sub

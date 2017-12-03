@@ -24,7 +24,7 @@ $(function(){
 	$('#form_join').submit(function(){
 
 		let user_name = $('#user_name').val()
-		let joined_time = formatDate(new Date(),'yyyy/mm/dd hh:mm:ss');
+		let joined_time = formatDate(new Date(),'YYYY/MM/DD hh:mm:ss');
 
 		$('#join_view').hide();
 		$('#room_view').show();
