@@ -70,6 +70,9 @@ $(function(){
 	
 	//update user list
 	socket.on('update_list_st',function(now_user_list, member_count){
+		let my_socketid = socket.id;
+		let my_room		= now_user_list[my_socketid].joined_room['room2'];
+
 		//update member list
 		$('.one_line').remove();
 		for(user in now_user_list){
@@ -96,9 +99,15 @@ $(function(){
 			if(r===''){
 				
 			}else{
-				$('#room_list').find('#'+r).find('.number').text(
-					member_count[r].now + "/" + member_count[r].max
-				);
+
+				if(member_count[r].max === 999){
+					$('#room_list').find('#'+r).find('.number').text(member_count[r].now);
+				}else{
+					$('#room_list').find('#'+r).find('.number').text(
+
+							member_count[r].now + "/" + member_count[r].max
+					);
+				}
 				
 
 				$('#room_list').find('#'+r).find('.room_name').text(
@@ -106,6 +115,18 @@ $(function(){
 				);
 			}
 		}
+
+		//update chat room info
+		$('#chat_room_title').text(my_room);
+		$('#chat_room_count').text('現在　' + member_count[my_room].now + ' 人');
+
+		if(member_count[my_room].max === 999){
+			$('#chat_room_limit').text('定員　なし');
+		} else{
+			$('#chat_room_limit').text('定員　' + member_count[my_room].max);
+		}
+
+		$('#chat_room_uname').text(now_user_list[my_socketid].user_name);
 
 	});
 	

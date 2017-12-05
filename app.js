@@ -73,13 +73,13 @@ app.use(function(err, req, res, next) {
 //
 var now_user_list = {};
 var member_count = {
-	''			: { 'name' : '共有ボード', 'now': 0, 'max': 50},
-	'red'		: { 'name' : '赤',		'now': 0, 'max': 20},
-	'waterblue'	: { 'name' : '薄青',	'now': 0, 'max': 20},
-	'green'		: { 'name' : '緑',		'now': 0, 'max': 20},
-	'purple'	: { 'name' : '紫',		'now': 0, 'max': 20},
-	'yellow'	: { 'name' : '黄',		'now': 0, 'max': 20},
-	'blue'		: { 'name' : '青',		'now': 0, 'max': 20},
+	''			: { 'name': '共有ボード', 'default': '共有ボード', 'now': 0, 'max': 50},
+	'red'		: { 'name': '赤',	'default': '赤', 	'now': 0, 'max': 999},
+	'waterblue'	: { 'name': '薄青', 'default': '薄青',	'now': 0, 'max': 999},
+	'green'		: { 'name': '緑',	'default': '緑',	'now': 0, 'max': 999},
+	'purple'	: { 'name': '紫',	'default': '紫',	'now': 0, 'max': 999},
+	'yellow'	: { 'name': '黄',	'default': '黄',	'now': 0, 'max': 999},
+	'blue'		: { 'name': '青',	'default': '青',	'now': 0, 'max': 999},
 	};
 io.on('connection', function(socket){
 	console.log('%s joined.', socket.id);
@@ -189,7 +189,13 @@ io.on('connection', function(socket){
 				break;
 			case '/room':
 				console.log('change room name');
-				member_count[this_room].name = command_val;
+
+				if(command_val=== null || command_val===''){
+					member_count[this_room].name = member_count[this_room].default
+				}else{
+					member_count[this_room].name = command_val;
+				}
+
 				io.sockets.emit('update_list_st', now_user_list, member_count);
 				break;
 			case '/member':
@@ -197,12 +203,14 @@ io.on('connection', function(socket){
 				if(command_val.match(reg) && command_val <= 20 && command_val >=2){
 					member_count[this_room].max = command_val;
 					io.sockets.emit('update_list_st', now_user_list, member_count);
+				}else if(command_val === '0' || command_val ==='' || command_val===null){
+					member_count[this_room].max = 999;
+					io.sockets.emit('update_list_st', now_user_list, member_count);
 				}else{
 					io.sockets.in(this_room).emit('message', '', '部屋人数は2～20までの間で設定してください。');
-
 				}
 				break;
-
+			
 			case '/rom':
 				now_user_list[recived_id].usr_status = 'rom';
 				io.sockets.emit('update_list_st', now_user_list, member_count);
