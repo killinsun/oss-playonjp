@@ -123,7 +123,7 @@ io.on('connection', function(socket){
 		let leave_room = now_user_list[recived_id].joined_room['room2'];
 
 		//Chat room out message.
-		io.sockets.in(leave_room).emit('message', '', user_name + ' ' + out_msg);
+		socket.broadcast.to(leave_room).emit('message', '', user_name + ' ' + out_msg);
 
 		socket.leave(leave_room);
 		now_user_list[recived_id].joined_room['room2'] = '';
@@ -171,7 +171,7 @@ io.on('connection', function(socket){
 		console.log('%s leave.', now_user_list[socket.id]);
 		if(now_user_list[socket.id]){
 			leave_room = now_user_list[socket.id].joined_room['room2'];
-			member_count[join_room].now -= 1;
+			member_count[leave_room].now -= 1;
 			member_count[''].now -= 1;
 			delete now_user_list[socket.id];
 			io.sockets.emit('update_list_st', now_user_list, member_count);

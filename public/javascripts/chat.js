@@ -4,10 +4,27 @@ var user_data= {};
 var socket = io();
 $(function(){
 
-	//Room join
+	let formatDate = function (date, format) {
+	  if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
+	  format = format.replace(/YYYY/g, date.getFullYear());
+	  format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
+	  format = format.replace(/DD/g, ('0' + date.getDate()).slice(-2));
+	  format = format.replace(/hh/g, ('0' + date.getHours()).slice(-2));
+	  format = format.replace(/mm/g, ('0' + date.getMinutes()).slice(-2));
+	  format = format.replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
+	  if (format.match(/S/g)) {
+		var milliSeconds = ('00' + date.getMilliseconds()).slice(-3);
+		var length = format.match(/S/g).length;
+		for (var i = 0; i < length; i++) format = format.replace(/S/, milliSeconds.substring(i, i + 1));
+	  }
+	  return format;
+	};
+
+	//room join
 	$('#form_join').submit(function(){
 
-		var user_name = $('#user_name').val()
+		let user_name = $('#user_name').val()
+		let joined_time = formatDate(new Date(),'YYYY/MM/DD hh:mm:ss');
 
 		$('#join_view').hide();
 		$('#room_view').show();
@@ -17,8 +34,9 @@ $(function(){
 			'socket_id': socket.id, 
 			'user_name': user_name, 
 			'joined_room': {'room1': 'share', 'room2': ''},
+			'joined_time': joined_time,
 			'resent_chat': null,
-			'usr_status'	 : 'stable',
+			'usr_status' : 'stable',
 			'in_msg'	 : 'さんが入室しました',
 			'out_msg'	 : 'さんが退室しました',
 			'msg_count'	 : 0
@@ -29,10 +47,10 @@ $(function(){
 		return false;
 	});
 
-	//Chat join
+	//chat join
 	$('.room_join_btn').click(function(){
-		//Get pressed button's room name.
-		var room = $(this).closest('.room').attr('id');
+		//get pressed button's room name.
+		let room = $(this).closest('.room').attr('id');
 
 		user_data.joined_room['room2'] = room;
 
@@ -50,15 +68,16 @@ $(function(){
 	
 	});
 	
-	//Update user list
+	//update user list
 	socket.on('update_list_st',function(now_user_list, member_count){
-		//Update Member list
+		//update member list
 		$('.one_line').remove();
 		for(user in now_user_list){
-			var socket_id = now_user_list[user].socket_id;
-			var user_name = now_user_list[user].user_name;
-			var room_name = now_user_list[user].joined_room['room2'];
-			var usr_status	  = now_user_list[user].usr_status;
+			let socket_id = now_user_list[user].socket_id;
+			let user_name = now_user_list[user].user_name;
+			let room_name = now_user_list[user].joined_room['room2'];
+			let usr_status	  = now_user_list[user].usr_status;
+			let joined_time	  = now_user_list[user].joined_time;
 			console.log('room:' + room_name);
 			one_line = '<div class="one_line row">';
 			one_line+= '<div class="room_color ' + room_name + ' col-sm-1"></div>';
@@ -67,12 +86,12 @@ $(function(){
 			}else{
 				one_line+= '<div class="user_name col-sm-4">' + user_name + '</div>';
 			}
-			one_line+= '<div class="date_time col-sm-6">2017/12/31 0:00:00 </div>';
+			one_line+= '<div class="date_time col-sm-6">' + joined_time + '</div>';
 			one_line+= '<div class="icon col-sm-1">a </div>';
 			one_line+= '</div>';
 			$('#list').append(one_line);
 		}
-		//Update room member number and title name;
+		//update room member number and title name;
 		for(r in member_count){
 			if(r===''){
 				
@@ -90,10 +109,10 @@ $(function(){
 
 	});
 	
-	//Send message and update message box
+	//send message and update message box
 	$('#form_chat').submit(function(){
-		let msg			= $('#msg').val()
-		let recent_chat = new Date();
+		let msg			= $('#input_box').val()
+		let recent_chat = formatDate(new Date(),'YYYY/MM/MM hh:mm:ss');
 
 		if(msg.match(special_command)){
 			console.log(msg);
@@ -102,33 +121,42 @@ $(function(){
 			command_val = spl_str[1];
 
 			socket.emit('special_command', socket.id, command, command_val);
-			$('#msg').val('').focus();
+			$('#input_box').val('').focus();
 			return false;
 		}else if(msg.match(/^\/rom\s*$/)){
 			console.log(msg);
 			socket.emit('special_command', socket.id, msg, null);
-			$('#msg').val('').focus();
+			$('#input_box').val('').focus();
 			return false;
 		}
 
 		if(msg ==='') return false;
 
 		socket.emit('message', socket.id, msg, recent_chat);
-		$('#msg').val('').focus();
+		$('#input_box').val('').focus();
 
 		return false;
+
 	});
 
 
 	socket.on('message', function(user_name,msg){
-		$('#message').append($('<li>').text(user_name + " : " + msg));
+		let msg_icon = null;
+		let one_line = '<div class="msg_line row">';
+		one_line += '<div class="msg_icon col-md-1">' + msg_icon + '</div>';
+		one_line += '<div class="chat_user col-md-2">' + user_name + '</div>';
+		one_line += '<div class="msg col-md-9">' + msg + '</div></div>';
+		$('#chatted_msg_area').prepend(one_line);
 
 	});
 
 	$('#btn_leave').click(function(){
 		$('#chat_view').hide();
+
+		$('#input_box').val('');
 		$('#room_view').show();
 		socket.emit('room_leave', socket.id);
+		$('#chatted_msg_area div').remove();
 
 	});
 	
@@ -138,6 +166,7 @@ $(function(){
 		let diff = (now.getTime() - recent_chat.getTime()) / ( 1000 * 60 * 60 * 24);
 		console.log(diff);
 	}
+
 
 });
 
