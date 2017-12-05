@@ -20,6 +20,7 @@ $(function(){
 	  return format;
 	};
 
+
 	//room join
 	$('#form_join').submit(function(){
 
@@ -39,7 +40,13 @@ $(function(){
 			'usr_status' : 'stable',
 			'in_msg'	 : 'さんが入室しました',
 			'out_msg'	 : 'さんが退室しました',
-			'msg_count'	 : 0
+			'msg_count'	 : 0,
+			'icon'		 : '',
+			'font_size'  : 'large',
+			'font_color' : '#000000',
+			'be_bordear' : false,
+			'be_italic'  : false,
+			'be_underl'  : false
 		}
 		
 		socket.emit('room_join', user_data);
@@ -72,6 +79,7 @@ $(function(){
 	socket.on('update_list_st',function(now_user_list, member_count){
 		let my_socketid = socket.id;
 		let my_room		= now_user_list[my_socketid].joined_room['room2'];
+		let my_room_name = member_count[my_room].name;
 
 		//update member list
 		$('.one_line').remove();
@@ -81,6 +89,7 @@ $(function(){
 			let room_name = now_user_list[user].joined_room['room2'];
 			let usr_status	  = now_user_list[user].usr_status;
 			let joined_time	  = now_user_list[user].joined_time;
+			let icon		  = now_user_list[user].icon;
 			console.log('room:' + room_name);
 			one_line = '<div class="one_line row">';
 			one_line+= '<div class="room_color ' + room_name + ' col-sm-1"></div>';
@@ -90,7 +99,7 @@ $(function(){
 				one_line+= '<div class="user_name col-sm-4">' + user_name + '</div>';
 			}
 			one_line+= '<div class="date_time col-sm-6">' + joined_time + '</div>';
-			one_line+= '<div class="icon col-sm-1">a </div>';
+			one_line+= '<div class="icon col-sm-1">'+ icon + ' </div>';
 			one_line+= '</div>';
 			$('#list').append(one_line);
 		}
@@ -104,12 +113,10 @@ $(function(){
 					$('#room_list').find('#'+r).find('.number').text(member_count[r].now);
 				}else{
 					$('#room_list').find('#'+r).find('.number').text(
-
 							member_count[r].now + "/" + member_count[r].max
 					);
 				}
 				
-
 				$('#room_list').find('#'+r).find('.room_name').text(
 					member_count[r].name
 				);
@@ -117,7 +124,7 @@ $(function(){
 		}
 
 		//update chat room info
-		$('#chat_room_title').text(my_room);
+		$('#chat_room_title').text(my_room_name);
 		$('#chat_room_count').text('現在　' + member_count[my_room].now + ' 人');
 
 		if(member_count[my_room].max === 999){
@@ -161,12 +168,19 @@ $(function(){
 	});
 
 
-	socket.on('message', function(user_name,msg){
-		let msg_icon = null;
+	socket.on('message', function(recived_user_data,msg){
+		let user_name	= recived_user_data.user_name;
+		let msg_icon	= recived_user_data.icon;
+		let font_size	= recived_user_data.font_size;
+		let font_color	= recived_user_data.font_color;
+
 		let one_line = '<div class="msg_line row">';
 		one_line += '<div class="msg_icon col-md-1">' + msg_icon + '</div>';
 		one_line += '<div class="chat_user col-md-2">' + user_name + '</div>';
-		one_line += '<div class="msg col-md-9">' + msg + '</div></div>';
+		one_line += '<div class="msg col-md-9">';
+		one_line += '<span width:100%; style="color:' + font_color + '; font-size:' + font_size  +';">';
+		one_line += msg;
+		one_line += '</span></div></div>';
 		$('#chatted_msg_area').prepend(one_line);
 
 	});
@@ -187,6 +201,14 @@ $(function(){
 		let diff = (now.getTime() - recent_chat.getTime()) / ( 1000 * 60 * 60 * 24);
 		console.log(diff);
 	}
+
+	$('.event_target').change(function(){
+		let changed_item_id  = $(this).attr("id");
+		let changed_item_val = $(this).val();
+		socket.emit('change_form_item', socket.id, changed_item_id, changed_item_val);
+		
+
+	});
 
 
 });

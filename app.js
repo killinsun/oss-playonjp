@@ -81,6 +81,25 @@ var member_count = {
 	'yellow'	: { 'name': '黄',	'default': '黄',	'now': 0, 'max': 999},
 	'blue'		: { 'name': '青',	'default': '青',	'now': 0, 'max': 999},
 	};
+
+var system_user_data = {
+	'socket_id': "system_dummy_socket_id",
+	'user_name': '',
+	'joined_room': {'room1': 'share', 'room2': ''},
+	'joined_time': null,
+	'resent_chat': null,
+	'usr_status' : 'stable',
+	'in_msg'	 : 'さんが入室しました',
+	'out_msg'	 : 'さんが退室しました',
+	'msg_count'	 : 0,
+	'icon'		 : '',
+	'font_size'  : 7,
+	'font_color' : "#000000",
+	'be_bordear' : false,
+	'be_italic'  : false,
+	'be_underl'  : false
+}
+
 io.on('connection', function(socket){
 	console.log('%s joined.', socket.id);
 
@@ -102,7 +121,7 @@ io.on('connection', function(socket){
 			
 			//Chat room in message.
 			if(join_room!=''){
-				io.sockets.in(join_room).emit('message', '', user_name + ' ' + in_msg);
+				io.sockets.in(join_room).emit('message', system_user_data, user_name + ' ' + in_msg);
 				io.to(user_data.socket_id).emit('result', true);
 			}
 			console.log(join_room);
@@ -123,7 +142,7 @@ io.on('connection', function(socket){
 		let leave_room = now_user_list[recived_id].joined_room['room2'];
 
 		//Chat room out message.
-		socket.broadcast.to(leave_room).emit('message', '', user_name + ' ' + out_msg);
+		socket.broadcast.to(leave_room).emit('message', system_user_data, user_name + ' ' + out_msg);
 
 		socket.leave(leave_room);
 		now_user_list[recived_id].joined_room['room2'] = '';
@@ -159,7 +178,9 @@ io.on('connection', function(socket){
 
 		//Recent chat time update.
 		now_user_list[recived_id].recent_chat = recent_chat;
-		io.sockets.in(room).emit('message', user_name, msg);
+
+		//Send message in room members.
+		io.sockets.in(room).emit('message', now_user_list[recived_id], msg);
 
 		if(now_user_list[recived_id].usr_status = 'rom'){
 			now_user_list[recived_id].usr_status = null;
@@ -207,7 +228,7 @@ io.on('connection', function(socket){
 					member_count[this_room].max = 999;
 					io.sockets.emit('update_list_st', now_user_list, member_count);
 				}else{
-					io.sockets.in(this_room).emit('message', '', '部屋人数は2～20までの間で設定してください。');
+					io.sockets.in(this_room).emit('message', system_user_data, '部屋人数は2～20までの間で設定してください。');
 				}
 				break;
 			
@@ -217,6 +238,26 @@ io.on('connection', function(socket){
 
 				break;
 		}
+	});
+	
+	socket.on('change_form_item', function(recived_id, changed_item_id, changed_item_val){
+		console.log(changed_item_id);
+
+		switch(changed_item_id){
+		
+			case 'icon_select':
+				now_user_list[recived_id].icon = changed_item_val;
+				io.sockets.emit('update_list_st', now_user_list, member_count);
+				break;
+			case 'font_color_picker':
+				now_user_list[recived_id].font_color = changed_item_val;
+				break;
+			case 'font_size_select':
+				now_user_list[recived_id].font_size = changed_item_val;
+				break;
+		}
+			
+
 	});
 
 
