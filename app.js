@@ -107,7 +107,7 @@ io.on('connection', function(socket){
 			}
 			console.log(join_room);
 		}else{
-			console.log("Capacity is max. send to " + user_data.socket_id + ":" + user_data.user_name);
+			console.log("Capacity is too max. send to " + user_data.socket_id + ":" + user_data.user_name);
 			io.to(user_data.socket_id).emit('result', false);
 
 		}
@@ -146,7 +146,7 @@ io.on('connection', function(socket){
 			room	 :	room,
 			sc_id	 :	recent_chat,
 			usr_id	 :	user_name,
-			ur_name	 :	user_name,
+			usr_name :	user_name,
 			msg		 :	msg,
 			say_date :	recent_chat
 		});
@@ -155,7 +155,6 @@ io.on('connection', function(socket){
 			if(err){
 				console.log(err);
 			}
-			console.log(newChat);
 		});
 
 		//Recent chat time update.
