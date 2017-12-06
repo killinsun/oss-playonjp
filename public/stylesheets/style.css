@@ -334,6 +334,12 @@ main {
           border-right: solid 1px #000000; }
         main div#chat_view div#chatted_msg_area .msg_line .msg {
           float: left; }
+        main div#chat_view div#chatted_msg_area .msg_line .be_bolder {
+          font-weight: bold; }
+        main div#chat_view div#chatted_msg_area .msg_line .be_italic {
+          font-style: oblique; }
+        main div#chat_view div#chatted_msg_area .msg_line .be_underl {
+          text-decoration: underline; }
 
 /*----------------------------------------------------
 	#sub

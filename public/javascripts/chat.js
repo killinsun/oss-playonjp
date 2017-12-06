@@ -44,7 +44,7 @@ $(function(){
 			'icon'		 : '',
 			'font_size'  : 'large',
 			'font_color' : '#000000',
-			'be_bordear' : false,
+			'be_boldear' : false,
 			'be_italic'  : false,
 			'be_underl'  : false
 		}
@@ -173,14 +173,19 @@ $(function(){
 		let msg_icon	= recived_user_data.icon;
 		let font_size	= recived_user_data.font_size;
 		let font_color	= recived_user_data.font_color;
+		let is_bolder	= recived_user_data.be_bolder;
+		let is_italic	= recived_user_data.be_italic;
+		let	is_underl	= recived_user_data.be_underl;
 
-		let one_line = '<div class="msg_line row">';
-		one_line += '<div class="msg_icon col-md-1">' + msg_icon + '</div>';
-		one_line += '<div class="chat_user col-md-2">' + user_name + '</div>';
-		one_line += '<div class="msg col-md-9">';
-		one_line += '<span width:100%; style="color:' + font_color + '; font-size:' + font_size  +';">';
-		one_line += msg;
-		one_line += '</span></div></div>';
+		let one_line = $('<div>',  { class:'msg_line row'});
+		one_line.append($('<div>', { class:'msg_icon col-md-1', text: msg_icon}));
+		one_line.append($('<div>', { class:'chat_user col-md-2', text: user_name}));
+		one_line.append($('<div>', { class:'msg col-md-9', text: msg}));
+
+		if(is_bolder){ one_line.children('.msg').addClass('be_bolder'); }
+		if(is_italic){ one_line.children('.msg').addClass('be_italic'); }
+		if(is_underl){ one_line.children('.msg').addClass('be_underl'); }
+
 		$('#chatted_msg_area').prepend(one_line);
 
 	});
@@ -208,6 +213,13 @@ $(function(){
 		socket.emit('change_form_item', socket.id, changed_item_id, changed_item_val);
 		
 
+	});
+
+	$('.event_target').click(function(){
+		let changed_item_id = $(this).attr("id");
+		let changed_item_val = $(this).val();
+		console.log(changed_item_id);
+		socket.emit('change_form_item', socket.id, changed_item_id, changed_item_val);
 	});
 
 

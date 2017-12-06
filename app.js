@@ -95,7 +95,7 @@ var system_user_data = {
 	'icon'		 : '',
 	'font_size'  : 7,
 	'font_color' : "#000000",
-	'be_bordear' : false,
+	'be_bolder'	 : false,
 	'be_italic'  : false,
 	'be_underl'  : false
 }
@@ -241,7 +241,7 @@ io.on('connection', function(socket){
 	});
 	
 	socket.on('change_form_item', function(recived_id, changed_item_id, changed_item_val){
-		console.log(changed_item_id);
+		console.log(now_user_list[recived_id].be_bolder);
 
 		switch(changed_item_id){
 		
@@ -255,8 +255,29 @@ io.on('connection', function(socket){
 			case 'font_size_select':
 				now_user_list[recived_id].font_size = changed_item_val;
 				break;
+			case 'bolder_sw':
+				if(now_user_list[recived_id].be_bolder){
+					now_user_list[recived_id].be_bolder = false;
+				}else{
+					now_user_list[recived_id].be_bolder = true;
+				}
+				break;
+			case 'italic_sw':
+				if(now_user_list[recived_id].be_italic){
+					now_user_list[recived_id].be_italic = false;
+				}else{
+					now_user_list[recived_id].be_italic = true;
+				}
+				break;
+			case 'underl_sw':
+				if(now_user_list[recived_id].be_underl){
+					now_user_list[recived_id].be_underl = false;
+				}else{
+					now_user_list[recived_id].be_underl = true;
+				}
+				break;
 		}
-			
+		console.log(now_user_list[recived_id].be_bolder);
 
 	});
 
