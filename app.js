@@ -251,8 +251,10 @@ io.on('connection', function(socket){
 	socket.on('disconnect', function(e) {
 		if(now_user_list[socket.id]){
 			leave_room = now_user_list[socket.id].joined_room['room2'];
-			member_count[leave_room].now -= 1;
-			member_count[''].now -= 1;
+			if(leave_room != ''){
+				member_count[leave_room].now -= 1;
+			}
+			member_count['share'].now -= 1;
 			delete now_user_list[socket.id];
 			io.sockets.emit('update_list_st', now_user_list, member_count);
 		}

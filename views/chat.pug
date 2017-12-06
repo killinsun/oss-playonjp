@@ -135,8 +135,12 @@ block contents
 												div#submit_container.col-lg-2
 													input#btn_send.form-control("type=submit value=送信")
 							div.row
-								div#room_button 部屋
-								div#share_board 共有ボード
+								div#room_button.change_tab.col-md-2 部屋
+								div#share_board.change_tab.col-md-2 
+									label 共有ボード
+										input#share_signal("type=radio")
+										span.share_icon
+								div#col-md-8
 							div.row
 								div#chatted_msg_area.container-fluid
 								div#dm_msg_area.container-fluid
