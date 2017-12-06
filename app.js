@@ -73,7 +73,7 @@ app.use(function(err, req, res, next) {
 //
 var now_user_list = {};
 var member_count = {
-	''			: { 'name': '共有ボード', 'default': '共有ボード', 'now': 0, 'max': 50},
+	'share'		: { 'name': '共有ボード', 'default': '共有ボード', 'now': 0, 'max': 50},
 	'red'		: { 'name': '赤',	'default': '赤', 	'now': 0, 'max': 999},
 	'waterblue'	: { 'name': '薄青', 'default': '薄青',	'now': 0, 'max': 999},
 	'green'		: { 'name': '緑',	'default': '緑',	'now': 0, 'max': 999},
@@ -102,16 +102,59 @@ var system_user_data = {
 
 io.on('connection', function(socket){
 	console.log('%s joined.', socket.id);
+	let user_data = {
+		'socket_id': socket.id,
+		'user_name': '',
+		'joined_room': {'room1': '', 'room2': ''},
+		'joined_time': null,
+		'resent_chat': null,
+		'usr_status' : 'stable',
+		'in_msg'	 : 'さんが入室しました',
+		'out_msg'	 : 'さんが退室しました',
+		'msg_count'	 : 0,
+		'icon'		 : '',
+		'font_size'  : 7,
+		'font_color' : "#000000",
+		'be_bolder'	 : false,
+		'be_italic'  : false,
+		'be_underl'  : false
+	}
+	now_user_list[socket.id] = user_data;
 
-	socket.on('room_join', function(user_data){
-		if(!now_user_list[user_data.socket_id]){
-			now_user_list[user_data.socket_id] = user_data;
-			console.log("add now_user_list " + now_user_list[user_data.socket_id].user_name);
+	io.sockets.emit('update_list_st', now_user_list, member_count);
+	console.log('add user ' + now_user_list[socket.id] );
+			
+
+	socket.on('room_join', function(recived_data){
+		if(!now_user_list[socket.id]){
+			now_user_list[socket.id] = user_data;
 		}
-	
-		let user_name	= user_data.user_name;
-		let in_msg		= user_data.in_msg;
-		let join_room	= user_data.joined_room['room2'];
+		
+		let join_room	= 'share';
+		let recived_id  = socket.id;
+		now_user_list[recived_id].user_name		= recived_data.user_name;
+		now_user_list[recived_id].joined_time	= recived_data.joined_time;
+
+		if(member_count[join_room].max >= member_count[join_room].now + 1){
+			now_user_list[recived_id].joined_room['room1'] = join_room;
+			member_count[join_room].now += 1;
+			socket.join(join_room);
+			io.sockets.emit('update_list_st', now_user_list, member_count);
+			
+		}else{
+			console.log("Capacity is too max. send to " + recived_id + ":" + recived_data.user_name);
+			io.to(recived_id).emit('result', false);
+
+		}
+	});
+	socket.on('chat_join', function(recived_data){
+		if(!now_user_list[socket.id]){
+			now_user_list[socket.id] = user_data;
+		}
+		let recived_id	= socket.id	;
+		let user_name	= now_user_list[recived_id].user_name;
+		let in_msg		= now_user_list[recived_id].in_msg;
+		let join_room	= recived_data.join_room
 
 		if(member_count[join_room].max >= member_count[join_room].now + 1){
 			now_user_list[user_data.socket_id].joined_room['room2'] = join_room;
@@ -121,13 +164,13 @@ io.on('connection', function(socket){
 			
 			//Chat room in message.
 			if(join_room!=''){
-				io.sockets.in(join_room).emit('message', system_user_data, user_name + ' ' + in_msg);
+				io.sockets.in(join_room).emit('message', system_user_data, user_name + ' ' + in_msg, false);
 				io.to(user_data.socket_id).emit('result', true);
 			}
 			console.log(join_room);
 		}else{
-			console.log("Capacity is too max. send to " + user_data.socket_id + ":" + user_data.user_name);
-			io.to(user_data.socket_id).emit('result', false);
+			console.log("Capacity is too max. send to " + recived_id + ":" + user_name);
+			io.to(recived_id).emit('result', false);
 
 		}
 	});
@@ -142,7 +185,7 @@ io.on('connection', function(socket){
 		let leave_room = now_user_list[recived_id].joined_room['room2'];
 
 		//Chat room out message.
-		socket.broadcast.to(leave_room).emit('message', system_user_data, user_name + ' ' + out_msg);
+		socket.broadcast.to(leave_room).emit('message', system_user_data, user_name + ' ' + out_msg, false);
 
 		socket.leave(leave_room);
 		now_user_list[recived_id].joined_room['room2'] = '';
@@ -180,7 +223,24 @@ io.on('connection', function(socket){
 		now_user_list[recived_id].recent_chat = recent_chat;
 
 		//Send message in room members.
-		io.sockets.in(room).emit('message', now_user_list[recived_id], msg);
+		io.sockets.in(room).emit('message', now_user_list[recived_id], msg, false);
+
+		if(now_user_list[recived_id].usr_status = 'rom'){
+			now_user_list[recived_id].usr_status = null;
+			io.sockets.emit('update_list_st', now_user_list, member_count);
+		}
+	});
+
+	socket.on('direct_message', function(recived_id, msg, recent_chat, to_id){
+
+		//Recent chat time update.
+		now_user_list[recived_id].recent_chat = recent_chat;
+
+		//Send message in room members.
+		io.sockets.in(to_id).emit('message', now_user_list[recived_id], msg, true);
+
+		//output from user's chat view.
+		io.sockets.in(recived_id).emit('message', now_user_list[recived_id], msg, true);
 
 		if(now_user_list[recived_id].usr_status = 'rom'){
 			now_user_list[recived_id].usr_status = null;
@@ -189,7 +249,6 @@ io.on('connection', function(socket){
 	});
 
 	socket.on('disconnect', function(e) {
-		console.log('%s leave.', now_user_list[socket.id]);
 		if(now_user_list[socket.id]){
 			leave_room = now_user_list[socket.id].joined_room['room2'];
 			member_count[leave_room].now -= 1;
@@ -228,7 +287,7 @@ io.on('connection', function(socket){
 					member_count[this_room].max = 999;
 					io.sockets.emit('update_list_st', now_user_list, member_count);
 				}else{
-					io.sockets.in(this_room).emit('message', system_user_data, '部屋人数は2～20までの間で設定してください。');
+					io.sockets.in(recived_id).emit('message', system_user_data, '部屋人数は2～20までの間で設定してください。', true);
 				}
 				break;
 			
