@@ -202,7 +202,8 @@ $(function(){
 		let one_line = $('<div>',  { class:'msg_line row'});
 		one_line.append($('<div>', { class:'msg_icon col-md-1', text: msg_icon}));
 		one_line.append($('<div>', { class:'chat_user col-md-2', text: user_name}));
-		one_line.append($('<div>', { class:'msg col-md-9', text: msg}));
+		one_line.append($('<div>', { class:'msg col-md-9 ', text: msg}));
+		one_line.css({'font-size': font_size, 'color': font_color});
 
 		if(is_bolder){ one_line.children('.msg').addClass('be_bolder'); }
 		if(is_italic){ one_line.children('.msg').addClass('be_italic'); }
