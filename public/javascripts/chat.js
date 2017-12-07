@@ -1,6 +1,5 @@
 //e.g,,, /member: 12 -> set room member max capacity.
 const special_command =/^\/[a-z]*:(.*)$/;
-var user_data= {};
 var socket = io.connect();
 
 $(function(){
