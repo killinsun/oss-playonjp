@@ -82,9 +82,9 @@
   box-shadow: none !important; }
 
 /* clearfix */
-.clearfix, header #nav, footer.copyright, nav, main, main div#chat_view div#chatted_msg_area .msg_line {
+.clearfix, header #nav, footer.copyright, nav, main, main div#chat_view div#dm_msg_area .msg_line, main div#chat_view div#chatted_msg_area .msg_line {
   *zoom: 1; }
-  .clearfix:after, header #nav:after, footer.copyright:after, nav:after, main:after, main div#chat_view div#chatted_msg_area .msg_line:after {
+  .clearfix:after, header #nav:after, footer.copyright:after, nav:after, main:after, main div#chat_view div#dm_msg_area .msg_line:after, main div#chat_view div#chatted_msg_area .msg_line:after {
     content: ".";
     display: block;
     clear: both;
@@ -324,7 +324,27 @@ main {
           width: 100%; }
       main div#chat_view div#input_area input .form-control-custom:hover {
         background-color: #000000; }
+    main div#chat_view div#dm_msg_area {
+      display: none;
+      margin: 15px;
+      border: solid 1px #000000; }
+      main div#chat_view div#dm_msg_area .msg_line {
+        border-top: solid 1px #DDDDDD; }
+        main div#chat_view div#dm_msg_area .msg_line .msg_icon {
+          float: left; }
+        main div#chat_view div#dm_msg_area .msg_line .chat_user {
+          float: left;
+          border-right: solid 1px #000000; }
+        main div#chat_view div#dm_msg_area .msg_line .msg {
+          float: left; }
+        main div#chat_view div#dm_msg_area .msg_line .be_bolder {
+          font-weight: bold; }
+        main div#chat_view div#dm_msg_area .msg_line .be_italic {
+          font-style: oblique; }
+        main div#chat_view div#dm_msg_area .msg_line .be_underl {
+          text-decoration: underline; }
     main div#chat_view div#chatted_msg_area {
+      display: visible;
       margin: 15px;
       border: solid 1px #000000; }
       main div#chat_view div#chatted_msg_area .msg_line {
@@ -337,6 +357,28 @@ main {
           border-right: solid 1px #000000; }
         main div#chat_view div#chatted_msg_area .msg_line .msg {
           float: left; }
+        main div#chat_view div#chatted_msg_area .msg_line .be_bolder {
+          font-weight: bold; }
+        main div#chat_view div#chatted_msg_area .msg_line .be_italic {
+          font-style: oblique; }
+        main div#chat_view div#chatted_msg_area .msg_line .be_underl {
+          text-decoration: underline; }
+    main div#chat_view .change_tab {
+      border: 1px solid #000000;
+      border-radius: 10px;
+      height: 30px; }
+    main div#chat_view #room_button {
+      background-color: #00FF00; }
+    main div#chat_view #share_board {
+      background-color: #DDAAEE; }
+    main div#chat_view #share_signal + .radio-icon:before {
+      background-color: #FFFFFF;
+      color: #f00;
+      font-size: 22px; }
+    main div#chat_view #share_signal:checked + .radio-icon:before {
+      background-color: #FFFFFF;
+      color: #f00;
+      font-size: 22px; }
 
 /*----------------------------------------------------
 	#sub

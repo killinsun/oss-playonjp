@@ -270,7 +270,7 @@ main {
 
 		}	
 
-		div#chatted_msg_area{
+		@mixin msg_area {
 			margin : 15px;
 			border: solid 1px #000000;
 			.msg_line{
@@ -290,8 +290,55 @@ main {
 				}
 				.msg{
 					float:left;
+
 				}
+
+				.be_bolder{ font-weight: bold;};
+				.be_italic{ font-style: oblique;};
+				.be_underl{ text-decoration: underline;};
 			}
+		}
+		div#dm_msg_area{
+			display: none;
+			@include msg_area;
+
+
+		}
+		div#chatted_msg_area{
+			display: visible;
+			@include msg_area;
+
+		}
+
+
+		.change_tab{
+			border: 1px solid #000000;
+			border-radius: 10px;
+			height: 30px;
+				
+		}
+
+		#room_button{
+			background-color: #00FF00;
+		}
+
+		#share_board{
+			background-color: #DDAAEE;
+		}
+
+
+		#share_signal + .radio-icon:before {
+			background-color: #FFFFFF;
+			color:#f00;
+			font-size: 22px;
+			
+		}
+
+		#share_signal:checked + .radio-icon:before {
+			background-color: #FFFFFF;
+			color:#f00;
+			font-size: 22px;
+			
 		}
 	}
 		
