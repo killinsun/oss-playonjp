@@ -217,11 +217,15 @@ main {
 
 	div#chat_view{
 		display: none;
-		background: #FFFFFF;
+		background: #f7f7f7;
 		padding-top: 10px;
 		padding-bottom: 10px;
 		padding-left: 20px;
 		padding-right: 20px;
+		
+		div#chat_room_info_box{
+			p{ margin-bottom: 5px;}
+		}
 
 		div#leave_box{
 			margin:10px;
@@ -271,6 +275,7 @@ main {
 			border: solid 1px #000000;
 			.msg_line{
 				@extend .clearfix;
+				background: #FFFFFF;
 				
 
 				border-top: solid 1px #DDDDDD;
