@@ -14,15 +14,45 @@ function dispatcher (path, func) {
 };
 
 
-dispatcher("^/$", function(){
+dispatcher('^/$', function(){
 	$(function(){
+		//update user list status
+		socket.on('update_list_st',function(now_user_list, member_count){
+			let my_socketid = socket.id;
+
+			console.log(member_count);			
+
+			//update room member count;
+			for(r in member_count){
+				if(r==='share'){
+					
+				}else{
+						$('#guest1').find('.'+r).text(
+							member_count[r].now
+						);
+				}
+			}
+
+			//update room member name
+			let member_string = ''
+			for(n in now_user_list){
+				if(now_user_list[n].joined_room['room1'] != ''){
+					member_string += now_user_list[n].user_name +', ';
+					console.log(now_user_list[n]);
+				}
+			}
+			$('#guest1').find('.member_list').find('p').text(member_string);
+
+			
+			
+		});
 
 	});
 
 });
 
 
-dispatcher("^/chat$", function(){
+dispatcher('^/chat$', function(){
 	$(function(){
 
 		let formatDate = function (date, format) {
@@ -143,10 +173,10 @@ dispatcher("^/chat$", function(){
 					$('#chat_dm_to').append($('<option>', {class:'form-control',text: user_name, value: socket_id}));
 				}
 			}
-			//update room member number and title name;
+			//update room member count and title name;
 			for(r in member_count){
 				console.log(member_count[r]);
-				if(r===''){
+				if(r==='share'){
 					
 				}else{
 
@@ -163,9 +193,6 @@ dispatcher("^/chat$", function(){
 					);
 				}
 			}
-
-			
-
 		});
 		
 		//send message and update message box
