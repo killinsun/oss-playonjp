@@ -23,6 +23,7 @@ dispatcher('^/$', function(){
 			console.log(member_count);			
 
 			//update room member count;
+			let all_count = 0;
 			for(r in member_count){
 				if(r==='share'){
 					
@@ -31,7 +32,10 @@ dispatcher('^/$', function(){
 							member_count[r].now
 						);
 				}
+				all_count += member_count[r].now;
 			}
+			all_count = member_count['share'].now;
+			$('#guest1').find('.number').text("現在 "+ all_count + "人入館中");
 
 			//update room member name
 			let member_string = ''
@@ -269,7 +273,7 @@ dispatcher('^/chat$', function(){
 
 			$('#input_box').val('');
 			$('#room_view').show();
-			socket.emit('room_leave', socket.id);
+			socket.emit('chat_leave', socket.id);
 			$('#chatted_msg_area div').remove();
 
 		});

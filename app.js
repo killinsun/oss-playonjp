@@ -176,7 +176,7 @@ io.on('connection', function(socket){
 		}
 	});
 
-	socket.on('room_leave', function(recived_id){
+	socket.on('chat_leave', function(recived_id){
 		if(!now_user_list[recived_id]){
 			console.log('socket error');
 		}
@@ -255,7 +255,13 @@ io.on('connection', function(socket){
 			if(leave_room != ''){
 				member_count[leave_room].now -= 1;
 			}
-			member_count['share'].now -= 1;
+
+			if(now_user_list[socket.id].joined_room['room1'] != ''){
+				member_count['share'].now -= 1;
+			}
+			if(member_count['share'] < 0){ member_count['share'] = 0; }
+
+
 			delete now_user_list[socket.id];
 			io.sockets.emit('update_list_st', now_user_list, member_count);
 		}
