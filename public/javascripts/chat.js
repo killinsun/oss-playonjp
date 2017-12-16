@@ -1,7 +1,7 @@
 //e.g,,, /member: 12 -> set room member max capacity.
 const special_command =/^\/[a-z]*:(.*)$/;
 let room_id = 'guest1'
-let websocket_url = 'http://localhost/chat_' + room_id;
+let websocket_url = 'http://localhost:3000/chat_' + room_id;
 let socket = io.connect(websocket_url);
 
 function dispatcher (path, func) {
