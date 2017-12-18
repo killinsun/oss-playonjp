@@ -2,13 +2,13 @@ extends _layout.pug
 block contents
 	script(src="https://code.jquery.com/jquery-1.11.1.js")
 	script(src="/socket.io/socket.io.js")
-	script(type="text/javascript" src="javascripts/chat.js")
+	script(type="text/javascript" src="javascripts/chat.js" id="get_data" data-string=`${room_id}`)
 	main
 		div.container-fluid
 			div.row
 				div.col-lg-12
 					//- Info
-					h1 ***号館 - チャット
+					h1 #{room_id} 号館 - チャット
 					p.chathelp
 						| FLASHで作られた[PLAYON.JP]を再現した、HTML5とnode.jsで動作するチャットです。
 						| 無料で利用できます。チャットの使い方については、説明ページを見て下さい。

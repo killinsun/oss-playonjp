@@ -1,6 +1,7 @@
 //e.g,,, /member: 12 -> set room member max capacity.
 const special_command =/^\/[a-z]*:(.*)$/;
-let room_id = 'guest1'
+let room_id = $('#get_data').data('string');
+
 let websocket_url = '/chat_' + room_id;
 let socket = io.connect(websocket_url);
 
@@ -98,6 +99,8 @@ dispatcher('^/chat$', function(){
 			//get pressed button's room name.
 			let room = $(this).closest('.room').attr('id');
 			let send_data = {};
+
+			$('#chatted_msg_area div').remove();
 
 			send_data.join_room = room;
 

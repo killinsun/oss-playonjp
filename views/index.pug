@@ -2,6 +2,7 @@ extends _layout.pug
 block contents
 	script(src="https://code.jquery.com/jquery-1.11.1.js")
 	script(src="/socket.io/socket.io.js")
+	script(type="text/javascript" src="javascripts/index.js")
 	script(type="text/javascript" src="javascripts/chat.js")
 	main
 		div.container
@@ -37,10 +38,10 @@ block contents
 												div.blue 0
 											div.member_list
 												p
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室")
+													input.room_join.form-control("type=button value=入室")
 										div#guest2.col-lg-3.roomarea
 											div.room_name ゲスト2
 											div.member_stat.clearfix
@@ -52,10 +53,10 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
+													input.room_join.form-control("type=button value=入室")
 										div#tennis.col-lg-3.roomarea
 											div.room_name テーブルテニス
 											div.member_stat.clearfix
@@ -67,12 +68,12 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
+													input.room_join.form-control("type=button value=入室")
 									div.row
-										div#build1.col-lg-3.roomarea
+										div#room1.col-lg-3.roomarea
 											div.room_name 1号館
 											div.member_stat.clearfix
 												div.red 0
@@ -83,11 +84,11 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
-										div#build2.col-lg-3.roomarea
+													input.room_join.form-control("type=button value=入室")
+										div#room2.col-lg-3.roomarea
 											div.room_name 2号館
 											div.member_stat.clearfix
 												div.red 0
@@ -98,11 +99,11 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
-										div#build3.col-lg-3.roomarea
+													input.room_join.form-control("type=button value=入室")
+										div#room3.col-lg-3.roomarea
 											div.room_name 3号館
 											div.member_stat.clearfix
 												div.red 0
@@ -113,12 +114,12 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
+													input.room_join.form-control("type=button value=入室")
 									div.row
-										div#build4.col-lg-3.roomarea
+										div#room4.col-lg-3.roomarea
 											div.room_name 4号館
 											div.member_stat.clearfix
 												div.red 0
@@ -129,11 +130,11 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
-										div#build5.col-lg-3.roomarea
+													input.room_join.form-control("type=button value=入室")
+										div#room5.col-lg-3.roomarea
 											div.room_name 5号館
 											div.member_stat.clearfix
 												div.red 0
@@ -144,11 +145,11 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
-										div#build6.col-lg-3.roomarea
+													input.room_join.form-control("type=button value=入室")
+										div#room6.col-lg-3.roomarea
 											div.room_name 6号館
 											div.member_stat.clearfix
 												div.red 0
@@ -159,10 +160,10 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
+													input.room_join.form-control("type=button value=入室")
 									div.row
 										div#two.col-lg-3.roomarea
 											div.room_name 二人限定
@@ -175,10 +176,10 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
+													input.room_join.form-control("type=button value=入室")
 										div#two2.col-lg-3.roomarea
 											div.room_name 二人限定(2)
 											div.member_stat.clearfix
@@ -189,11 +190,11 @@ block contents
 												div.yellow 0
 												div.blue 0
 											div.member_list
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
-										div#denybuild.col-lg-3.roomarea
+													input.room_join.form-control("type=button value=入室")
+										div#denyroom.col-lg-3.roomarea
 											div.room_name アクセス禁止
 											div.member_stat.clearfix
 												div.red 0
@@ -204,10 +205,10 @@ block contents
 												div.blue 0
 											div.member_list
 												p aaa,bbb,ccc,ddd,eee,fff,gg
-											div.build_info
+											div.room_info
 												div.number 現在 0 人入館中
 												div.join
-													input.form-control("type=button value=入室 disalbed=disabled")
+													input.room_join.form-control("type=button value=入室")
 							div.col-lg-2
 								//- Right advert
 								div#advert_right
