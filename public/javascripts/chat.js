@@ -15,6 +15,7 @@ function dispatcher (path, func) {
     };
 };
 
+console.log(socket);
 
 dispatcher('^/$', function(){
 	$(function(){

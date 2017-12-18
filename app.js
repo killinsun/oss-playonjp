@@ -73,7 +73,7 @@ app.use(function(err, req, res, next) {
 // We will devide these code later.
 //
 
-let room_array = ["guest1","guest2","tennis","room1","room2","room3","room4","room5","room6","two","two2","denyroom"];
+let room_array = ["/","guest1","guest2","tennis","room1","room2","room3","room4","room5","room6","two","two2","denyroom"];
 
 room_array.forEach(function(v){
 
@@ -107,10 +107,12 @@ room_array.forEach(function(v){
 	}
 
 	let chatNS = io.of('/chat_'+ v);
+
 	chatNS.on("connection", function(socket){
 		let user_data = {
-			'socket_id': socket.id,
-			'user_name': '',
+			'socket_id'  : socket.id,
+			'user_name'  : '',
+			'room_id'    : socket.nsp,
 			'joined_room': {'room1': '', 'room2': ''},
 			'joined_time': null,
 			'resent_chat': null,
