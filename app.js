@@ -128,7 +128,7 @@ room_array.forEach(function(v){
 		}
 		now_user_list[socket.id] = user_data;
 
-		io.sockets.emit('update_list_st', now_user_list, member_count);
+		this.emit('update_list_st', now_user_list, member_count);
 		console.log('add user ' + now_user_list[socket.id] );
 				
 
@@ -146,11 +146,11 @@ room_array.forEach(function(v){
 				now_user_list[recived_id].joined_room['room1'] = join_room;
 				member_count[join_room].now += 1;
 				socket.join(join_room);
-				io.sockets.emit('update_list_st', now_user_list, member_count);
+				this.emit('update_list_st', now_user_list, member_count);
 				
 			}else{
 				console.log("Capacity is too max. send to " + recived_id + ":" + recived_data.user_name);
-				io.to(recived_id).emit('result', false);
+				this.to(recived_id).emit('result', false);
 
 			}
 		});
@@ -168,17 +168,17 @@ room_array.forEach(function(v){
 				now_user_list[user_data.socket_id].joined_room['room2'] = join_room;
 				member_count[join_room].now += 1;
 				socket.join(join_room);
-				io.sockets.emit('update_list_st', now_user_list, member_count);
+				this.emit('update_list_st', now_user_list, member_count);
 				
 				//Chat room in message.
 				if(join_room!=''){
-					io.sockets.in(join_room).emit('message', system_user_data, user_name + ' ' + in_msg, false);
-					io.to(user_data.socket_id).emit('result', true);
+					this.in(join_room).emit('message', system_user_data, user_name + ' ' + in_msg, false);
+					this.to(user_data.socket_id).emit('result', true);
 				}
 				console.log(join_room);
 			}else{
 				console.log("Capacity is too max. send to " + recived_id + ":" + user_name);
-				io.to(recived_id).emit('result', false);
+				this.to(recived_id).emit('result', false);
 
 			}
 		});
@@ -193,13 +193,13 @@ room_array.forEach(function(v){
 			let leave_room = now_user_list[recived_id].joined_room['room2'];
 
 			//Chat room out message.
-			socket.broadcast.to(leave_room).emit('message', system_user_data, user_name + ' ' + out_msg, false);
+			this.broadcast.to(leave_room).emit('message', system_user_data, user_name + ' ' + out_msg, false);
 
 			socket.leave(leave_room);
 			now_user_list[recived_id].joined_room['room2'] = '';
 			member_count[leave_room].now -= 1;
 			if(leave_room!=''){
-				io.sockets.emit('update_list_st', now_user_list, member_count);
+				this.sockets.emit('update_list_st', now_user_list, member_count);
 			}
 		});
 
@@ -231,11 +231,11 @@ room_array.forEach(function(v){
 			now_user_list[recived_id].recent_chat = recent_chat;
 
 			//Send message in room members.
-			io.sockets.in(room).emit('message', now_user_list[recived_id], msg, false);
+			this.in(room).emit('message', now_user_list[recived_id], msg, false);
 
 			if(now_user_list[recived_id].usr_status = 'rom'){
 				now_user_list[recived_id].usr_status = null;
-				io.sockets.emit('update_list_st', now_user_list, member_count);
+				this.emit('update_list_st', now_user_list, member_count);
 			}
 		});
 
@@ -245,14 +245,14 @@ room_array.forEach(function(v){
 			now_user_list[recived_id].recent_chat = recent_chat;
 
 			//Send message in room members.
-			io.sockets.in(to_id).emit('message', now_user_list[recived_id], msg, true);
+			this.in(to_id).emit('message', now_user_list[recived_id], msg, true);
 
 			//output from user's chat view.
-			io.sockets.in(recived_id).emit('message', now_user_list[recived_id], msg, true);
+			this.in(recived_id).emit('message', now_user_list[recived_id], msg, true);
 
 			if(now_user_list[recived_id].usr_status = 'rom'){
 				now_user_list[recived_id].usr_status = null;
-				io.sockets.emit('update_list_st', now_user_list, member_count);
+				this.emit('update_list_st', now_user_list, member_count);
 			}
 		});
 
@@ -270,7 +270,7 @@ room_array.forEach(function(v){
 
 
 				delete now_user_list[socket.id];
-				io.sockets.emit('update_list_st', now_user_list, member_count);
+				this.emit('update_list_st', now_user_list, member_count);
 			}
 		});
 
@@ -281,7 +281,7 @@ room_array.forEach(function(v){
 				case '/name':
 					console.log('change user name');
 					now_user_list[recived_id].user_name = command_val;
-					io.sockets.emit('update_list_st', now_user_list, member_count);
+					this.emit('update_list_st', now_user_list, member_count);
 					break;
 				case '/room':
 					console.log('change room name');
@@ -292,24 +292,24 @@ room_array.forEach(function(v){
 						member_count[this_room].name = command_val;
 					}
 
-					io.sockets.emit('update_list_st', now_user_list, member_count);
+					this.emit('update_list_st', now_user_list, member_count);
 					break;
 				case '/member':
 					const reg = /^\s*[0-9]*$/
 					if(command_val.match(reg) && command_val <= 20 && command_val >=2){
 						member_count[this_room].max = command_val;
-						io.sockets.emit('update_list_st', now_user_list, member_count);
+						this.emit('update_list_st', now_user_list, member_count);
 					}else if(command_val === '0' || command_val ==='' || command_val===null){
 						member_count[this_room].max = 999;
-						io.sockets.emit('update_list_st', now_user_list, member_count);
+						this.emit('update_list_st', now_user_list, member_count);
 					}else{
-						io.sockets.in(recived_id).emit('message', system_user_data, '部屋人数は2～20までの間で設定してください。', true);
+						this.in(recived_id).emit('message', system_user_data, '部屋人数は2～20までの間で設定してください。', true);
 					}
 					break;
 				
 				case '/rom':
 					now_user_list[recived_id].usr_status = 'rom';
-					io.sockets.emit('update_list_st', now_user_list, member_count);
+					this.emit('update_list_st', now_user_list, member_count);
 
 					break;
 			}
@@ -322,7 +322,7 @@ room_array.forEach(function(v){
 			
 				case 'icon_select':
 					now_user_list[recived_id].icon = changed_item_val;
-					io.sockets.emit('update_list_st', now_user_list, member_count);
+					this.emit('update_list_st', now_user_list, member_count);
 					break;
 				case 'font_color_picker':
 					now_user_list[recived_id].font_color = changed_item_val;
