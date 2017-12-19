@@ -15,43 +15,34 @@ function dispatcher (path, func) {
     };
 };
 
-console.log(socket);
-
 dispatcher('^/$', function(){
+	console.log(socket);
 	$(function(){
-		//update user list status
-		socket.on('update_list_st',function(now_user_list, member_count){
-			let my_socketid = socket.id;
 
-			console.log(member_count);			
+		socket.emit('all_view_callback');
+
+		socket.on('get_all_users',function(all_user_list){
+			console.log("get_all_users");
+			console.log(all_user_list);
+			let my_socketid = socket.id;
 
 			//update room member count;
 			let all_count = 0;
-			for(r in member_count){
-				if(r==='share'){
-					
-				}else{
-						$('#guest1').find('.'+r).text(
-							member_count[r].now
-						);
-				}
-				all_count += member_count[r].now;
-			}
-			all_count = member_count['share'].now;
-			$('#guest1').find('.number').text("現在 "+ all_count + "人入館中");
 
 			//update room member name
 			let member_string = ''
-			for(n in now_user_list){
-				if(now_user_list[n].joined_room['room1'] != ''){
-					member_string += now_user_list[n].user_name +', ';
-					console.log(now_user_list[n]);
+			for(a in all_user_list){
+				if(all_user_list[a].user_name != null){
+					member_string += all_member_count[a].user_name +', ';
 				}
 			}
-			$('#guest1').find('.member_list').find('p').text(member_string);
+			$('#'+ a.room_id ).find('.member_list').find('p').text(member_string);
 
-			
-			
+		});
+
+		socket.on('update_data', function(recived_data){
+			console.log("update_data");
+			console.log(recived_data);
 		});
 
 	});
@@ -90,8 +81,6 @@ dispatcher('^/chat$', function(){
 			$('#current_user_name').text(send_data.user_name);
 			
 			socket.emit('room_join', send_data);
-			console.log('room_join pressed')
-
 			return false;
 		});
 
@@ -185,7 +174,6 @@ dispatcher('^/chat$', function(){
 			}
 			//update room member count and title name;
 			for(r in member_count){
-				console.log(member_count[r]);
 				if(r==='share'){
 					
 				}else{
@@ -216,7 +204,6 @@ dispatcher('^/chat$', function(){
 
 				//use special command
 				if(msg.match(special_command)){
-					console.log(msg);
 					spl_str= msg.split(":");	
 					command = spl_str[0];
 					command_val = spl_str[1];
@@ -225,7 +212,6 @@ dispatcher('^/chat$', function(){
 					$('#input_box').val('').focus();
 					return false;
 				}else if(msg.match(/^\/rom\s*$/)){
-					console.log(msg);
 					socket.emit('special_command', socket.id, msg, null);
 					$('#input_box').val('').focus();
 					return false;
@@ -302,7 +288,6 @@ dispatcher('^/chat$', function(){
 		$('.event_target').click(function(){
 			let changed_item_id = $(this).attr("id");
 			let changed_item_val = $(this).val();
-			console.log(changed_item_id);
 			socket.emit('change_form_item', socket.id, changed_item_id, changed_item_val);
 		});
 
