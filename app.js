@@ -112,7 +112,7 @@ room_array.forEach(function(v){
 		let user_data = {
 			'socket_id'  : socket.id,
 			'user_name'  : '',
-			'room_id'    : socket.nsp,
+			'room_id'	 : v,
 			'joined_room': {'room1': '', 'room2': ''},
 			'joined_time': null,
 			'resent_chat': null,
@@ -131,8 +131,6 @@ room_array.forEach(function(v){
 		now_user_list[socket.id] = user_data;
 
 		chatNS.emit('update_list_st', now_user_list, member_count);
-		console.log('add user ' + now_user_list[socket.id] );
-				
 
 		socket.on('room_join', function(recived_data){
 			if(!now_user_list[socket.id]){
@@ -353,8 +351,6 @@ room_array.forEach(function(v){
 					}
 					break;
 			}
-			console.log(now_user_list[recived_id].be_bolder);
-
 		});
 
 	});
