@@ -21,7 +21,7 @@ dispatcher('^/$', function(){
 
 		socket.emit('all_view_callback');
 
-		socket.on('get_all_users',function(all_user_list){
+		socket.on('get_all_users',function(all_user_list, room_array){
 			console.log("get_all_users");
 			console.log(all_user_list);
 			let my_socketid = socket.id;
@@ -30,13 +30,20 @@ dispatcher('^/$', function(){
 			let all_count = 0;
 
 			//update room member name
-			let member_string = ''
-			for(a in all_user_list){
-				if(all_user_list[a].user_name != null){
-					member_string += all_member_count[a].user_name +', ';
+			for(r in room_array){
+				let member_string = ''
+				for(a in all_user_list){
+					if(all_user_list[a].room_id == room_array[r]){
+
+						if(all_user_list[a].user_name != null){
+							member_string += all_user_list[a].user_name +', ';
+						}
+
+						$('#'+ room_array[r] ).find('.member_list').find('p').text(member_string);
+					}
 				}
+				$('#'+ room_array[r] ).find('.member_list').find('p').text(member_string);
 			}
-			$('#'+ a.room_id ).find('.member_list').find('p').text(member_string);
 
 		});
 

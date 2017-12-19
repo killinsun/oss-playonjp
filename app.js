@@ -138,7 +138,7 @@ room_array.forEach(function(v){
 
 		chatNS.emit('update_list_st', now_user_list, member_count);
 
-		socket.on('all_view_callback', function(){ chatNS.emit('get_all_users',all_user_list); });
+		socket.on('all_view_callback', function(){ chatNS.emit('get_all_users',all_user_list, room_array); });
 
 		socket.on('room_join', function(recived_data){
 			if(!now_user_list[socket.id]){
