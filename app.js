@@ -79,7 +79,7 @@ let all_user_list = {};
 room_array.forEach(function(v){
 
 	let now_user_list = {};
-	let member_count = {
+	let user_count = {
 		'room_id'		: v,
 		'share'		: { 'name': '共有ボード', 'default': '共有ボード', 'now': 0, 'max': 50},
 		'red'		: { 'name': '赤',	'default': '赤', 	'now': 0, 'max': 999},
@@ -94,7 +94,7 @@ room_array.forEach(function(v){
 		'socket_id': "system_dummy_socket_id",
 		'user_name': '',
 		'room_id'	 : v,
-		'joined_room': {'room1': 'share', 'room2': ''},
+		'joined_chat': {'room1': 'share', 'room2': ''},
 		'joined_time': null,
 		'resent_chat': null,
 		'usr_status' : 'stable',
@@ -116,7 +116,7 @@ room_array.forEach(function(v){
 			'socket_id'  : socket.id,
 			'user_name'  : '',
 			'room_id'	 : v,
-			'joined_room': {'room1': '', 'room2': ''},
+			'joined_chat': {'room1': '', 'room2': ''},
 			'joined_time': null,
 			'resent_chat': null,
 			'usr_status' : 'stable',
@@ -136,7 +136,7 @@ room_array.forEach(function(v){
 		i = { 'socket_id': socket.id, 'room_id': v, 'user_name': null, 'chat': null }
 		all_user_list[socket.id] = i; 
 
-		chatNS.emit('update_list_st', now_user_list, member_count);
+		chatNS.emit('update_list_st', now_user_list, user_count);
 
 		socket.on('all_view_callback', function(){ chatNS.emit('get_all_users',all_user_list, room_array); });
 
@@ -151,11 +151,11 @@ room_array.forEach(function(v){
 			now_user_list[recived_id].joined_time	= recived_data.joined_time;
 			all_user_list[recived_id].user_name	= recived_data.user_name;
 
-			if(member_count[join_room].max >= member_count[join_room].now + 1){
-				now_user_list[recived_id].joined_room['room1'] = join_room;
-				member_count[join_room].now += 1;
+			if(user_count[join_room].max >= user_count[join_room].now + 1){
+				now_user_list[recived_id].joined_chat['chat1'] = join_room;
+				user_count[join_room].now += 1;
 				socket.join(join_room);
-				chatNS.emit('update_list_st', now_user_list, member_count);
+				chatNS.emit('update_list_st', now_user_list, user_count);
 				io.of('/chat_all').emit('update_data', all_user_list[recived_id]);
 				
 			}else{
@@ -176,14 +176,14 @@ room_array.forEach(function(v){
 			let in_msg		= now_user_list[recived_id].in_msg;
 			let join_room	= recived_data.join_room
 
-			if(member_count[join_room].max >= member_count[join_room].now + 1){
+			if(user_count[join_room].max >= user_count[join_room].now + 1){
 
 				all_user_list[recived_id].chat						= join_room;
-				now_user_list[recived_id].joined_room['room2'] = join_room;
+				now_user_list[recived_id].joined_chat['chat2'] = join_room;
 
-				member_count[join_room].now += 1;
+				user_count[join_room].now += 1;
 				socket.join(join_room);
-				chatNS.emit('update_list_st', now_user_list, member_count);
+				chatNS.emit('update_list_st', now_user_list, user_count);
 				io.of('/chat_all').emit('update_data', all_user_list[recived_id]);
 				
 				//Chat room in message.
@@ -205,18 +205,18 @@ room_array.forEach(function(v){
 			
 			let user_name	= now_user_list[recived_id].user_name;
 			let out_msg		= now_user_list[recived_id].out_msg;
-			let leave_room = now_user_list[recived_id].joined_room['room2'];
+			let leave_room = now_user_list[recived_id].joined_chat['chat2'];
 
 			//Chat room out message.
 			chatNS.to(leave_room).emit('message', system_user_data, user_name + ' ' + out_msg, false);
 
 			socket.leave(leave_room);
 			
-			now_user_list[recived_id].joined_room['room2'] = '';
+			now_user_list[recived_id].joined_chat['chat2'] = '';
 			all_user_list[recived_id].chat = '';
-			member_count[leave_room].now -= 1;
+			user_count[leave_room].now -= 1;
 			if(leave_room!=''){
-				chatNS.emit('update_list_st', now_user_list, member_count);
+				chatNS.emit('update_list_st', now_user_list, user_count);
 				io.of('/chat_all').emit('update_data', all_user_list[recived_id]);
 			}
 		});
@@ -228,7 +228,7 @@ room_array.forEach(function(v){
 			}
 
 			let user_name	= now_user_list[recived_id].user_name;
-			let room		= now_user_list[recived_id].joined_room['room2'];
+			let room		= now_user_list[recived_id].joined_chat['chat2'];
 
 			var newChat = new Chat({
 				room	 :	room,
@@ -253,7 +253,7 @@ room_array.forEach(function(v){
 
 			if(now_user_list[recived_id].usr_status = 'rom'){
 				now_user_list[recived_id].usr_status = null;
-				chatNS.emit('update_list_st', now_user_list, member_count);
+				chatNS.emit('update_list_st', now_user_list, user_count);
 			}
 		});
 
@@ -270,58 +270,58 @@ room_array.forEach(function(v){
 
 			if(now_user_list[recived_id].usr_status = 'rom'){
 				now_user_list[recived_id].usr_status = null;
-				chatNS.emit('update_list_st', now_user_list, member_count);
+				chatNS.emit('update_list_st', now_user_list, user_count);
 			}
 		});
 
 		socket.on('disconnect', function(e) {
 			if(now_user_list[socket.id]){
-				leave_room = now_user_list[socket.id].joined_room['room2'];
+				leave_room = now_user_list[socket.id].joined_chat['chat2'];
 				if(leave_room != ''){
-					member_count[leave_room].now -= 1;
+					user_count[leave_room].now -= 1;
 				}
 
-				if(now_user_list[socket.id].joined_room['room1'] != ''){
-					member_count['share'].now -= 1;
+				if(now_user_list[socket.id].joined_chat['chat1'] != ''){
+					user_count['share'].now -= 1;
 				}
-				if(member_count['share'] < 0){ member_count['share'] = 0; }
+				if(user_count['share'] < 0){ user_count['share'] = 0; }
 
 
 				delete now_user_list[socket.id];
 				delete all_user_list[socket.id];
-				chatNS.emit('update_list_st', now_user_list, member_count);
-				chatNS.emit('get_all_users', all_user_list);
+				chatNS.emit('update_list_st', now_user_list, user_count);
+				io.of('/chat_all').emit('get_all_users', all_user_list, room_array);
 			}
 		});
 
 		socket.on('special_command', function(recived_id, command, command_val){
-			let this_room = now_user_list[recived_id].joined_room['room2'];
+			let this_room = now_user_list[recived_id].joined_chat['chat2'];
 			
 			switch(command){
 				case '/name':
 					console.log('change user name');
 					now_user_list[recived_id].user_name = command_val;
-					chatNS.emit('update_list_st', now_user_list, member_count);
+					chatNS.emit('update_list_st', now_user_list, user_count);
 					break;
 				case '/room':
 					console.log('change room name');
 
 					if(command_val=== null || command_val===''){
-						member_count[this_room].name = member_count[this_room].default
+						user_count[this_room].name = user_count[this_room].default
 					}else{
-						member_count[this_room].name = command_val;
+						user_count[this_room].name = command_val;
 					}
 
-					chatNS.emit('update_list_st', now_user_list, member_count);
+					chatNS.emit('update_list_st', now_user_list, user_count);
 					break;
 				case '/member':
 					const reg = /^\s*[0-9]*$/
 					if(command_val.match(reg) && command_val <= 20 && command_val >=2){
-						member_count[this_room].max = command_val;
-						chatNS.emit('update_list_st', now_user_list, member_count);
+						user_count[this_room].max = command_val;
+						chatNS.emit('update_list_st', now_user_list, user_count);
 					}else if(command_val === '0' || command_val ==='' || command_val===null){
-						member_count[this_room].max = 999;
-						chatNS.emit('update_list_st', now_user_list, member_count);
+						user_count[this_room].max = 999;
+						chatNS.emit('update_list_st', now_user_list, user_count);
 					}else{
 						chatNS.to(recived_id).emit('message', system_user_data, '部屋人数は2～20までの間で設定してください。', true);
 					}
@@ -329,7 +329,7 @@ room_array.forEach(function(v){
 				
 				case '/rom':
 					now_user_list[recived_id].usr_status = 'rom';
-					chatNS.emit('update_list_st', now_user_list, member_count);
+					chatNS.emit('update_list_st', now_user_list, user_count);
 
 					break;
 			}
@@ -342,7 +342,7 @@ room_array.forEach(function(v){
 			
 				case 'icon_select':
 					now_user_list[recived_id].icon = changed_item_val;
-					chatNS.emit('update_list_st', now_user_list, member_count);
+					chatNS.emit('update_list_st', now_user_list, user_count);
 					break;
 				case 'font_color_picker':
 					now_user_list[recived_id].font_color = changed_item_val;

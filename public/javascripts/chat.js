@@ -20,23 +20,20 @@ dispatcher('^/$', function(){
 	$(function(){
 
 		socket.emit('all_view_callback');
+		let client_side_all_user = {}
 
 		socket.on('get_all_users',function(all_user_list, room_array){
-			console.log("get_all_users");
-			console.log(all_user_list);
-			let my_socketid = socket.id;
-
-			//update room member count;
-			let all_count = 0;
-
+			client_side_all_user = all_user_list;
+			
 			//update room member name
 			for(r in room_array){
-				let member_string = ''
-				for(a in all_user_list){
-					if(all_user_list[a].room_id == room_array[r]){
+				let member_string = '';
+				for(a in client_side_all_user){
+					let user = client_side_all_user[a];
 
-						if(all_user_list[a].user_name != null){
-							member_string += all_user_list[a].user_name +', ';
+					if(user[a].room_id == room_array[r]){
+						if(_user[a].user_name != null){
+							member_string += user[a].user_name +', ';
 						}
 
 						$('#'+ room_array[r] ).find('.member_list').find('p').text(member_string);
@@ -48,8 +45,21 @@ dispatcher('^/$', function(){
 		});
 
 		socket.on('update_data', function(recived_data){
-			console.log("update_data");
-			console.log(recived_data);
+
+			let recived_id					 = recived_data.socket_id;
+			client_side_all_user[recived_id] = recived_data;
+
+			let member_string = '';
+			for(a in client_side_all_user){
+				if(client_side_all_user[a].room_id == recived_data.room_id){
+					if(client_side_all_user[a].user_name != null){
+						member_string += client_side_all_user[a].user_name + ',';
+					}
+					
+				}
+			}
+
+			$('#' + recived_data.room_id).find('.member_list').find('p').text(member_string);
 		});
 
 	});
@@ -116,22 +126,22 @@ dispatcher('^/chat$', function(){
 		});
 		
 		//update user list status
-		socket.on('update_list_st',function(now_user_list, member_count){
+		socket.on('update_list_st',function(now_user_list, user_count){
 			let my_socketid = socket.id;
 
 			//If user already joined chatroom, get own chatroom info.
-			if(now_user_list[my_socketid].joined_room['room2'] != ''){
-				let my_room		= now_user_list[my_socketid].joined_room['room2'];
-				let my_room_name = member_count[my_room].name;
+			if(now_user_list[my_socketid].joined_chat['chat2'] != ''){
+				let my_room		= now_user_list[my_socketid].joined_chat['chat2'];
+				let my_room_name = user_count[my_room].name;
 
 				//update chat room info
 				$('#chat_room_title').text(my_room_name);
-				$('#chat_room_count').text('現在　' + member_count[my_room].now + ' 人');
+				$('#chat_room_count').text('現在　' + user_count[my_room].now + ' 人');
 
-				if(member_count[my_room].max === 999){
+				if(user_count[my_room].max === 999){
 					$('#chat_room_limit').text('定員　なし');
 				} else{
-					$('#chat_room_limit').text('定員　' + member_count[my_room].max);
+					$('#chat_room_limit').text('定員　' + user_count[my_room].max);
 				}
 
 			} else{
@@ -149,13 +159,13 @@ dispatcher('^/chat$', function(){
 			$('#chat_dm_to').append($('<option>', {class:'form-control',text: '共有ボード', value: 'share'}));
 
 			for(user in now_user_list){
-				is_room_join = now_user_list[user].joined_room['room1']
+				is_room_join = now_user_list[user].joined_chat['chat1']
 				if(is_room_join === '' || is_room_join === null){
 
 				}else{
 					let socket_id = now_user_list[user].socket_id;
 					let user_name = now_user_list[user].user_name;
-					let room_name = now_user_list[user].joined_room['room2'];
+					let room_name = now_user_list[user].joined_chat['chat2'];
 					let usr_status	  = now_user_list[user].usr_status;
 					let joined_time	  = now_user_list[user].joined_time;
 					let icon		  = now_user_list[user].icon;
@@ -180,21 +190,21 @@ dispatcher('^/chat$', function(){
 				}
 			}
 			//update room member count and title name;
-			for(r in member_count){
+			for(r in user_count){
 				if(r==='share'){
 					
 				}else{
 
-					if(member_count[r].max === 999){
-						$('#room_list').find('#'+r).find('.number').text(member_count[r].now);
+					if(user_count[r].max === 999){
+						$('#room_list').find('#'+r).find('.number').text(user_count[r].now);
 					}else{
 						$('#room_list').find('#'+r).find('.number').text(
-								member_count[r].now + "/" + member_count[r].max
+								user_count[r].now + "/" + user_count[r].max
 						);
 					}
 					
 					$('#room_list').find('#'+r).find('.room_name').text(
-						member_count[r].name
+						user_count[r].name
 					);
 				}
 			}
