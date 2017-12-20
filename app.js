@@ -73,8 +73,9 @@ app.use(function(err, req, res, next) {
 // We will devide these code later.
 //
 
-let room_array = ["all","guest1","guest2","tennis","room1","room2","room3","room4","room5","room6","two","two2","denyroom"];
+let room_array = ['all','guest1','guest2','tennis','room1','room2','room3','room4','room5','room6','two','two2','denyroom'];
 let all_user_list = {};
+
 
 room_array.forEach(function(v){
 
@@ -89,25 +90,6 @@ room_array.forEach(function(v){
 		'yellow'	: { 'name': '黄',	'default': '黄',	'now': 0, 'max': 999},
 		'blue'		: { 'name': '青',	'default': '青',	'now': 0, 'max': 999},
 		};
-
-	let system_user_data = {
-		'socket_id': "system_dummy_socket_id",
-		'user_name': '',
-		'room_id'	 : v,
-		'joined_chat': {'chat1': 'share', 'chat2': ''},
-		'joined_time': null,
-		'resent_chat': null,
-		'usr_status' : 'stable',
-		'in_msg'	 : 'さんが入室しました',
-		'out_msg'	 : 'さんが退室しました',
-		'msg_count'	 : 0,
-		'icon'		 : '',
-		'font_size'  : 'large',
-		'font_color' : '#000000',
-		'be_bolder'	 : false,
-		'be_italic'  : false,
-		'be_underl'  : false
-	}
 
 	let chatNS = io.of('/chat_'+ v);
 
@@ -131,8 +113,14 @@ room_array.forEach(function(v){
 			'be_italic'  : false,
 			'be_underl'  : false
 		}
+
+		// Set system user
+		let system_user_data	   = user_data;
+		system_user_data.socket_id = 'dummy';
+		system_user_data.user_name = '';
+
+		// Set user data for management tables
 		now_user_list[socket.id] = user_data;
-		
 		i = { 'socket_id': socket.id, 'room_id': v, 'user_name': null, 'chat': null }
 		all_user_list[socket.id] = i; 
 
@@ -141,10 +129,6 @@ room_array.forEach(function(v){
 		socket.on('all_view_callback', function(){ chatNS.emit('get_all_users',all_user_list, room_array); });
 
 		socket.on('room_join', function(recived_data){
-			if(!now_user_list[socket.id]){
-				now_user_list[socket.id] = user_data;
-			}
-			
 			let recived_id  = socket.id;
 			let join_chat	= 'share';
 			
@@ -152,6 +136,7 @@ room_array.forEach(function(v){
 			now_user_list[recived_id].user_name		= recived_data.user_name;
 			now_user_list[recived_id].joined_time	= recived_data.joined_time;
 
+			//Check user count limit
 			if(user_count[join_chat].max >= user_count[join_chat].now + 1){
 				now_user_list[recived_id].joined_chat['chat1'] = join_chat;
 				user_count[join_chat].now += 1;
@@ -169,15 +154,13 @@ room_array.forEach(function(v){
 		});
 		
 		socket.on('chat_join', function(recived_data){
-			if(!now_user_list[socket.id]){
-				now_user_list[socket.id] = user_data;
-			}
 			let recived_id	= socket.id	;
 			let user_name	= now_user_list[recived_id].user_name;
 			let in_msg		= now_user_list[recived_id].in_msg;
 			let join_chat	= recived_data.join_chat
 			console.log(recived_data);
 
+			//Check user count limit
 			if(user_count[join_chat].max >= user_count[join_chat].now + 1){
 
 				all_user_list[recived_id].chat				   = join_chat;
@@ -379,6 +362,7 @@ room_array.forEach(function(v){
 	});
 	
 });
+
 
 
 

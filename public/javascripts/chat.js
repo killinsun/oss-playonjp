@@ -27,6 +27,20 @@ dispatcher('^/$', function(){
 			
 			//update room member name
 			for(r in room_array){
+				//user count
+				let room_count = 0;
+				$('#'+ room_array[r]).find('.member_stat').children().each(function(){
+					let chat  = $(this).attr('class');
+					let count = calcUserCount(room_array[r], chat, client_side_all_user);
+					room_count += count;
+
+					$(this).text(count);
+				});
+				room_count += calcUserCount(room_array[r], undefined, client_side_all_user);
+
+				$('#'+ room_array[r]).find('.number').text('現在 '+ room_count + '人入館中');
+				
+				//user list
 				let member_string = '';
 				for(a in client_side_all_user){
 					let user = client_side_all_user[a];
@@ -35,8 +49,6 @@ dispatcher('^/$', function(){
 						if(user.user_name != null){
 							member_string += user.user_name +', ';
 						}
-
-						$('#'+ room_array[r] ).find('.member_list').find('p').text(member_string);
 					}
 				}
 				$('#'+ room_array[r] ).find('.member_list').find('p').text(member_string);
@@ -48,6 +60,19 @@ dispatcher('^/$', function(){
 
 			let recived_id					 = recived_data.socket_id;
 			client_side_all_user[recived_id] = recived_data;
+
+			//user count
+			let room_count = 0;
+			$('#'+ recived_data.room_id).find('.member_stat').children().each(function(){
+				let chat  = $(this).attr('class');
+				let count = calcUserCount(recived_data.room_id, chat, client_side_all_user);
+				room_count += count;
+
+				$(this).text(count);
+			});
+
+			room_count += calcUserCount(recived_data.room_id, undefined, client_side_all_user);
+			$('#'+ recived_data.room_id).find('.number').text('現在 '+ room_count + '人入館中');
 
 			let member_string = '';
 			for(a in client_side_all_user){
@@ -61,6 +86,17 @@ dispatcher('^/$', function(){
 
 			$('#' + recived_data.room_id).find('.member_list').find('p').text(member_string);
 		});
+
+		function calcUserCount(room_id, chat, all_user_list){
+			let count = 0;
+			for(u in all_user_list){
+				let user = all_user_list[u];
+				if(user.room_id === room_id && user.chat === chat){
+					count +=1;
+				}
+			}
+			return count;
+		};
 
 	});
 
@@ -310,6 +346,6 @@ dispatcher('^/chat$', function(){
 
 });
 
-
 });
+
 dispatcher(location.pathname);
