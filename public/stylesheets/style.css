@@ -213,7 +213,7 @@ main {
     left: 550px; }
     main div#member_list #title_bar {
       background: blue;
-      height: 15px; }
+      height: 20px; }
     main div#member_list #list {
       background: #FFFFFF;
       width: 90%;
@@ -252,36 +252,36 @@ main {
         main div#room_view #command div#text_area .row {
           margin-top: 5px;
           margin-bottom: 5px; }
-    main div#room_view #room_list {
+    main div#room_view #chat_list {
       padding-top: 10px;
       padding-bottom: 10px;
       padding-left: 20px;
       padding-right: 20px; }
-      main div#room_view #room_list .row .room {
+      main div#room_view #chat_list .row .chat {
         height: 150px;
         margin: 10px;
         margin-bottom: 100px;
         padding: 10px;
         border: 1px solid #000000; }
-        main div#room_view #room_list .row .room .room_name {
+        main div#room_view #chat_list .row .chat .chat_name {
           text-align: center; }
-        main div#room_view #room_list .row .room .number {
+        main div#room_view #chat_list .row .chat .number {
           text-align: center; }
-        main div#room_view #room_list .row .room input.form-control {
+        main div#room_view #chat_list .row .chat input.form-control {
           background: #F8B500;
           color: #000000;
           font-weight: bold; }
-      main div#room_view #room_list .row #red {
+      main div#room_view #chat_list .row #red {
         background: #EE836F; }
-      main div#room_view #room_list .row #waterblue {
+      main div#room_view #chat_list .row #waterblue {
         background: #89C3EB; }
-      main div#room_view #room_list .row #green {
+      main div#room_view #chat_list .row #green {
         background: #3EB370; }
-      main div#room_view #room_list .row #purple {
+      main div#room_view #chat_list .row #purple {
         background: #7058A3; }
-      main div#room_view #room_list .row #yellow {
+      main div#room_view #chat_list .row #yellow {
         background: #F3F133; }
-      main div#room_view #room_list .row #blue {
+      main div#room_view #chat_list .row #blue {
         background: #1E50A2; }
   main div#join_view {
     display: visible;
@@ -329,6 +329,7 @@ main {
       margin: 15px;
       border: solid 1px #000000; }
       main div#chat_view div#dm_msg_area .msg_line {
+        background: #FFFFFF;
         border-top: solid 1px #DDDDDD; }
         main div#chat_view div#dm_msg_area .msg_line .msg_icon {
           float: left; }
@@ -367,7 +368,7 @@ main {
       border: 1px solid #000000;
       border-radius: 10px;
       height: 30px; }
-    main div#chat_view #room_button {
+    main div#chat_view #chat_button {
       background-color: #00FF00; }
     main div#chat_view #share_board {
       background-color: #DDAAEE; }

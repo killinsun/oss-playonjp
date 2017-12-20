@@ -169,20 +169,20 @@ main {
 
 
 		//Room List
-		#room_list{
+		#chat_list{
 			padding-top: 10px;
 			padding-bottom: 10px;
 			padding-left: 20px;
 			padding-right: 20px;
 
 			.row{
-				.room{
+				.chat{
 					height: 150px;
 					margin: 10px;
 					margin-bottom: 100px;
 					padding: 10px;
 					border: 1px solid #000000;
-					.room_name{
+					.chat_name{
 						text-align: center;
 					}
 					.number{
@@ -318,7 +318,7 @@ main {
 				
 		}
 
-		#room_button{
+		#chat_button{
 			background-color: #00FF00;
 		}
 

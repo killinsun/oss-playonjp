@@ -102,14 +102,14 @@ dispatcher('^/chat$', function(){
 		});
 
 		//chat join
-		$('.room_join_btn').click(function(){
+		$('.chat_join_btn').click(function(){
 			//get pressed button's room name.
-			let room = $(this).closest('.room').attr('id');
+			let chat = $(this).closest('.chat').attr('id');
 			let send_data = {};
 
 			$('#chatted_msg_area div').remove();
 
-			send_data.join_room = room;
+			send_data.join_chat = chat;
 
 			socket.emit('chat_join', send_data );
 
@@ -131,17 +131,17 @@ dispatcher('^/chat$', function(){
 
 			//If user already joined chatroom, get own chatroom info.
 			if(now_user_list[my_socketid].joined_chat['chat2'] != ''){
-				let my_room		= now_user_list[my_socketid].joined_chat['chat2'];
-				let my_room_name = user_count[my_room].name;
+				let my_chat		 = now_user_list[my_socketid].joined_chat['chat2'];
+				let my_chat_name = user_count[my_chat].name;
 
 				//update chat room info
-				$('#chat_room_title').text(my_room_name);
-				$('#chat_room_count').text('現在　' + user_count[my_room].now + ' 人');
+				$('#chat_room_title').text(my_chat_name);
+				$('#chat_room_count').text('現在　' + user_count[my_chat].now + ' 人');
 
-				if(user_count[my_room].max === 999){
+				if(user_count[my_chat].max === 999){
 					$('#chat_room_limit').text('定員　なし');
 				} else{
-					$('#chat_room_limit').text('定員　' + user_count[my_room].max);
+					$('#chat_room_limit').text('定員　' + user_count[my_chat].max);
 				}
 
 			} else{
@@ -149,7 +149,7 @@ dispatcher('^/chat$', function(){
 
 			$('#chat_room_uname').text(now_user_list[my_socketid].user_name);
 
-			//update member list
+			//update user list
 			$('.one_line').remove();
 			$('#room_dm_to option').remove();
 			$('#room_dm_to').append($('<option>', {class:'form-control',text: '共有ボード', value: 'share'}));
@@ -189,21 +189,21 @@ dispatcher('^/chat$', function(){
 					$('#chat_dm_to').append($('<option>', {class:'form-control',text: user_name, value: socket_id}));
 				}
 			}
-			//update room member count and title name;
+			//update chat user count and title name;
 			for(r in user_count){
 				if(r==='share'){
 					
 				}else{
 
 					if(user_count[r].max === 999){
-						$('#room_list').find('#'+r).find('.number').text(user_count[r].now);
+						$('#chat_list').find('#'+r).find('.number').text(user_count[r].now);
 					}else{
-						$('#room_list').find('#'+r).find('.number').text(
+						$('#chat_list').find('#'+r).find('.number').text(
 								user_count[r].now + "/" + user_count[r].max
 						);
 					}
 					
-					$('#room_list').find('#'+r).find('.room_name').text(
+					$('#chat_list').find('#'+r).find('.chat_name').text(
 						user_count[r].name
 					);
 				}

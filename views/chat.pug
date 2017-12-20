@@ -55,40 +55,40 @@ block contents
 										div.row.form-inline
 											input.form-control.col-sm11("type=text placeholder=type_command")
 											button.btn.btn-default.col-sm1("type=submit") 送信
-							div#room_list.row
+							div#chat_list.row
 								div.container
 									div.row
-										div#red.col-lg-2.room.container
+										div#red.col-lg-2.chat.container
 											div.row
 												div.col-lg-6.number 1/16
-												div.col-lg-6.join: input.form-control.room_join_btn("type=button value=入室")
-											div.room_name 赤
-										div#waterblue.col-lg-2.room.container
+												div.col-lg-6.join: input.form-control.chat_join_btn("type=button value=入室")
+											div.chat_name 赤
+										div#waterblue.col-lg-2.chat.container
 											div.row
 												div.col-lg-6.number 1/16
-												div.col-lg-6.join: input.form-control.room_join_btn("type=button value=入室")
-											div.room_name 薄青
-										div#green.col-lg-2.room.container
+												div.col-lg-6.join: input.form-control.chat_join_btn("type=button value=入室")
+											div.chat_name 薄青
+										div#green.col-lg-2.chat.container
 											div.row
 												div.col-lg-6.number 1/16
-												div.col-lg-6.join: input.form-control.room_join_btn("type=button value=入室")
-											div.room_name 緑
+												div.col-lg-6.join: input.form-control.chat_join_btn("type=button value=入室")
+											div.chat_name 緑
 									div.row
-										div#purple.col-lg-2.room.container
+										div#purple.col-lg-2.chat.container
 											div.row
 												div.col-lg-6.number 1/16
-												div.col-lg-6.join: input.form-control.room_join_btn("type=button value=入室")
-											div.room_name 紫
-										div#yellow.col-lg-2.room.container
+												div.col-lg-6.join: input.form-control.chat_join_btn("type=button value=入室")
+											div.chat_name 紫
+										div#yellow.col-lg-2.chat.container
 											div.row
 												div.col-lg-6.number 1/16
-												div.col-lg-6.join: input.form-control.room_join_btn("type=button value=入室")
-											div.room_name 黄
-										div#blue.col-lg-2.room.container
+												div.col-lg-6.join: input.form-control.chat_join_btn("type=button value=入室")
+											div.chat_name 黄
+										div#blue.col-lg-2.chat.container
 											div.row
 												div.col-lg-6.number 1/16
-												div.col-lg-6.join: input.form-control.room_join_btn("type=button value=入室")
-											div.room_name 青
+												div.col-lg-6.join: input.form-control.chat_join_btn("type=button value=入室")
+											div.chat_name 青
 					div.row
 						div#chat_view.container-fluid
 							// Chat view
@@ -149,7 +149,7 @@ block contents
 												div#submit_container.col-lg-2
 													input#btn_send.form-control("type=submit value=送信")
 							div.row
-								div#room_button.change_tab.col-md-2 部屋
+								div#chat_button.change_tab.col-md-2 部屋
 								div#share_board.change_tab.col-md-2 
 									label 共有ボード
 										input#share_signal("type=radio")
