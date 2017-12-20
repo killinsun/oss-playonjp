@@ -32,7 +32,7 @@ dispatcher('^/$', function(){
 					let user = client_side_all_user[a];
 
 					if(user.room_id == room_array[r]){
-						if(_user.user_name != null){
+						if(user.user_name != null){
 							member_string += user.user_name +', ';
 						}
 
