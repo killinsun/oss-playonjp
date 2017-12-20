@@ -31,9 +31,9 @@ dispatcher('^/$', function(){
 				for(a in client_side_all_user){
 					let user = client_side_all_user[a];
 
-					if(user[a].room_id == room_array[r]){
-						if(_user[a].user_name != null){
-							member_string += user[a].user_name +', ';
+					if(user.room_id == room_array[r]){
+						if(_user.user_name != null){
+							member_string += user.user_name +', ';
 						}
 
 						$('#'+ room_array[r] ).find('.member_list').find('p').text(member_string);
