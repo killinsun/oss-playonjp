@@ -1,21 +1,21 @@
-let express		= require('express');
-let path		= require('path');
-let favicon		= require('serve-favicon');
-let logger		= require('morgan');
-let cookieParser= require('cookie-parser');
-let bodyParser	= require('body-parser');
+const express		= require('express');
+const path		= require('path');
+const favicon		= require('serve-favicon');
+const logger		= require('morgan');
+const cookieParser= require('cookie-parser');
+const bodyParser	= require('body-parser');
 
-let routes		= require('./routes/index');
-let users		= require('./routes/users');
-let chat		= require('./routes/chat');
+const routes		= require('./routes/index');
+const users		= require('./routes/users');
+const chat		= require('./routes/chat');
 
-let app			= express();
-let http		= require('http').Server(app);
-let io = require('socket.io')(http);
+const app			= express();
+const http		= require('http').Server(app);
+const io = require('socket.io')(http);
 const PORT		= 3000;
 
 const model		= require('./model');
-let	  Chat		= model.Chat;
+const Chat		= model.Chat;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,7 +35,7 @@ app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  let err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
@@ -73,8 +73,8 @@ app.use(function(err, req, res, next) {
 // We will devide these code later.
 //
 
-let room_array = ['all','guest1','guest2','tennis','room1','room2','room3','room4','room5','room6','two','two2','denyroom'];
-let all_user_list = {};
+const room_array = ['all','guest1','guest2','tennis','room1','room2','room3','room4','room5','room6','two','two2','denyroom'];
+const all_user_list = {};
 
 
 room_array.forEach(function(v){
@@ -129,8 +129,8 @@ room_array.forEach(function(v){
 		socket.on('all_view_callback', function(){ chatNS.emit('get_all_users',all_user_list, room_array); });
 
 		socket.on('room_join', function(recived_data){
-			let recived_id  = socket.id;
-			let join_chat	= 'share';
+			const recived_id  = socket.id;
+			const join_chat	= 'share';
 			
 			all_user_list[recived_id].user_name		= recived_data.user_name;
 			now_user_list[recived_id].user_name		= recived_data.user_name;
@@ -154,10 +154,10 @@ room_array.forEach(function(v){
 		});
 		
 		socket.on('chat_join', function(recived_data){
-			let recived_id	= socket.id	;
-			let user_name	= now_user_list[recived_id].user_name;
-			let in_msg		= now_user_list[recived_id].in_msg;
-			let join_chat	= recived_data.join_chat
+			const recived_id	= socket.id	;
+			const user_name	= now_user_list[recived_id].user_name;
+			const in_msg		= now_user_list[recived_id].in_msg;
+			const join_chat	= recived_data.join_chat
 			console.log(recived_data);
 
 			//Check user count limit
@@ -188,9 +188,9 @@ room_array.forEach(function(v){
 				console.log('socket error');
 			}
 			
-			let user_name	= now_user_list[recived_id].user_name;
-			let out_msg		= now_user_list[recived_id].out_msg;
-			let leave_chat = now_user_list[recived_id].joined_chat['chat2'];
+			const user_name	= now_user_list[recived_id].user_name;
+			const out_msg		= now_user_list[recived_id].out_msg;
+			const leave_chat = now_user_list[recived_id].joined_chat['chat2'];
 
 			//Chat out message.
 			chatNS.to(leave_chat).emit('message', system_user_data, user_name + ' ' + out_msg, false);
@@ -212,8 +212,8 @@ room_array.forEach(function(v){
 				console.log('socket error');
 			}
 
-			let user_name	= now_user_list[recived_id].user_name;
-			let chat		= now_user_list[recived_id].joined_chat['chat2'];
+			const user_name	= now_user_list[recived_id].user_name;
+			const chat		= now_user_list[recived_id].joined_chat['chat2'];
 
 			var newChat = new Chat({
 				chat	 :	chat,
@@ -280,7 +280,7 @@ room_array.forEach(function(v){
 		});
 
 		socket.on('special_command', function(recived_id, command, command_val){
-			let this_chat = now_user_list[recived_id].joined_chat['chat2'];
+			const this_chat = now_user_list[recived_id].joined_chat['chat2'];
 			
 			switch(command){
 				case '/name':
