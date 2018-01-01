@@ -216,7 +216,7 @@ room_array.forEach(function(v){
 			let chat		= now_user_list[recived_id].joined_chat['chat2'];
 
 			var newChat = new Chat({
-				room	 :	chat,
+				chat	 :	chat,
 				sc_id	 :	recent_chat,
 				usr_id	 :	user_name,
 				usr_name :	user_name,

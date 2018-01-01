@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let db		 = mongoose.connect('mongodb://localhost/oss-playonjp');
 
 let Chat = new mongoose.Schema({
-	room:		String,
+	chat:		String,
 	sc_id:		String,
 	usr_id:		String,
 	usr_name:	String,
