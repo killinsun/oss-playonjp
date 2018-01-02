@@ -151,6 +151,7 @@ dispatcher('^/chat$', function(){
 
 			socket.on('result', function(result){
 				if(result){
+					console.log("success");
 					$('#room_view').hide();
 					$('#chat_view').show();
 				}else{

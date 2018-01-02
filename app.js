@@ -155,9 +155,9 @@ room_array.forEach(function(v){
 		
 		socket.on('chat_join', function(recived_data){
 			const recived_id	= socket.id	;
-			const user_name	= now_user_list[recived_id].user_name;
+			const user_name		= now_user_list[recived_id].user_name;
 			const in_msg		= now_user_list[recived_id].in_msg;
-			const join_chat	= recived_data.join_chat
+			const join_chat		= recived_data.join_chat
 			console.log(recived_data);
 
 			//Check user count limit
@@ -172,9 +172,10 @@ room_array.forEach(function(v){
 				io.of('/chat_all').emit('update_data', all_user_list[recived_id]);
 				
 				//Chat in message.
-				if(join_chat!=''){
+				if(join_chat != ''){
 					chatNS.to(join_chat).emit('message', system_user_data, user_name + ' ' + in_msg, false);
-					chatNS.to(user_data.socket_id).emit('result', true);
+					chatNS.to(recived_id).emit('result', true);
+					console.log("success");
 				}
 			}else{
 				console.log("Capacity is too max. send to " + recived_id + ":" + user_name);
