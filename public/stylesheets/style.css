@@ -209,12 +209,12 @@ main {
     background: gray;
     position: absolute;
     z-index: 9999;
-    top: 120px;
-    left: 550px; }
+    top: 35%;
+    left: 60%; }
     main div#member_list #title_bar {
       background: blue;
       height: 20px; }
-    main div#member_list #list {
+    main div#member_list #list_wrap {
       background: #FFFFFF;
       width: 90%;
       height: 70%;
@@ -222,22 +222,32 @@ main {
       font-size: 12px;
       padding: 10px;
       margin: 10px auto; }
-      main div#member_list #list .one_line {
-        height: 10%; }
-        main div#member_list #list .one_line .rom_user {
-          color: #FF0000; }
-        main div#member_list #list .one_line .red {
-          background: #EE836F; }
-        main div#member_list #list .one_line .waterblue {
-          background: #89C3EB; }
-        main div#member_list #list .one_line .green {
-          background: #3EB370; }
-        main div#member_list #list .one_line .purple {
-          background: #7058A3; }
-        main div#member_list #list .one_line .yellow {
-          background: #F3F133; }
-        main div#member_list #list .one_line .blue {
-          background: #1E50A2; }
+      main div#member_list #list_wrap #list {
+        width: 100%;
+        height: 100%;
+        padding: 0; }
+        main div#member_list #list_wrap #list .one_line {
+          height: 10%; }
+          main div#member_list #list_wrap #list .one_line .rom_user {
+            color: #FF0000; }
+          main div#member_list #list_wrap #list .one_line .red {
+            background: #EE836F; }
+          main div#member_list #list_wrap #list .one_line .waterblue {
+            background: #89C3EB; }
+          main div#member_list #list_wrap #list .one_line .green {
+            background: #3EB370; }
+          main div#member_list #list_wrap #list .one_line .purple {
+            background: #7058A3; }
+          main div#member_list #list_wrap #list .one_line .yellow {
+            background: #F3F133; }
+          main div#member_list #list_wrap #list .one_line .blue {
+            background: #1E50A2; }
+          main div#member_list #list_wrap #list .one_line .user_name {
+            text-overflow: ellipsis;
+            -webkit-text-overflow: ellipsis;
+            /* Safari */
+            -o-text-overflow: ellipsis;
+            /* Opera */ }
   main div#room_view {
     display: none;
     background: #EDE9D8; }
@@ -380,6 +390,33 @@ main {
       background-color: #FFFFFF;
       color: #f00;
       font-size: 22px; }
+
+/*gridのgutter調整*/
+.row-0 {
+  margin-left: 0px;
+  margin-right: 0px; }
+  .row-0 > div {
+    padding-right: 0px;
+    padding-left: 0px; }
+
+.row-10 {
+  margin-left: -5px;
+  margin-right: -5px; }
+
+.row-20 {
+  margin-left: -10px;
+  margin-right: -10px; }
+
+.row-30 {
+  margin-left: -15px;
+  margin-right: -15px; }
+
+.row-40 {
+  margin-left: -20px;
+  margin-right: -20px; }
+  .row-40 > div {
+    padding-left: 0px;
+    padding-right: 0px; }
 
 /*----------------------------------------------------
 	#sub

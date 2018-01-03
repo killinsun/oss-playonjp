@@ -207,15 +207,15 @@ dispatcher('^/chat$', function(){
 					let joined_time	  = now_user_list[user].joined_time;
 					let icon		  = now_user_list[user].icon;
 					console.log('room:' + room_name);
-					one_line = '<div class="one_line row">';
-					one_line+= '<div class="room_color ' + room_name + ' col-sm-1"></div>';
+					one_line = '<div class="one_line row row-40">';
+					one_line+= '<div class="room_color ' + room_name + ' col-md-1"></div>';
 					if(usr_status ==='rom'){
-						one_line+= '<div class="user_name col-sm-4 rom_user">' + user_name + '</div>';
+						one_line+= '<div class="user_name rom_user col-md-5">' + user_name + '</div>';
 					}else{
-						one_line+= '<div class="user_name col-sm-4">' + user_name + '</div>';
+						one_line+= '<div class="user_name col-md-5">' + user_name + '</div>';
 					}
-					one_line+= '<div class="date_time col-sm-6">' + joined_time + '</div>';
-					one_line+= '<div class="icon col-sm-1">'+ icon + ' </div>';
+					one_line+= '<div class="date_time col-md-5">' + joined_time + '</div>';
+					one_line+= '<div class="icon col-md-1">'+ icon + ' </div>';
 					one_line+= '</div>';
 					$('#list').append(one_line);
 

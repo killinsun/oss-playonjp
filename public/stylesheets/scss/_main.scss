@@ -112,15 +112,15 @@ main {
 		background:gray;
 		position: absolute;
 		z-index: 9999;
-		top: 120px;
-		left: 550px;
+		top: 35%;
+		left: 60%;
 		#title_bar{
 			background: blue;
 			height:20px;
 		}
 		#switch_opt{
 		}
-		#list{
+		#list_wrap{
 			background: #FFFFFF;
 			width: 90%;
 			height: 70%;
@@ -128,17 +128,27 @@ main {
 			font-size: 12px;
 			padding:10px;
 			margin:10px auto;
-			.one_line{
-				height: 10%;
+			#list{
+				width: 100%;
+				height: 100%;
+				padding: 0;
 
-				.rom_user{ color: #FF0000; }
-				.red{ background: $red; }
-				.waterblue{ background: $waterblue; }
-				.green{ background: $green; }
-				.purple{ background: $purple; }
-				.yellow{ background: $yellow; }
-				.blue{ background: $blue; }
-			}
+				.one_line{
+					height: 10%;
+					.rom_user{ color: #FF0000; }
+					.red{ background: $red; }
+					.waterblue{ background: $waterblue; }
+					.green{ background: $green; }
+					.purple{ background: $purple; }
+					.yellow{ background: $yellow; }
+					.blue{ background: $blue; }
+					.user_name{
+						  text-overflow: ellipsis;
+						  -webkit-text-overflow: ellipsis; /* Safari */
+						  -o-text-overflow: ellipsis; /* Opera */	
+					}
+				}
+			} 
 		}
 	}
 
@@ -341,12 +351,43 @@ main {
 			
 		}
 	}
-		
 
 }
 
+/*gridのgutter調整*/
+.row-0{
+    margin-left:0px;
+    margin-right:0px;
  
+    > div{
+        padding-right:0px;
+        padding-left:0px;
+    }
+}
+.row-10{
+    margin-left:-5px;
+    margin-right:-5px;
+}
+.row-20{
+    margin-left:-10px;
+    margin-right:-10px;
  
+}
+.row-30{
+    margin-left:-15px;
+    margin-right:-15px;
+ 
+}
+.row-40{
+    margin-left:-20px;
+    margin-right:-20px;
+	> div{
+		padding-left:0px;
+		padding-right:0px;
+	}
+ 
+}
+
 /*----------------------------------------------------
 	#sub
 ----------------------------------------------------*/
