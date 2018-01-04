@@ -27,7 +27,7 @@ dispatcher('^/$', function(){
 			client_side_all_user = all_user_list;
 			
 			//update room member name
-			for(r in room_array){
+			for(let r in room_array){
 				//user count
 				let room_count = 0;
 				$('#'+ room_array[r]).find('.member_stat').children().each(function(){
@@ -43,7 +43,7 @@ dispatcher('^/$', function(){
 				
 				//user list
 				let member_string = '';
-				for(a in client_side_all_user){
+				for(let a in client_side_all_user){
 					let user = client_side_all_user[a];
 
 					if(user.room_id == room_array[r]){
@@ -90,7 +90,7 @@ dispatcher('^/$', function(){
 
 		function calcUserCount(room_id, chat, all_user_list){
 			let count = 0;
-			for(u in all_user_list){
+			for(let u in all_user_list){
 				let user = all_user_list[u];
 				if(user.room_id === room_id && user.chat === chat){
 					count +=1;
@@ -196,8 +196,8 @@ dispatcher('^/chat$', function(){
 			$('#chat_dm_to').append($('<option>', {class:'form-control',text: '部屋', value: 'this_room'}));
 			$('#chat_dm_to').append($('<option>', {class:'form-control',text: '共有ボード', value: 'share'}));
 
-			for(user in now_user_list){
-				is_room_join = now_user_list[user].joined_chat['chat1']
+			for(let user in now_user_list){
+				const is_room_join = now_user_list[user].joined_chat['chat1']
 				if(is_room_join === '' || is_room_join === null){
 
 				}else{
@@ -208,7 +208,7 @@ dispatcher('^/chat$', function(){
 					let joined_time	  = now_user_list[user].joined_time;
 					let icon		  = now_user_list[user].icon;
 					console.log('room:' + room_name);
-					one_line = '<div class="one_line row row-40">';
+					let one_line = '<div class="one_line row row-40">';
 					one_line+= '<div class="room_color ' + room_name + ' col-md-1"></div>';
 					if(usr_status ==='rom'){
 						one_line+= '<div class="user_name rom_user col-md-5">' + user_name + '</div>';
@@ -228,7 +228,7 @@ dispatcher('^/chat$', function(){
 				}
 			}
 			//update chat user count and title name;
-			for(r in user_count){
+			for(let r in user_count){
 				if(r==='share'){
 					
 				}else{

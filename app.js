@@ -122,7 +122,7 @@ room_array.forEach(function(v){
 
 		// Set user data for management tables
 		now_user_list[socket.id] = user_data;
-		i = { 'socket_id': socket.id, 'room_id': v, 'user_name': null, 'chat': null }
+		const i = { 'socket_id': socket.id, 'room_id': v, 'user_name': null, 'chat': null }
 		all_user_list[socket.id] = i; 
 
 		chatNS.emit('update_list_st', now_user_list, user_count);
@@ -263,7 +263,7 @@ room_array.forEach(function(v){
 
 		socket.on('disconnect', function(e) {
 			if(now_user_list[socket.id]){
-				leave_chat = now_user_list[socket.id].joined_chat['chat2'];
+				const leave_chat = now_user_list[socket.id].joined_chat['chat2'];
 				if(leave_chat != ''){
 					user_count[leave_chat].now -= 1;
 				}
