@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-let db		 = mongoose.connect('mongodb://localhost/oss-playonjp');
+let db		 = mongoose.connect('mongodb://heroku_mfqn1mx7:fmp0mooad0b0ii4p18hllsm9ef@ds139067.mlab.com:39067/heroku_mfqn1mx7');
 
 let Chat = new mongoose.Schema({
 	chat:		String,
