@@ -368,7 +368,7 @@ room_array.forEach(function(v){
 
 
 
-http.listen(PORT, function(){
+http.listen(process.env.PORT || PORT, function(){
 	console.log('server started on %d', PORT);
 });
 
