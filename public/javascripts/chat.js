@@ -1,3 +1,4 @@
+'use strict';
 //e.g,,, /member: 12 -> set room member max capacity.
 const special_command =/^\/[a-z]*:(.*)$/;
 let room_id = $('#get_data').data('string');

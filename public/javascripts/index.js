@@ -1,3 +1,4 @@
+'use strict';
 $(function(){
 	$('.room_join').click(function(){
 		let room_id = $(this).closest('.roomarea').attr('id');
