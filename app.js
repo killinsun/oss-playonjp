@@ -1,19 +1,19 @@
 'use strict';
 const express		= require('express');
-const path		= require('path');
+const path			= require('path');
 const favicon		= require('serve-favicon');
 const logger		= require('morgan');
-const cookieParser= require('cookie-parser');
+const cookieParser	= require('cookie-parser');
 const bodyParser	= require('body-parser');
 
-const routes		= require('./routes/index');
+const routes	= require('./routes/index');
 const users		= require('./routes/users');
 const chat		= require('./routes/chat');
 
-const app			= express();
+const app		= express();
 const http		= require('http').Server(app);
-const io = require('socket.io')(http);
-const PORT		= 3000;
+const io		= require('socket.io')(http);
+const PORT		= process.env.PORT || 3000;
 
 const model		= require('./model');
 const Chat		= model.Chat;
@@ -368,7 +368,7 @@ room_array.forEach(function(v){
 
 
 
-http.listen(process.env.PORT || 3000, function(){
+http.listen(PORT, function(){
 	console.log('server started on %d', PORT);
 });
 
