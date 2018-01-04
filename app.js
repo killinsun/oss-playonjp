@@ -175,6 +175,7 @@ room_array.forEach(function(v){
 				//Chat in message.
 				if(join_chat != ''){
 					chatNS.to(join_chat).emit('message', system_user_data, user_name + ' ' + in_msg, false);
+					chatNS.to(join_chat).emit('message', system_user_data, '現在、テスト稼働中です。予告なくサービスの停止や、想定外のエラーが発生する場合があります', false);
 					chatNS.to(recived_id).emit('result', true);
 					console.log("success");
 				}
