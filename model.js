@@ -1,5 +1,17 @@
-let mongoose = require('mongoose');
-let db		 = mongoose.connect('mongodb://heroku_mfqn1mx7:fmp0mooad0b0ii4p18hllsm9ef@ds139067.mlab.com:39067/heroku_mfqn1mx7');
+require('dotenv').config();
+const mongoose = require('mongoose');
+let db_uri;
+
+if(process.env.NODE_DEV === "True"){
+	db_uri	= 'mongodb://localhost';
+}else{
+	db_uri	= 'mongodb://heroku_mfqn1mx7:fmp0mooad0b0ii4p18hllsm9ef@ds139067.mlab.com:39067/heroku_mfqn1mx7';
+}
+
+
+const db	=	 mongoose.connect(db_uri);
+
+console.log("MongoDB connect to " + db_uri );
 
 let Chat = new mongoose.Schema({
 	chat:		String,

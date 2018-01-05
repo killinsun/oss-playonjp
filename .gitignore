@@ -39,3 +39,5 @@ ex_test
 
 .sass-cache
 *.swp
+
+.env
