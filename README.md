@@ -15,7 +15,7 @@ We will reproduce with HTML5.
 
 
 ## Author
-é¦–ç„¡ã—ã‚­ãƒªãƒ³
+ñ–³‚µƒLƒŠƒ“
 (@Kill_in_Sun)
 
 ## License
