@@ -1,10 +1,10 @@
 'use strict';
 //e.g,,, /member: 12 -> set room member max capacity.
 const special_command =/^\/[a-z]*:(.*)$/;
-let room_id = $('#get_data').data('string');
+const room_id = $('#get_data').data('string');
 
-let websocket_url = '/chat_' + room_id;
-let socket = io.connect(websocket_url);
+const websocket_url = '/chat_' + room_id;
+const socket = io.connect(websocket_url);
 
 function dispatcher (path, func) {
     dispatcher.path_func = dispatcher.path_func || []
@@ -59,7 +59,7 @@ dispatcher('^/$', function(){
 
 		socket.on('update_data', function(recived_data){
 
-			let recived_id					 = recived_data.socket_id;
+			const recived_id					 = recived_data.socket_id;
 			client_side_all_user[recived_id] = recived_data;
 
 			//user count
@@ -107,7 +107,7 @@ dispatcher('^/$', function(){
 dispatcher('^/chat$', function(){
 	$(function(){
 
-		let formatDate = function (date, format) {
+		const formatDate = function (date, format) {
 		  if (!format) format = 'YYYY-MM-DD hh:mm:ss.SSS';
 		  format = format.replace(/YYYY/g, date.getFullYear());
 		  format = format.replace(/MM/g, ('0' + (date.getMonth() + 1)).slice(-2));
