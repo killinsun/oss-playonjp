@@ -92,6 +92,15 @@ room_array.forEach(function(v){
 		'blue'		: { 'name': '青',	'default': '青',	'now': 0, 'max': 999},
 		};
 
+	if(v === 'two' || v === 'two2'){
+		user_count['red'].max = 2;
+		user_count['waterblue'].max = 2;
+		user_count['green'].max = 2;
+		user_count['purple'].max = 2;
+		user_count['yellow'].max = 2;
+		user_count['blue'].max = 2;
+	}
+
 	let chatNS = io.of('/chat_'+ v);
 
 	chatNS.on("connection", function(socket){
