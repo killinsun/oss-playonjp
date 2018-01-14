@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 let db_uri;
 
 if(process.env.NODE_DEV === "True"){
-	db_uri	= 'mongodb://localhost';
+	db_uri	= 'mongodb://localhost/oss-playonjp';
 }else{
-	db_uri	= 'mongodb://heroku_mfqn1mx7:fmp0mooad0b0ii4p18hllsm9ef@ds139067.mlab.com:39067/heroku_mfqn1mx7';
+	db_uri	= 'mongodb://heroku_mfqn1mx7:fmp0mooad0b0ii4p18hllsm9ef@ds139067.mlab.com:39067/heroku_mfqn1mx7/oss-playonjp';
 }
 
 

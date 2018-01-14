@@ -1,7 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const os = require('os')
+const hostname = os.hostname();
+const passport		= require('passport');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
 	console.log(req.query);
 	let room_id = '';
@@ -10,5 +12,6 @@ router.get('/', function(req, res, next) {
 	}
 	res.render('chat', { title: 'OSS-PLAYON.JP', room_id: room_id });
 });
+
 
 module.exports = router;
