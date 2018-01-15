@@ -11,9 +11,9 @@ let Chat			= model.Chat;
 
 passport.use(new LocalStrategy(function(username, password, cb) {
 	User.find({usr_id: username}, function(err, docs){
-		docs.forEach( function(element){
-			if(element.pwd != password){ return cb(null, false);}
-			return cb(null, element);
+		docs.forEach( function(user){
+			if(user.pwd != password){ return cb(null, false);}
+			return cb(null, user);
 		});
 	});
   }));
@@ -21,14 +21,13 @@ passport.use(new LocalStrategy(function(username, password, cb) {
 
 // Configure Passport authenticated session persistence.
 passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
+	console.log('serializeUser : ' + user.usr_id);
+	cb(null, user.usr_id);
 });
 
-passport.deserializeUser(function(id, cb) {
-  db.users.findById(id, function (err, user) {
-    if (err) { return cb(err); }
-    cb(null, user);
-  });
+passport.deserializeUser(function(usr_id, cb) {
+	console.log('deserializeUser : ' + usr_id);
+	cb(null, {name:usr_id, msg:'test'});
 });
 
 

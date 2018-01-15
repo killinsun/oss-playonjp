@@ -25,6 +25,7 @@ let Chat = new mongoose.Schema({
 let User = new mongoose.Schema({
 	usr_id:		String,
 	pwd:		String,
+	usr_name:	String,
 	in_msg:		String,
 	ot_msg:		String,
 	font_size:	Number,

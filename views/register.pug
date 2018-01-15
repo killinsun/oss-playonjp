@@ -1,0 +1,39 @@
+extends _layout.pug
+block contents
+	script(src="https://code.jquery.com/jquery-1.11.1.js")
+	script(src="/socket.io/socket.io.js")
+	script(type="text/javascript" src="javascripts/index.js")
+	script(type="text/javascript" src="javascripts/chat.js" id="get_data" data-string="all")
+	main
+		div.container
+			div.row
+				div#user_column_pc.col-md-2.hidden-sm
+					p user_navigation
+					include include/_inc_user_nav.pug
+				div#main_container.col-md-10
+					div.container-fluid
+						div.row
+							div.col-lg-12
+								//- Info
+								h1 ユーザ登録
+								p.chathelp
+									| *は必須項目です
+						div.row
+							div.col-lg-10
+								form("action=/register method=POST")
+									div
+										label ユーザID
+										input("type=text name=user_id")
+									div
+										label ユーザ名
+										input("type=text name=user_name")
+									div
+										label パスワード
+										input("type=password name=password")
+									div
+										input("type=submit value=登録")
+							div.col-lg-2
+								//- Right advert
+								div#advert_right
+									p advert
+

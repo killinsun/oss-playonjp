@@ -13,6 +13,7 @@ const Chat			= model.Chat;
 const routes	= require('./routes/routes');
 const chat		= require('./routes/chat');
 const login		= require('./routes/login');
+const register	= require('./routes/register');
 
 const app		= express();
 const http		= require('http').Server(app);
@@ -34,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Setting session middleware.
-app.use(session({ resave:false, saveUninitialized:false, secret: 'keyboar cat'}));
+app.use(session({ resave:false, saveUninitialized:false, secret: 'keyboard cat'}));
 
 //initialize passport midlleware.
 app.use(passport.initialize());
@@ -43,6 +44,7 @@ app.use(passport.session());
 app.use('/', routes);
 app.use('/chat', chat);
 app.use('/login', login);
+app.use('/register', register);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
